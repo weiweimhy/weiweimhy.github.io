@@ -3,26 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://weiweimhy.github.io/post/</loc>
-    <lastmod>2019-09-23T21:25:36+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://weiweimhy.github.io/post/test/</loc>
-    <lastmod>2019-09-23T21:25:36+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://weiweimhy.github.io/</loc>
-    <lastmod>2019-09-23T21:25:36+08:00</lastmod>
-  </url>
-  
-  <url>
     <loc>http://weiweimhy.github.io/categories/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://weiweimhy.github.io/tags/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/unity/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/tags/unity/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/tags/unity-android/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/tags/unity-plugin/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/unity/plugins/unity-multi-dex/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/categories/unity3d-plugin/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/</loc>
+    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/series/</loc>
   </url>
   
 </urlset>

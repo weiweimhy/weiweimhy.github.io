@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Unity 使用 MultiDex 库 | 君不见的博客</title>
+    <meta property="og:title" content="Unity 使用 MultiDex 库 - 君不见的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-09-24T10:51:57&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-09-24T10:51:57&#43;08:00">
+        
+    <meta name="Keywords" content="Android,Java,Kotlin,Flutter,Unity3D,C#">
+    <meta name="description" content="Unity 使用 MultiDex 库">
+        
+    <meta name="author" content="君不见">
+    <meta property="og:url" content="http://weiweimhy.github.io/unity/plugins/unity-multi-dex/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://weiweimhy.github.io/">
+                        君不见的博客
+                    </a>
+                
+                <p class="description">热衷于移动互联网的Unity游戏开发者</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://weiweimhy.github.io/">首页</a>
+                    
+                    <a  href="http://weiweimhy.github.io/tools/" title="工具">工具</a>
+                    
+                    <a  href="http://weiweimhy.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        <div id="virtual_toc_list" style="display: none">
+            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#场景">场景</a></li>
+<li><a href="#开发环境">开发环境</a></li>
+<li><a href="#multidex-使用">MultiDex 使用</a></li>
+<li><a href="#参见">参见</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        <div id="float_toc_div" style="margin: 10px;border: 1px solid gray;z-index:99999;display: none;">
+            <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                <strong id="toc_btn_open" style="color: black;font-size: large;">目录</strong>
+                <strong id="toc_btn_close" style="color: black;font-size: large;float: right">╳</strong>
+            </header>
+            <div id="toc_list" style="background-color: #f3f3f3;color: black;padding: 10px;">
+        
+            </div>
+        </div>
+        <style type="text/css">
+            #float_toc_div {
+                position: fixed;
+                display: none;
+                 
+                height: auto;
+                font-size: 13px;
+            }
+        
+            #toc_list a:hover,
+            #toc_list a:active {
+                color: #ba3925;
+            }
+        </style>
+        <script>
+            window.onload = function () {
+                let tocNavElem = document.getElementById("TableOfContents");
+                let floatTocDivElem = document.getElementById("float_toc_div");
+                let tocListElem = floatTocDivElem.getElementsByTagName('div')[0];
+                let colGroupElem = document.getElementById("body").getElementsByClassName("col-group")[0]
+                let floatTocWidth = (document.body.clientWidth - colGroupElem.offsetWidth) / 2 - 16;
+                var useFloatToc = false;
+
+                if (floatTocWidth >= 100) {
+                    useFloatToc = true;
+                    document.getElementById("toc_list").appendChild(tocNavElem);
+                    floatTocDivElem.style.display = 'block';
+                    floatTocDivElem.style.width = floatTocWidth + 'px';
+                    top();
+                    floatTocDivElem.style.left = '0px';
+
+                    function top() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.top = window.innerHeight / 9 + 'px';
+                        }
+                    }
+
+                    function ishide() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.display = 'block';
+                        }
+                    }
+
+                    window.onscroll = function () {
+                        ishide();
+                        if ((document.documentElement.scrollTop != 0) && (floatTocDivElem.style.display == 'block')) {
+                            top();
+                        }
+                    };
+
+                    window.onresize = function () {
+                        ishide();
+                    }
+
+                    document.getElementById("toc_btn_open").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "none":
+                                document.getElementById("toc_btn_close").style.display = "";
+                                tocListElem.style.display = "";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "1px solid gray";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+
+                    document.getElementById("toc_btn_close").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "":
+                                document.getElementById("toc_btn_close").style.display = "none";
+                                tocListElem.style.display = "none";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+                } else {
+                    let fixedTocElem = document.getElementsByClassName("toc-article")[0];
+                    fixedTocElem.appendChild(tocNavElem);
+                    fixedTocElem.parentElement.style.display = "";
+                }
+                document.getElementById("virtual_toc_list").remove();
+            };   
+        </script>
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">Unity 使用 MultiDex 库</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年9月24日
+                        </date>
+                        
+                        <div class="post-meta">
+                            <span>|</span>
+                            
+                                <span class="meta-category"><a href="http://weiweimhy.github.io/categories/unity3d-plugin">Unity3D Plugin</a></span>
+                            
+                        </div>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="clear" style="display: none">
+                            <div class="toc-article">
+                                <div class="toc-title">文章目录</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>当Unity导出 Android Apk 方法数超过 65536 限制时的解决方案。</p>
+
+<h2 id="场景">场景</h2>
+
+<p>Unity导出 Android Apk 非常方便，但当游戏使用大量的第三方 SDK 时，
+导出 APK 就很容易达到 Android 方法数 65536 的限制。</p>
+
+<h2 id="开发环境">开发环境</h2>
+
+<ul>
+<li>Unity 2018.4.9，使用<code>Gradle</code>构建 Android Project/Apk<br/>
+<em>注：Unity 5.x 开始支持使用 aar 文件，Unity 5.4 开始支持 Gradle</em></li>
+<li>Android <code>minSdkVersion</code> 16</li>
+</ul>
+
+<h2 id="multidex-使用">MultiDex 使用</h2>
+
+<p><code>MultiDex</code>的使用需要修改 Gradle 配置文件，Unity 开启 Gradle build 后 Gradle 配置文件路径 <em>Assets/Plugins/Android/mainTemplate.gradle</em></p>
+
+<ol>
+<li><p>开启<code>MultiDex</code>支持</p>
+
+<pre><code class="language-grovvy">android {
+    defaultConfig {
+        ...
+        minSdkVersion 21
+        targetSdkVersion 28
+        multiDexEnabled true
+    }
+    ...
+}
+</code></pre></li>
+
+<li><p>特殊处理</p>
+
+<blockquote>
+<p>Android 5.0(21) 之前平台版本使用<code>Dalvik</code>运行时来执行应用代码，
+  <code>Dalvik</code>将应用限制每个Apk只能使用一个<code>classes.dex</code>字节码文件。<br/></p>
+
+<p>Android 5.0(21) 以及更高的版本使用ART的运行时，它本身支持从Apk文件加载多个dex文件。</p>
+</blockquote>
+
+<p>当 Android <code>minSdkVersion</code>版本低于 Android 5（21），需要做如下处理：</p>
+
+<ul>
+<li><p>添加依赖</p>
+
+<pre><code class="language-grovvy">dependencies {
+implementation 'androidx.multidex:multidex:2.0.1'
+}
+</code></pre></li>
+</ul>
+
+<p>如果项目未使用 <code>AndroidX</code>, 需要改为添加</p>
+
+<pre><code class="language-grovvy">dependencies {
+    implementation 'com.android.support:multidex:1.0.3'
+}
+</code></pre>
+
+<ul>
+<li>修改<code>Application</code></li>
+</ul>
+
+<p>需要修改 <em>Assets/Plugins/Android/AndroidManifest.xml</em> ，在<code>&lt;application&gt;</code>标记中的<code>android：name</code>改为如下所示：</p>
+
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;xxxx.xxxx.com&quot;&gt;
+    &lt;application
+            android:name=&quot;android.support.multidex.MultiDexApplication&quot; &gt;
+        ...
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre></li>
+</ol>
+
+<h2 id="参见">参见</h2>
+
+<ul>
+<li>更多文档说明，请参见<span id = '1'><a href="https://developer.android.com/studio/build/multidex.html?hl=zh-cn" title="更多使用">Google MultiDex 使用说明</a></span></li>
+</ul>
+                        </div>
+
+                        
+
+
+                        
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            <ul class="clearfix">
+                                
+                                <li><a href="http://weiweimhy.github.io/tags/unity">Unity</a></li>
+                                
+                                <li><a href="http://weiweimhy.github.io/tags/unity-plugin">Unity Plugin</a></li>
+                                
+                                <li><a href="http://weiweimhy.github.io/tags/unity-android">Unity Android</a></li>
+                                
+                            </ul>
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://weiweimhy.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://weiweimhy.github.io/categories/unity3d-plugin/">unity3d-plugin(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://weiweimhy.github.io/tags/unity/">unity</a>
+    
+    <a href="http://weiweimhy.github.io/tags/unity-android/">unity-android</a>
+    
+    <a href="http://weiweimhy.github.io/tags/unity-plugin/">unity-plugin</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://weiweimhy.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="http://weiweimhy.github.io/">君不见的博客 By 君不见</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.2.8/raphael.min.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/flowchart/1.12.2/flowchart.min.js" crossorigin="anonymous"></script>
+        <script>(function () {
+                if (!window.flowchart) return;
+                const blocks = document.querySelectorAll('pre code.language-flowchart, pre code.language-flow');
+                for (let i = 0; i < blocks.length; i++) {
+                    const block = blocks[i];
+                    const rootElement = block.parentNode;
+                    const container = document.createElement('div');
+                    const id = `js-flowchart-diagrams-${i}`;
+                    container.id = id;
+                    container.className = 'align-center';
+                    container.setAttribute("style", "overFlow-x:auto");
+                    rootElement.parentNode.replaceChild(container, rootElement);
+                    const diagram = flowchart.parse(block.childNodes[0].nodeValue);
+                    diagram.drawSVG(id, window.flowchartDiagramsOptions ? window.flowchartDiagramsOptions : {});
+                }
+            })();
+        </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js" crossorigin="anonymous"></script>
+        <script>(function () {
+            if (!window.Diagram) return;
+            const blocks = document.querySelectorAll('pre code.language-sequence');
+            for (let i = 0; i < blocks.length; i++) {
+                const block = blocks[i];
+                
+                const rootElement = block.parentNode;
+                const container = document.createElement('div');
+                const id = `js-sequence-diag-${i}`;
+                container.id = id;
+                container.className = 'align-center';
+                container.setAttribute("style", "overFlow-x:auto");
+                rootElement.parentNode.replaceChild(container, rootElement);
+
+                const diagram = Diagram.parse(block.childNodes[0].nodeValue);
+                diagram.drawSVG(id, window.sequenceDiagramsOptions
+                    ? window.sequenceDiagramsOptions
+                    : { theme: 'simple' });
+            }
+        })();
+        </script><script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>
