@@ -3,11 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://weiweimhy.github.io/categories/</loc>
+    <loc>http://weiweimhy.github.io/post/</loc>
+    <lastmod>2019-09-23T21:25:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/post/test/</loc>
+    <lastmod>2019-09-23T21:25:36+08:00</lastmod>
   </url>
   
   <url>
     <loc>http://weiweimhy.github.io/</loc>
+    <lastmod>2019-09-23T21:25:36+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/categories/</loc>
   </url>
   
   <url>
