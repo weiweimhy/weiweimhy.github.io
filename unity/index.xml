@@ -17,7 +17,7 @@
       <pubDate>Tue, 24 Sep 2019 10:51:57 +0800</pubDate>
       
       <guid>http://weiweimhy.github.io/unity/plugins/unity-multi-dex/</guid>
-      <description>&lt;p&gt;当Unity导出 Android Apk 方法数超过 65536 限制时的解决方案。&lt;/p&gt;</description>
+      <description>&lt;p&gt;当Unity导出 Android Apk 方法数超过 &lt;font color = red&gt;65536&lt;/font&gt; 限制时的解决方案。&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -211,7 +211,7 @@
                         </div>
                         
                         <div class="post-content">
-                            <p>当Unity导出 Android Apk 方法数超过 65536 限制时的解决方案。</p>
+                            <p>当Unity导出 Android Apk 方法数超过 <font color = red>65536</font> 限制时的解决方案。</p>
 
 <h2 id="场景">场景</h2>
 
@@ -259,23 +259,21 @@
 <li><p>添加依赖</p>
 
 <pre><code class="language-grovvy">dependencies {
-implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
-</code></pre></li>
-</ul>
+</code></pre>
 
 <p>如果项目未使用 <code>AndroidX</code>, 需要改为添加</p>
 
 <pre><code class="language-grovvy">dependencies {
     implementation 'com.android.support:multidex:1.0.3'
 }
-</code></pre>
+</code></pre></li>
 
-<ul>
-<li>修改<code>Application</code></li>
-</ul>
+<li><p>修改<code>Application</code></p>
 
-<p>需要修改 <em>Assets/Plugins/Android/AndroidManifest.xml</em> ，在<code>&lt;application&gt;</code>标记中的<code>android：name</code>改为如下所示：</p>
+<p>需要修改 *Assets/Plugins/Android/AndroidManifest.xml*，在<code>&lt;application&gt;</code>标记中的
+<code>android：name</code>改为如下所示：</p>
 
 <pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
@@ -286,6 +284,7 @@ implementation 'androidx.multidex:multidex:2.0.1'
     &lt;/application&gt;
 &lt;/manifest&gt;
 </code></pre></li>
+</ul></li>
 </ol>
 
 <h2 id="参见">参见</h2>
@@ -305,11 +304,13 @@ implementation 'androidx.multidex:multidex:2.0.1'
                             
                             <ul class="clearfix">
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/unity">Unity</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/multidex">MultiDex</a></li>
                                 
                                 <li><a href="http://weiweimhy.github.io/tags/unity-plugin">Unity Plugin</a></li>
                                 
                                 <li><a href="http://weiweimhy.github.io/tags/unity-android">Unity Android</a></li>
+                                
+                                <li><a href="http://weiweimhy.github.io/tags/unity">Unity</a></li>
                                 
                             </ul>
                             
@@ -355,6 +356,8 @@ implementation 'androidx.multidex:multidex:2.0.1'
     <section class="widget">
         <h3 class="widget-title">标签</h3>
 <div class="tagcloud">
+    
+    <a href="http://weiweimhy.github.io/tags/multidex/">multidex</a>
     
     <a href="http://weiweimhy.github.io/tags/unity/">unity</a>
     
