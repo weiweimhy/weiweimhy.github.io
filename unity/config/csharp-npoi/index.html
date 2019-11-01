@@ -7,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Unity 使用 MultiDex 库 | 君不见的博客</title>
-    <meta property="og:title" content="Unity 使用 MultiDex 库 - 君不见的博客">
+    <title>C# NPOI 解析 Excel | 君不见的博客</title>
+    <meta property="og:title" content="C# NPOI 解析 Excel - 君不见的博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2019-09-24T10:51:57&#43;08:00">
+    <meta property="article:published_time" content="2019-11-01T15:56:16&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2019-09-24T10:51:57&#43;08:00">
+    <meta property="article:modified_time" content="2019-11-01T15:56:16&#43;08:00">
         
     <meta name="Keywords" content="Android,Java,Kotlin,Flutter,Unity3D,C#">
-    <meta name="description" content="Unity 使用 MultiDex 库">
+    <meta name="description" content="C# NPOI 解析 Excel">
         
     <meta name="author" content="君不见">
-    <meta property="og:url" content="http://weiweimhy.github.io/unity/plugins/unity-multi-dex/">
+    <meta property="og:url" content="http://weiweimhy.github.io/unity/config/csharp-npoi/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
@@ -71,10 +71,17 @@
 <ul>
 <li>
 <ul>
-<li><a href="#场景">场景</a></li>
-<li><a href="#开发环境">开发环境</a></li>
-<li><a href="#multidex-使用">MultiDex 使用</a></li>
-<li><a href="#参见">参见</a></li>
+<li><a href="#前言">前言</a></li>
+<li><a href="#认识npoi">认识NPOI</a></li>
+<li><a href="#导入工程">导入工程</a></li>
+<li><a href="#hssfworkbook-和-xssfworkbook">HSSFWorkbook 和 XSSFWorkbook</a></li>
+<li><a href="#操作-excel">操作 Excel</a>
+<ul>
+<li><a href="#创建-excel">创建 Excel</a></li>
+<li><a href="#读取-excel">读取 Excel</a></li>
+<li><a href="#简单操作单元格">简单操作单元格</a></li>
+</ul></li>
+<li><a href="#更多高级操作">更多高级操作</a></li>
 </ul></li>
 </ul>
 </nav>
@@ -185,16 +192,16 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">Unity 使用 MultiDex 库</h1>
+                            <h1 class="post-title">C# NPOI 解析 Excel</h1>
                         </header>
                         <date class="post-meta meta-date">
-                            2019年9月24日
+                            2019年11月1日
                         </date>
                         
                         <div class="post-meta">
                             <span>|</span>
                             
-                                <span class="meta-category"><a href="http://weiweimhy.github.io/categories/unity3d-plugin">Unity3D Plugin</a></span>
+                                <span class="meta-category"><a href="http://weiweimhy.github.io/categories/c#-plugin">C# Plugin</a></span>
                             
                         </div>
                         
@@ -211,86 +218,94 @@
                         </div>
                         
                         <div class="post-content">
-                            <p>当Unity导出 Android Apk 方法数超过 <font color = red>65536</font> 限制时的解决方案。</p>
+                            <p><code>NPOI</code> 是一个开源的 <code>C#</code> 读写 Excel、Word 等微软 OLE2 组件文档的项目，可以在没有安装 Office 的情况下对 Word 或 Excel 文档进行读写操作。</p>
 
-<h2 id="场景">场景</h2>
+<h2 id="前言">前言</h2>
 
-<p>Unity导出 Android Apk 非常方便，但当游戏使用大量的第三方 SDK 时，
-导出 APK 就很容易达到 Android 方法数 65536 的限制。</p>
+<p>本文的初衷是使用 <code>NPOI</code> 读取 Excel 管理的项目配置表，只是对 <code>NPOI</code> 的简单使用，其他高级功能不做介绍。</p>
 
-<h2 id="开发环境">开发环境</h2>
+<h2 id="认识npoi">认识NPOI</h2>
 
-<ul>
-<li>Unity 2018.4.9，使用<code>Gradle</code>构建 Android Project/Apk<br/>
-<em>注：Unity 5.x 开始支持使用 aar 文件，Unity 5.4 开始支持 Gradle</em></li>
-<li>Android <code>minSdkVersion</code> 16</li>
-</ul>
+<p><code>POI</code> 是一套用 <code>Java</code> 写成的库，能够帮助开发者在没有安装微软 Office 的情况下读写 Office 97-2003 的文件，支持的文件格式包括xls, doc, ppt等。</p>
 
-<h2 id="multidex-使用">MultiDex 使用</h2>
+<p><code>NPOI</code> 即 <code>POI</code> 的 <code>.NET</code> 版本。</p>
 
-<p><code>MultiDex</code>的使用需要修改 Gradle 配置文件，Unity 开启 Gradle build 后 Gradle 配置文件路径 <em>Assets/Plugins/Android/mainTemplate.gradle</em></p>
+<h2 id="导入工程">导入工程</h2>
 
 <ol>
-<li><p>开启<code>MultiDex</code>支持</p>
+<li><p>下载 dll，<a href="https://archive.codeplex.com/?p=npoi">官方页面链接</a>，官方网页可能已经不维护了， download archive，解压下载的文件，在 release 文件夹有所有的历史版本（名字是编号）， 编号文件夹里面的序列号文件是一个压缩包，修改后缀使用解压文件即可。</p></li>
 
-<pre><code class="language-grovvy">android {
-    defaultConfig {
-        ...
-        minSdkVersion 21
-        targetSdkVersion 28
-        multiDexEnabled true
-    }
-    ...
-}
-</code></pre></li>
-
-<li><p>特殊处理</p>
-
-<blockquote>
-<p>Android 5.0(21) 之前平台版本使用<code>Dalvik</code>运行时来执行应用代码，
-  <code>Dalvik</code>将应用限制每个Apk只能使用一个<code>classes.dex</code>字节码文件。<br/></p>
-
-<p>Android 5.0(21) 以及更高的版本使用ART的运行时，它本身支持从Apk文件加载多个dex文件。</p>
-</blockquote>
-
-<p>当 Android <code>minSdkVersion</code>版本低于 Android 5（21），需要做如下处理：</p>
+<li><p>创建项目，导入 <code>NPOI</code> 库</p>
 
 <ul>
-<li><p>添加依赖</p>
-
-<pre><code class="language-grovvy">dependencies {
-    implementation 'androidx.multidex:multidex:2.0.1'
-}
-</code></pre>
-
-<p>如果项目未使用 <code>AndroidX</code>, 需要改为添加</p>
-
-<pre><code class="language-grovvy">dependencies {
-    implementation 'com.android.support:multidex:1.0.3'
-}
-</code></pre></li>
-
-<li><p>修改<code>Application</code></p>
-
-<p>需要修改 *Assets/Plugins/Android/AndroidManifest.xml*，在<code>&lt;application&gt;</code>标记中的
-<code>android：name</code>改为如下所示：</p>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    package=&quot;xxxx.xxxx.com&quot;&gt;
-    &lt;application
-            android:name=&quot;android.support.multidex.MultiDexApplication&quot; &gt;
-        ...
-    &lt;/application&gt;
-&lt;/manifest&gt;
-</code></pre></li>
+<li>NPOI.dll</li>
+<li>NPOI.POIFS.dll</li>
+<li>NPOI.HSSF.dll</li>
+<li>NPOI.Util.dll</li>
 </ul></li>
 </ol>
 
-<h2 id="参见">参见</h2>
+<h2 id="hssfworkbook-和-xssfworkbook">HSSFWorkbook 和 XSSFWorkbook</h2>
+
+<p><code>HSSFWorkbook</code> 和 <code>XSSFWorkbook</code> 都是 <code>IWorkbook</code> 的具体实现， 是 <code>NPOI</code> 中关键的类，不管是创建还是读取 Excel 都需要创建 <code>IWorkbook</code> 对象，可以简单理解为一个 xls 或者 xlsx 文件。</p>
 
 <ul>
-<li>更多文档说明，请参见<span id = '1'><a href="https://developer.android.com/studio/build/multidex.html?hl=zh-cn" title="更多使用">Google MultiDex 使用说明</a></span></li>
+<li><code>HSSFWorkbook</code> 是解析 excel 2007 以前版本的，后缀名为 xls。</li>
+<li><code>XSSFWorkbook</code> 是解析 excel 2007 及更高版本的，后缀名为 xlsx。</li>
+</ul>
+
+<h2 id="操作-excel">操作 Excel</h2>
+
+<h3 id="创建-excel">创建 Excel</h3>
+
+<pre><code class="language-c#">using NPOI.HSSF.UserModel;
+
+...
+
+IWorkbook workbook = new XSSFWorkbook();
+</code></pre>
+
+<p>创建一个 <code>IWorkbook</code> 非常简单，但是这样创建的 xls 文件在 Excel 无法打开，因为 Excel 规定一个 xls 文件至少带有一个 Sheet。</p>
+
+<pre><code class="language-c#">workbook.CreateSheet(&quot;Sheet1&quot;);
+</code></pre>
+
+<p>创建 xls 只需将 <code>IWorkbook</code> 实例写入文件</p>
+
+<pre><code class="language-c#">FileStream file =new FileStream(@&quot;test.xlsx&quot;, FileMode.Create);
+workbook.Write(file);
+</code></pre>
+
+<h3 id="读取-excel">读取 Excel</h3>
+
+<p>读取 Excel 和创建过程类似。</p>
+
+<pre><code class="language-c#">FileStream file =new FileStream(@&quot;test.xlsx&quot;, FileMode.Open);
+IWorkbook workbook = new XSSFWorkbook(file);
+
+// 读取 Sheet
+// workbook.GetSheetAt(0)；// 读取第一个 Sheet
+workbook.GetSheet(&quot;Sheet1&quot;);
+</code></pre>
+
+<h3 id="简单操作单元格">简单操作单元格</h3>
+
+<pre><code class="language-c#">// 获取一行，下标从 0 开始
+IRow row = sheet.GetRow(2);
+// 获取该行的一列，即一个单元格 下标从0开始
+ICell cell = row.GetCell(1);
+
+// 设置单元格的值
+cell.SetCellValue(&quot;hello&quot;);
+// 读取单元格的值
+string value = cell.StringCellValue;
+</code></pre>
+
+<h2 id="更多高级操作">更多高级操作</h2>
+
+<ul>
+<li><a href="https://www.jianshu.com/p/8bdb95b2d5b4">NPOI使用手册1</a></li>
+<li><a href="https://www.jianshu.com/p/b5d75558cce4">NPOI使用手册2</a></li>
 </ul>
                         </div>
 
@@ -299,18 +314,27 @@
 
                         
 
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/hugo/hugo-guide-line/">使用hugo搭建个人博客站点</a></li>
+        
+        <li><a href="/unity/plugins/unity-multi-dex/">Unity 使用 MultiDex 库</a></li>
+        
+    </ul>
+</div>
+
 
                         <div class="post-meta meta-tags">
                             
                             <ul class="clearfix">
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/multidex">MultiDex</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/c">C#</a></li>
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/unity-plugin">Unity Plugin</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/c#-plugin">C# Plugin</a></li>
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/unity-android">Unity Android</a></li>
-                                
-                                <li><a href="http://weiweimhy.github.io/tags/unity">Unity</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/npoi">NPOI</a></li>
                                 
                             </ul>
                             

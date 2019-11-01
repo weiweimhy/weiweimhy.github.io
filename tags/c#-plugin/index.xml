@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Unities on 君不见的博客</title>
-    <link>http://weiweimhy.github.io/unity/</link>
-    <description>Recent content in Unities on 君不见的博客</description>
+    <title>C# Plugin on 君不见的博客</title>
+    <link>http://weiweimhy.github.io/tags/c#-plugin/</link>
+    <description>Recent content in C# Plugin on 君不见的博客</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-CN</language>
     <lastBuildDate>Fri, 01 Nov 2019 15:56:16 +0800</lastBuildDate>
     
-	<atom:link href="http://weiweimhy.github.io/unity/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://weiweimhy.github.io/tags/c#-plugin/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://weiweimhy.github.io/unity/config/csharp-npoi/</guid>
       <description>&lt;p&gt;&lt;code&gt;NPOI&lt;/code&gt; 是一个开源的 &lt;code&gt;C#&lt;/code&gt; 读写 Excel、Word 等微软 OLE2 组件文档的项目，可以在没有安装 Office 的情况下对 Word 或 Excel 文档进行读写操作。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Unity 使用 MultiDex 库</title>
-      <link>http://weiweimhy.github.io/unity/plugins/unity-multi-dex/</link>
-      <pubDate>Tue, 24 Sep 2019 10:51:57 +0800</pubDate>
-      
-      <guid>http://weiweimhy.github.io/unity/plugins/unity-multi-dex/</guid>
-      <description>&lt;p&gt;当Unity导出 Android Apk 方法数超过 &lt;font color = red&gt;65536&lt;/font&gt; 限制时的解决方案。&lt;/p&gt;</description>
     </item>
     
   </channel>

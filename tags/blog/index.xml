@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>blog on 君不见的博客</title>
+    <link>http://weiweimhy.github.io/tags/blog/</link>
+    <description>Recent content in blog on 君不见的博客</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Fri, 01 Nov 2019 14:11:27 +0800</lastBuildDate>
+    
+	<atom:link href="http://weiweimhy.github.io/tags/blog/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>使用hugo搭建个人博客站点</title>
+      <link>http://weiweimhy.github.io/hugo/hugo-guide-line/</link>
+      <pubDate>Fri, 01 Nov 2019 14:11:27 +0800</pubDate>
+      
+      <guid>http://weiweimhy.github.io/hugo/hugo-guide-line/</guid>
+      <description>&lt;p&gt;Hugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
