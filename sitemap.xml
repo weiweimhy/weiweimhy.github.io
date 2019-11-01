@@ -3,6 +3,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://weiweimhy.github.io/hugo/</loc>
+    <lastmod>2019-11-01T14:11:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/hugo/hugo-guide-line/</loc>
+    <lastmod>2019-11-01T14:11:27+08:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://weiweimhy.github.io/</loc>
+    <lastmod>2019-11-01T14:11:27+08:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://weiweimhy.github.io/categories/</loc>
     <lastmod>2019-09-24T10:51:57+08:00</lastmod>
   </url>
@@ -44,11 +59,6 @@
   
   <url>
     <loc>http://weiweimhy.github.io/categories/unity3d-plugin/</loc>
-    <lastmod>2019-09-24T10:51:57+08:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>http://weiweimhy.github.io/</loc>
     <lastmod>2019-09-24T10:51:57+08:00</lastmod>
   </url>
   

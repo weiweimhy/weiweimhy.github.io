@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="generator" content="Hugo 0.58.3" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>使用hugo搭建个人博客站点 | 君不见的博客</title>
+    <meta property="og:title" content="使用hugo搭建个人博客站点 - 君不见的博客">
+    <meta property="og:type" content="article">
+        
+    <meta property="article:published_time" content="2019-11-01T14:11:27&#43;08:00">
+        
+        
+    <meta property="article:modified_time" content="2019-11-01T14:11:27&#43;08:00">
+        
+    <meta name="Keywords" content="Android,Java,Kotlin,Flutter,Unity3D,C#">
+    <meta name="description" content="使用hugo搭建个人博客站点">
+        
+    <meta name="author" content="君不见">
+    <meta property="og:url" content="http://weiweimhy.github.io/hugo/hugo-guide-line/">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/css/normalize.css">
+    
+        <link rel="stylesheet" href="/css/prism.css">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
+
+
+    
+    
+</head>
+
+<body>
+<header id="header" class="clearfix">
+    <div class="container">
+        <div class="col-group">
+            <div class="site-name ">
+                
+                    <a id="logo" href="http://weiweimhy.github.io/">
+                        君不见的博客
+                    </a>
+                
+                <p class="description">热衷于移动互联网的Unity游戏开发者</p>
+            </div>
+            <div>
+                <nav id="nav-menu" class="clearfix">
+                    <a class="" href="http://weiweimhy.github.io/">首页</a>
+                    
+                    <a  href="http://weiweimhy.github.io/tools/" title="工具">工具</a>
+                    
+                    <a  href="http://weiweimhy.github.io/about/" title="关于">关于</a>
+                    
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+<div id="body">
+        
+        <div id="virtual_toc_list" style="display: none">
+            <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#安装">安装</a>
+<ul>
+<li><a href="#maxos">MaxOs</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#验证是否安装成功">验证是否安装成功</a></li>
+</ul></li>
+<li><a href="#生成站点">生成站点</a></li>
+<li><a href="#创建文章">创建文章</a></li>
+<li><a href="#生成页面">生成页面</a>
+<ul>
+<li><a href="#本地调试">本地调试</a></li>
+<li><a href="#生成最终页面">生成最终页面</a></li>
+</ul></li>
+<li><a href="#部署">部署</a></li>
+<li><a href="#主题">主题</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+        <div id="float_toc_div" style="margin: 10px;border: 1px solid gray;z-index:99999;display: none;">
+            <header style="background-color: #f3f3f3;color: black;border-bottom: 1px solid gray;padding: 10px 10px 10px 10px;">
+                <strong id="toc_btn_open" style="color: black;font-size: large;">目录</strong>
+                <strong id="toc_btn_close" style="color: black;font-size: large;float: right">╳</strong>
+            </header>
+            <div id="toc_list" style="background-color: #f3f3f3;color: black;padding: 10px;">
+        
+            </div>
+        </div>
+        <style type="text/css">
+            #float_toc_div {
+                position: fixed;
+                display: none;
+                 
+                height: auto;
+                font-size: 13px;
+            }
+        
+            #toc_list a:hover,
+            #toc_list a:active {
+                color: #ba3925;
+            }
+        </style>
+        <script>
+            window.onload = function () {
+                let tocNavElem = document.getElementById("TableOfContents");
+                let floatTocDivElem = document.getElementById("float_toc_div");
+                let tocListElem = floatTocDivElem.getElementsByTagName('div')[0];
+                let colGroupElem = document.getElementById("body").getElementsByClassName("col-group")[0]
+                let floatTocWidth = (document.body.clientWidth - colGroupElem.offsetWidth) / 2 - 16;
+                var useFloatToc = false;
+
+                if (floatTocWidth >= 100) {
+                    useFloatToc = true;
+                    document.getElementById("toc_list").appendChild(tocNavElem);
+                    floatTocDivElem.style.display = 'block';
+                    floatTocDivElem.style.width = floatTocWidth + 'px';
+                    top();
+                    floatTocDivElem.style.left = '0px';
+
+                    function top() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.top = window.innerHeight / 9 + 'px';
+                        }
+                    }
+
+                    function ishide() {
+                        if (document.getElementsByClassName('container')[0].offsetWidth <= 720) {
+                            floatTocDivElem.style.top = '0px';
+                        } else {
+                            floatTocDivElem.style.display = 'block';
+                        }
+                    }
+
+                    window.onscroll = function () {
+                        ishide();
+                        if ((document.documentElement.scrollTop != 0) && (floatTocDivElem.style.display == 'block')) {
+                            top();
+                        }
+                    };
+
+                    window.onresize = function () {
+                        ishide();
+                    }
+
+                    document.getElementById("toc_btn_open").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "none":
+                                document.getElementById("toc_btn_close").style.display = "";
+                                tocListElem.style.display = "";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "1px solid gray";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+
+                    document.getElementById("toc_btn_close").addEventListener('click', function () {
+                        switch (tocListElem.style.display) {
+                            case "":
+                                document.getElementById("toc_btn_close").style.display = "none";
+                                tocListElem.style.display = "none";
+                                floatTocDivElem.getElementsByTagName("header")[0].style.borderBottom = "";
+                                break;
+                            default:
+                                break;
+                        }
+                    }, false);
+                } else {
+                    let fixedTocElem = document.getElementsByClassName("toc-article")[0];
+                    fixedTocElem.appendChild(tocNavElem);
+                    fixedTocElem.parentElement.style.display = "";
+                }
+                document.getElementById("virtual_toc_list").remove();
+            };   
+        </script>
+        
+    <div class="container">
+        <div class="col-group">
+
+            <div class="col-8" id="main">
+                <div class="res-cons">
+                    <article class="post">
+                        <header>
+                            <h1 class="post-title">使用hugo搭建个人博客站点</h1>
+                        </header>
+                        <date class="post-meta meta-date">
+                            2019年11月1日
+                        </date>
+                        
+                        
+                        <div class="post-meta">
+                            <span id="busuanzi_container_page_pv">|<span id="busuanzi_value_page_pv"></span><span> 阅读</span></span>
+                        </div>
+                        
+                        
+                        <div class="clear" style="display: none">
+                            <div class="toc-article">
+                                <div class="toc-title">文章目录</div>
+                            </div>
+                        </div>
+                        
+                        <div class="post-content">
+                            <p>Hugo是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。</p>
+
+<h2 id="安装">安装</h2>
+
+<p>推荐使用二进制安装，源码安装请查看<a href="https://www.gohugo.org/">Hugo中文文档</a></p>
+
+<h3 id="maxos">MaxOs</h3>
+
+<pre><code>$ brew install hugo   
+</code></pre>
+
+<h3 id="windows">Windows</h3>
+
+<ol>
+<li>到 <a href="https://github.com/gohugoio/hugo/releases">Hugo Releases</a>下载对应的操作系统版本的二进制文件</li>
+<li>配置 hugo 环境变量</li>
+</ol>
+
+<h3 id="验证是否安装成功">验证是否安装成功</h3>
+
+<pre><code>$ hugo version
+</code></pre>
+
+<h2 id="生成站点">生成站点</h2>
+
+<p>一个站点对应本地的一个文件夹，如：希望在 <code>/uers/blog</code> 路径创建一个站点</p>
+
+<pre><code>$ hugo new site /uers/blog
+</code></pre>
+
+<p>创建成功以后切换到对应路径</p>
+
+<pre><code>$ cd /user/blog
+</code></pre>
+
+<h2 id="创建文章">创建文章</h2>
+
+<p>创建第一篇文章</p>
+
+<pre><code>gugo new hugo/hugo-guide-line.md
+</code></pre>
+
+<p><code>hugo-guide-line.md</code> 自动生成到 <code>content/hugo/hugo-guide-line.md</code> ，按照 <code>Markdown</code> 文件格式编辑文章。</p>
+
+<h2 id="生成页面">生成页面</h2>
+
+<h3 id="本地调试">本地调试</h3>
+
+<p>在发布文章之前，你可能希望在本地调试，在站点根路径执行 <code>hugo</code> 命令进行调试</p>
+
+<pre><code>$ hugo server --buildDrafts
+</code></pre>
+
+<p>在浏览器打开  <a href="http://localhost:1313">http://localhost:1313</a></p>
+
+<h3 id="生成最终页面">生成最终页面</h3>
+
+<p>在站点跟路径执行 <code>hugo</code> 命令生成页面</p>
+
+<pre><code>$ hugo
+</code></pre>
+
+<p>生成的页面在 <code>public</code> 路径下。</p>
+
+<p><strong>注意，此命令并不会生成草稿页面，如果未生成文章，请去掉文章头部的 draft=true 再重新生成</strong></p>
+
+<h2 id="部署">部署</h2>
+
+<p>如果需要部署在 <code>Github pages</code> 上，首先在 <a href="https://github.com/">github</a> 上创建一个名为 <code>xxxx.github.io</code> 的仓库（ xxxx 为你个人 github 的用户名）。</p>
+
+<p>将站点关联到 <code>Github pages</code></p>
+
+<pre><code>hugo --baseUrl=&quot;http://xxxx.github.io/&quot;
+</code></pre>
+
+<p>将 <code>public</code> 文件夹关联到刚创建的仓库</p>
+
+<pre><code>$ cd public
+$ git init
+$ git remote add origin https://github.com/xxxx/xxxx.github.io.git
+$ git add .
+$ git commit -m &quot;add hugo-guide-line.md&quot;
+$ git push -u origin master
+</code></pre>
+
+<p>之后可在浏览器访问 <a href="http://xxxx.github.io">http://xxxx.github.io</a> 即可看到发布的文章</p>
+
+<h2 id="主题">主题</h2>
+
+<p>到 <a href="https://www.gohugo.org/theme/">皮肤列表</a> 挑选一个心仪的皮肤，比如你觉得 Hyde 皮肤不错，找到相关的 GitHub 地址，创建目录 themes，在 themes 目录里把皮肤 git clone 下来：</p>
+
+<pre><code>$ cd themes
+$ git clone https://github.com/spf13/hyde.git
+$ hugo --theme=byde
+</code></pre>
+                        </div>
+
+                        
+
+
+                        
+
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/unity/plugins/unity-multi-dex/">Unity 使用 MultiDex 库</a></li>
+        
+    </ul>
+</div>
+
+
+                        <div class="post-meta meta-tags">
+                            
+                            没有标签
+                            
+                        </div>
+                    </article>
+                    
+    
+
+    
+    
+                </div>
+            </div>
+            <div id="secondary">
+    <section class="widget">
+        <form id="search" action="//www.google.com/search" method="get" accept-charset="utf-8" target="_blank" _lpchecked="1">
+      
+      <input type="text" name="q" maxlength="20" placeholder="Search">
+      <input type="hidden" name="sitesearch" value="http://weiweimhy.github.io/">
+      <button type="submit" class="submit icon-search"></button>
+</form>
+    </section>
+    
+    <section class="widget">
+        <h3 class="widget-title">最近文章</h3>
+<ul class="widget-list">
+    
+</ul>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">分类</h3>
+<ul class="widget-list">
+    
+    <li>
+        <a href="http://weiweimhy.github.io/categories/unity3d-plugin/">unity3d-plugin(1)</a>
+    </li>
+    
+</ul>
+    </section>
+
+    <section class="widget">
+        <h3 class="widget-title">标签</h3>
+<div class="tagcloud">
+    
+    <a href="http://weiweimhy.github.io/tags/multidex/">multidex</a>
+    
+    <a href="http://weiweimhy.github.io/tags/unity/">unity</a>
+    
+    <a href="http://weiweimhy.github.io/tags/unity-android/">unity-android</a>
+    
+    <a href="http://weiweimhy.github.io/tags/unity-plugin/">unity-plugin</a>
+    
+</div>
+    </section>
+
+    
+
+    <section class="widget">
+        <h3 class="widget-title">其它</h3>
+        <ul class="widget-list">
+            <li><a href="http://weiweimhy.github.io/index.xml">文章 RSS</a></li>
+        </ul>
+    </section>
+</div>
+        </div>
+    </div>
+</div>
+<footer id="footer">
+    <div class="container">
+        &copy; 2019 <a href="http://weiweimhy.github.io/">君不见的博客 By 君不见</a>.
+        Powered by <a rel="nofollow noreferer noopener" href="https://gohugo.io" target="_blank">Hugo</a>.
+        <a href="https://www.flysnow.org/" target="_blank">Theme</a> based on <a href="https://github.com/rujews/maupassant-hugo" target="_blank">maupassant</a>.
+        
+    </div>
+</footer>
+
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.2.8/raphael.min.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/flowchart/1.12.2/flowchart.min.js" crossorigin="anonymous"></script>
+        <script>(function () {
+                if (!window.flowchart) return;
+                const blocks = document.querySelectorAll('pre code.language-flowchart, pre code.language-flow');
+                for (let i = 0; i < blocks.length; i++) {
+                    const block = blocks[i];
+                    const rootElement = block.parentNode;
+                    const container = document.createElement('div');
+                    const id = `js-flowchart-diagrams-${i}`;
+                    container.id = id;
+                    container.className = 'align-center';
+                    container.setAttribute("style", "overFlow-x:auto");
+                    rootElement.parentNode.replaceChild(container, rootElement);
+                    const diagram = flowchart.parse(block.childNodes[0].nodeValue);
+                    diagram.drawSVG(id, window.flowchartDiagramsOptions ? window.flowchartDiagramsOptions : {});
+                }
+            })();
+        </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/snap.svg/0.5.1/snap.svg-min.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.9.1/underscore-min.js" crossorigin="anonymous"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js" crossorigin="anonymous"></script>
+        <script>(function () {
+            if (!window.Diagram) return;
+            const blocks = document.querySelectorAll('pre code.language-sequence');
+            for (let i = 0; i < blocks.length; i++) {
+                const block = blocks[i];
+                
+                const rootElement = block.parentNode;
+                const container = document.createElement('div');
+                const id = `js-sequence-diag-${i}`;
+                container.id = id;
+                container.className = 'align-center';
+                container.setAttribute("style", "overFlow-x:auto");
+                rootElement.parentNode.replaceChild(container, rootElement);
+
+                const diagram = Diagram.parse(block.childNodes[0].nodeValue);
+                diagram.drawSVG(id, window.sequenceDiagramsOptions
+                    ? window.sequenceDiagramsOptions
+                    : { theme: 'simple' });
+            }
+        })();
+        </script><script type="text/javascript">
+        
+        (function () {
+            $("pre code").parent().addClass("line-numbers")
+        }());
+
+        window.MathJax = {
+            tex2jax: {
+                inlineMath: [['$', '$']],
+                processEscapes: true
+                }
+            };
+    </script>
+    <script type="text/javascript" src="/js/prism.js" async="true"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<a id="rocket" href="#top"></a>
+<script type="text/javascript" src="/js/totop.js?v=0.0.0" async=""></script>
+
+
+
+    <script type="text/javascript" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script>
+
+
+
+
+</body>
+</html>
