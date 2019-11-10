@@ -7,20 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Unity 使用 MultiDex 库 | 君不见的博客</title>
-    <meta property="og:title" content="Unity 使用 MultiDex 库 - 君不见的博客">
+    <title>Csharp Protobuf 使用 | 君不见的博客</title>
+    <meta property="og:title" content="Csharp Protobuf 使用 - 君不见的博客">
     <meta property="og:type" content="article">
         
-    <meta property="article:published_time" content="2019-09-24T10:51:57&#43;08:00">
+    <meta property="article:published_time" content="2019-11-01T17:56:44&#43;08:00">
         
         
-    <meta property="article:modified_time" content="2019-09-24T10:51:57&#43;08:00">
+    <meta property="article:modified_time" content="2019-11-01T17:56:44&#43;08:00">
         
     <meta name="Keywords" content="Android,Java,Kotlin,Flutter,Unity3D,C#">
-    <meta name="description" content="Unity 使用 MultiDex 库">
+    <meta name="description" content="Csharp Protobuf 使用">
         
     <meta name="author" content="君不见">
-    <meta property="og:url" content="http://weiweimhy.github.io/unity/plugins/unity-multi-dex/">
+    <meta property="og:url" content="http://weiweimhy.github.io/unity/config/csharp-protobuf/">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 
     <link rel="stylesheet" href="/css/normalize.css">
@@ -71,10 +71,16 @@
 <ul>
 <li>
 <ul>
-<li><a href="#场景">场景</a></li>
-<li><a href="#开发环境">开发环境</a></li>
-<li><a href="#multidex-使用">MultiDex 使用</a></li>
-<li><a href="#参见">参见</a></li>
+<li>
+<ul>
+<li><a href="#优点">优点</a></li>
+<li><a href="#使用">使用</a>
+<ul>
+<li><a href="#数据描述文件">数据描述文件</a></li>
+<li><a href="#编译proto文件">编译proto文件</a></li>
+<li><a href="#序列化和反序列化">序列化和反序列化</a></li>
+</ul></li>
+</ul></li>
 </ul></li>
 </ul>
 </nav>
@@ -185,16 +191,16 @@
                 <div class="res-cons">
                     <article class="post">
                         <header>
-                            <h1 class="post-title">Unity 使用 MultiDex 库</h1>
+                            <h1 class="post-title">Csharp Protobuf 使用</h1>
                         </header>
                         <date class="post-meta meta-date">
-                            2019年9月24日
+                            2019年11月1日
                         </date>
                         
                         <div class="post-meta">
                             <span>|</span>
                             
-                                <span class="meta-category"><a href="http://weiweimhy.github.io/categories/unity3d-plugin">Unity3D Plugin</a></span>
+                                <span class="meta-category"><a href="http://weiweimhy.github.io/categories/c#-plugin">C# Plugin</a></span>
                             
                         </div>
                         
@@ -211,87 +217,86 @@
                         </div>
                         
                         <div class="post-content">
-                            <p>当Unity导出 Android Apk 方法数超过 <font color = red>65536</font> 限制时的解决方案。</p>
+                            <p><code>Protocol Buffers</code> （简称 Protobuf） 是Google公司开发的一种数据描述语言，类似于XML能够将结构化数据序列化，可用于数据存储、通信协议等方面。</p>
 
-<h2 id="场景">场景</h2>
-
-<p>Unity导出 Android Apk 非常方便，但当游戏使用大量的第三方 SDK 时，
-导出 APK 就很容易达到 Android 方法数 65536 的限制。</p>
-
-<h2 id="开发环境">开发环境</h2>
-
-<ul>
-<li>Unity 2018.4.9，使用<code>Gradle</code>构建 Android Project/Apk<br/>
-<em>注：Unity 5.x 开始支持使用 aar 文件，Unity 5.4 开始支持 Gradle</em></li>
-<li>Android <code>minSdkVersion</code> 16</li>
-</ul>
-
-<h2 id="multidex-使用">MultiDex 使用</h2>
-
-<p><code>MultiDex</code>的使用需要修改 Gradle 配置文件，Unity 开启 Gradle build 后 Gradle 配置文件路径 <em>Assets/Plugins/Android/mainTemplate.gradle</em></p>
+<h3 id="优点">优点</h3>
 
 <ol>
-<li><p>开启<code>MultiDex</code>支持</p>
+<li>开发语言无关，和平台无关，具有良好的可扩展性。</li>
+<li>数据文件小，相比 xml 和 json 小很多，具体少多少取决于数据类型，在 <code>protocol buffers</code> 中<code>bytes</code>和<code>string</code>类型是按照原值储存,如果原数据存在大量的<code>bytes</code>。和<code>string</code>，数据文件将不是减少很多（如果有需求，可以考虑使用其他工具压缩）。</li>
+<li>解析速度很快。</li>
+<li>减少二义性，一个数据描述文件（<code>.proto</code>），通过工具编译，将生产程序可用的访问类，如：<code>C#</code> 将生产对应的 <code>.cs</code> 文件。</li>
+<li>支持多种编程语言。</li>
+</ol>
 
-<pre><code class="language-grovvy">android {
-    defaultConfig {
-        ...
-        minSdkVersion 21
-        targetSdkVersion 28
-        multiDexEnabled true
-    }
-    ...
-}
-</code></pre></li>
+<h3 id="使用">使用</h3>
 
-<li><p>特殊处理</p>
+<ol>
+<li>编写数据描述文件 <code>.proto</code>。</li>
+<li>使用 <code>protoc</code> 将 <code>.proto</code> 文件编译为对应语言的文件，如: 编译为 <code>C#</code> 语言的 <code>.cs</code> 文件。</li>
+<li>序列化和反序列化数据文件。</li>
+</ol>
 
-<blockquote>
-<p>Android 5.0(21) 之前平台版本使用<code>Dalvik</code>运行时来执行应用代码，
-  <code>Dalvik</code>将应用限制每个Apk只能使用一个<code>classes.dex</code>字节码文件。<br/></p>
+<h4 id="数据描述文件">数据描述文件</h4>
 
-<p>Android 5.0(21) 以及更高的版本使用ART的运行时，它本身支持从Apk文件加载多个dex文件。</p>
-</blockquote>
+<p>相比 <code>json</code> 或者 <code>xml</code> 文件，<code>protobuf</code> 可读性差，缺少自描述性，<code>protobuf</code> 数据文件需要对应的 <code>.proto</code> 文件结合，才具有可读性。</p>
 
-<p>当 Android <code>minSdkVersion</code>版本低于 Android 5（21），需要做如下处理：</p>
+<p>构建一个简单的 <code>.proto</code> 文件</p>
 
-<ul>
-<li><p>添加依赖</p>
+<pre><code>syntax = &quot;proto3&quot;;
 
-<pre><code class="language-grovvy">dependencies {
-    implementation 'androidx.multidex:multidex:2.0.1'
+message Student {
+    string name = 1;
+    int age = 2;
+    repeated string phoneNumber = 3; // 学生电话号码可能有多个
 }
 </code></pre>
 
-<p>如果项目未使用 <code>AndroidX</code>, 需要改为添加</p>
+<p>解释：
+1.  <code>syntax</code> 定义 <code>protobuf</code> 的版本，如果没有定义，编译器会使用 proto2，这个这个指定语法行必须是文件的非空非注释的第一个行。
+2.  使用 <code>message</code> 关键字定义一个消息类型，对于 <code>C#</code> 中的一个 <code>Class</code>。
+3.  <code>message</code> {} 中定义消息的字段，每个字段必须包含<strong>类型</strong>、<strong>分配标识号</strong>和可选的<strong>字段规则</strong>。
+    -   支持类型:
+        -   double、float：浮点类型
+        -   int32、int62、uint32、uint64、sint32、sint64、fixed32 fixed64、xfixed64：整型类型，具体区别查看<a href="https://developers.google.com/protocol-buffers/docs/proto3?hl=zh-cn#scalar">官方说明</a>
+        -   bool：布尔类型
+        -   string：字符串类型
+        -   bytes：字节类型
+    -   分配标识符：在消息定义中，每个字段都有唯一的一个数字标识符。这些标识符是用来在消息的二进制格式中识别各个字段的，一旦开始使用就不能够再改变。<br>最小的标识号可以从1开始，最大到2^29 - 1, or 536,870,911。不可以使用其中的[19000－19999]（ (从FieldDescriptor::kFirstReservedNumber 到 FieldDescriptor::kLastReservedNumber)）的标识号， Protobuf协议实现中对这些进行了预留。如果非要在.proto文件中使用这些预留标识号，编译时就会报警。同样你也不能使用早期保留的标识号。<br>注：[1,15]之内的标识号在编码的时候会占用一个字节。[16,2047]之内的标识号则占用2个字节。所以应该为那些频繁出现的消息元素保留 [1,15]之内的标识号。<br>切记：要为将来有可能添加的、频繁出现的标识号预留一些标识号。
+    -   字段规则，所指定的消息字段修饰符必须是如下之一:
+        -   <code>singular</code>：一个格式良好的消息应该有0个或者1个这种字段（但是不能超过1个），如果未定义，默认使用 <code>singular</code>。
+        -   <code>repeated</code>：在一个格式良好的消息中，这种字段可以重复任意多次（包括0次）。重复的值的顺序会被保留。
+4.  注释，<code>protobuf</code> 支持c语言注释，包括 <code>//</code> 单行注释，<code>/**/</code> 多行注释</p>
 
-<pre><code class="language-grovvy">dependencies {
-    implementation 'com.android.support:multidex:1.0.3'
-}
-</code></pre></li>
+<p>更多使用请查看<a href="https://developers.google.com/protocol-buffers/docs/proto3?hl=zh-cn">官方文档</a>
+-   支持枚举类型
+-   支持嵌套类型</p>
 
-<li><p>修改<code>Application</code></p>
-
-<p>需要修改 *Assets/Plugins/Android/AndroidManifest.xml*，在<code>&lt;application&gt;</code>标记中的
-<code>android：name</code>改为如下所示：</p>
-
-<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
-&lt;manifest xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
-    package=&quot;xxxx.xxxx.com&quot;&gt;
-    &lt;application
-            android:name=&quot;android.support.multidex.MultiDexApplication&quot; &gt;
-        ...
-    &lt;/application&gt;
-&lt;/manifest&gt;
-</code></pre></li>
-</ul></li>
-</ol>
-
-<h2 id="参见">参见</h2>
+<h4 id="编译proto文件">编译proto文件</h4>
 
 <ul>
-<li>更多文档说明，请参见<span id = '1'><a href="https://developer.android.com/studio/build/multidex.html?hl=zh-cn" title="更多使用">Google MultiDex 使用说明</a></span></li>
+<li>下载<a href="https://github.com/protocolbuffers/protobuf/releases">编译工具</a></li>
+
+<li><p>编译文件，一下是编译成c#文件</p>
+
+<pre><code class="language-shell">$ protoc -I=./input --csharp_out=./out/ helloworld.proto
+</code></pre>
+
+<p>其他类型编译，将 &ndash;csharp_out 替换为对应的类型，如：&ndash;go_out</p></li>
 </ul>
+
+<h4 id="序列化和反序列化">序列化和反序列化</h4>
+
+<pre><code class="language-c#">Student student = new Student();
+student.name = &quot;Arthur&quot;;
+person.age = 18;
+
+// 序列化
+byte[] buffer = student.ToByteArray();
+
+// 反序列化
+Student student2 = Student.Parser.ParseFrom(buffer);
+</code></pre>
                         </div>
 
                         
@@ -299,18 +304,31 @@
 
                         
 
+<div class="post-archive">
+    <h2>See Also</h2>
+    <ul class="listing">
+        
+        <li><a href="/unity/config/csharp-npoi/">C# NPOI 解析 Excel</a></li>
+        
+        <li><a href="/hugo/hugo-guide-line/">使用hugo搭建个人博客站点</a></li>
+        
+        <li><a href="/unity/plugins/unity-multi-dex/">Unity 使用 MultiDex 库</a></li>
+        
+    </ul>
+</div>
+
 
                         <div class="post-meta meta-tags">
                             
                             <ul class="clearfix">
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/multidex">MultiDex</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/c">C#</a></li>
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/unity-plugin">Unity Plugin</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/c#-plugin">C# Plugin</a></li>
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/unity-android">Unity Android</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/protobuf">Protobuf</a></li>
                                 
-                                <li><a href="http://weiweimhy.github.io/tags/unity">Unity</a></li>
+                                <li><a href="http://weiweimhy.github.io/tags/game-config">Game Config</a></li>
                                 
                             </ul>
                             
