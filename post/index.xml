@@ -1,4 +1,134 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 君不见</title><link>https://imhy.top/post/</link><description>Recent content in Posts on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Tue, 20 Aug 2024 16:39:37 +0800</lastBuildDate><atom:link href="https://imhy.top/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo Stack主题使用和美化配置</title><link>https://imhy.top/p/hugo-stack%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BE%8E%E5%8C%96%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 19 Aug 2024 15:28:43 +0800</pubDate><guid>https://imhy.top/p/hugo-stack%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BE%8E%E5%8C%96%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>hugo 安装和简单使用请查看上篇&lt;a class="link" href="https://imhy.top/p/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" >文档&lt;/a>&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 君不见</title><link>https://imhy.top/post/</link><description>Recent content in Posts on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Tue, 20 Aug 2024 16:39:37 +0800</lastBuildDate><atom:link href="https://imhy.top/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 的使用和相关问题</title><link>https://imhy.top/p/git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 20 Aug 2024 16:39:37 +0800</pubDate><guid>https://imhy.top/p/git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="git-新特性">Git 新特性
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>Git 2.23&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>git switch&lt;/code>：简化了分支切换操作，取代了 git checkout 的一部分功能&lt;/li>
+&lt;li>&lt;code>git restore&lt;/code>：提供了一个新的命令用于恢复文件状态，代替 git checkout 和 - git reset 的一些功能&lt;/li>
+&lt;li>&lt;code>git rebase --rebase-merges&lt;/code>：保留变基过程中的合并提交&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>Git 2.24&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git sparse-checkout&lt;/code>：允许用户只检出仓库的一部分内容，节省磁盘空间和提高操作效率。&lt;/li>
+&lt;li>&lt;code>git commit --fixup&lt;/code> 和 &lt;code>--squash&lt;/code>：在交互式变基中用于标记修复或合并提交。&lt;/li>
+&lt;li>&lt;code>git log --format&lt;/code>：提供了更灵活的日志格式选项。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.25&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git switch&lt;/code> 和 &lt;code>git restore&lt;/code> 的增强：进一步改进了这两个命令的功能和稳定性。&lt;/li>
+&lt;li>&lt;code>git log --graph --oneline&lt;/code>：改进了图形化日志的显示。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.26&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git restore --source&lt;/code>：允许指定恢复内容的源。&lt;/li>
+&lt;li>&lt;code>git stash&lt;/code>：增强了 git stash 的功能，支持对未跟踪文件的操作。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.27&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git commit --verbose&lt;/code>：在提交时显示变更的详细信息。&lt;/li>
+&lt;li>&lt;code>git diff&lt;/code> 的增强：改进了 diff 显示，增加了 &amp;ndash;color-words 选项。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.28&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git config&lt;/code> 的 &lt;code>includeIf&lt;/code> 选项：允许根据不同条件包括配置文件。&lt;/li>
+&lt;li>&lt;code>git remote&lt;/code>：增强了远程管理功能，支持更多的配置选项。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.29&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git diff&lt;/code> 的 &lt;code>--inter-hunk-context&lt;/code> 选项：增强了 diff 输出的上下文显示功能。&lt;/li>
+&lt;li>&lt;code>git pull&lt;/code> 的 &lt;code>--rebase&lt;/code>：改进了拉取操作的变基选项。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.30&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git commit&lt;/code> 的 &lt;code>--no-verify&lt;/code>：在提交时跳过钩子验证。&lt;/li>
+&lt;li>&lt;code>git merge&lt;/code> 的 &lt;code>--rerere-autoupdate&lt;/code>：增强了合并冲突的自动解决功能。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.31&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git log&lt;/code> 的 &lt;code>--notes&lt;/code> 选项：允许在日志中显示附加的注释。&lt;/li>
+&lt;li>&lt;code>git switch --orphan&lt;/code>：创建一个新的孤立分支，方便从空白状态开始。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.32&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git commit --dry-run&lt;/code>：提供了一个预查看提交的选项。&lt;/li>
+&lt;li>&lt;code>git diff&lt;/code> 的 &lt;code>--stat&lt;/code> 选项：改进了统计信息的显示。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.33&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git branch&lt;/code> 的 &lt;code>--show-current&lt;/code>：显示当前分支的简化命令。&lt;/li>
+&lt;li>&lt;code>git log&lt;/code> 的 &lt;code>--merges&lt;/code>：更好地显示合并提交。&lt;/li>
+&lt;/ul>
+&lt;ol>
+&lt;li>Git 2.34&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;code>git rebase&lt;/code> 的 &lt;code>--exec&lt;/code> 选项：在每个变基操作后执行指定命令。&lt;/li>
+&lt;li>&lt;code>git status&lt;/code> 的 &lt;code>--short&lt;/code> 选项：简化状态显示。&lt;/li>
+&lt;/ul>
+&lt;h2 id="git-覆盖所有提交">Git 覆盖所有提交
+&lt;/h2>&lt;p>git 没有提供直接指令覆盖所有提交，但是在某些场合下，我们可能有这个需求，例如：从某个克隆仓库修改&lt;/p>
+&lt;p>思路：&lt;/p>
+&lt;ul>
+&lt;li>创建一个独立分支&lt;/li>
+&lt;li>初始化仓库&lt;/li>
+&lt;li>删除 main 分支&lt;/li>
+&lt;li>将新分支修改为 main&lt;/li>
+&lt;li>强制提交&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git checkout --orphan temp_branch
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;init&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git branch -D main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git branch -m temp_branch main
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push -f ogigin main
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>注意：此过程不能撤销，请三思！&lt;/strong>&lt;/p>
+&lt;h2 id="问题和解决">问题和解决
+&lt;/h2>&lt;h3 id="git-status-不能显示中文">git status 不能显示中文
+&lt;/h3>&lt;p>在默认设置下，中文文件名在工作区状态输出，中文名不能正确显示，而是显示为八进制的字符编码&lt;/p>
+&lt;p>解决办法：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git config --global core.quotepath &lt;span class="nb">false&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>Hugo Stack主题使用和美化配置</title><link>https://imhy.top/p/hugo-stack%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BE%8E%E5%8C%96%E9%85%8D%E7%BD%AE/</link><pubDate>Mon, 19 Aug 2024 15:28:43 +0800</pubDate><guid>https://imhy.top/p/hugo-stack%E4%B8%BB%E9%A2%98%E4%BD%BF%E7%94%A8%E5%92%8C%E7%BE%8E%E5%8C%96%E9%85%8D%E7%BD%AE/</guid><description>&lt;p>hugo 安装和简单使用请查看上篇&lt;a class="link" href="https://imhy.top/p/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/" >文档&lt;/a>&lt;/p>
 &lt;h2 id="添加-stack-主题">添加 stack 主题
 &lt;/h2>&lt;p>在个人站点目录，执行如下命令以git子模块的模式来添加Stack&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
