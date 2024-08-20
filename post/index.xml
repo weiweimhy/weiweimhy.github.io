@@ -867,5 +867,6 @@ alt="create_workflow"
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">cname&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">imhy.top&lt;/span>&lt;span class="w">
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;/li>
+&lt;/div>&lt;p>至此，自动部署已完成，每当 push 到 main 分支的时候，github 会自动生成并且部署到个人页面&lt;/p>
+&lt;/li>
 &lt;/ol></description></item></channel></rss>
