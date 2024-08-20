@@ -1,0 +1,402 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="用更优雅更便捷的方式安装应用"><title>windows系统安装软件</title>
+<link rel=canonical href=https://imhy.top/p/windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/><link rel=stylesheet href=/scss/style.min.01f125fb3ce046fae5f60cf112340d9c28139f18451ef2e7edb64cfba4565b56.css><meta property='og:title' content="windows系统安装软件"><meta property='og:description' content="用更优雅更便捷的方式安装应用"><meta property='og:url' content='https://imhy.top/p/windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/'><meta property='og:site_name' content='君不见'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Windows开发环境'><meta property='article:tag' content='scoop'><meta property='article:published_time' content='2024-08-19T12:01:28+08:00'><meta property='article:modified_time' content='2024-08-20T12:06:10+00:00'><meta name=twitter:title content="windows系统安装软件"><meta name=twitter:description content="用更优雅更便捷的方式安装应用"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu9769813113213727679.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍦</span></figure><div class=site-meta><h1 class=site-name><a href=/>君不见</a></h1><h2 class=site-description>每天记录一点点🌱</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/%E6%90%9C%E7%B4%A2/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#package-manager-的优点>Package Manager 的优点</a></li><li><a href=#windows-平台的-package-manager>Windows 平台的 Package Manager</a></li><li><a href=#安装-scoop>安装 Scoop</a></li><li><a href=#scoop-目录说明>Scoop 目录说明</a></li><li><a href=#scoop-常用命令>Scoop 常用命令</a></li><li><a href=#补充>补充</a><ol><li><a href=#winget-使用>WinGet 使用</a><ol><li><a href=#安装-winget>安装 WinGet</a></li><li><a href=#常用命令>常用命令</a></li></ol></li><li><a href=#安装包安装>安装包安装</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><div class=article-title-wrapper><h2 class=article-title><a href=/p/windows%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E8%BD%AF%E4%BB%B6/>windows系统安装软件</a></h2><h3 class=article-subtitle>用更优雅更便捷的方式安装应用</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#597e8d" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4L18.5 9.5a2.828 2.828.0 10-4-4L4 16v4"/><path d="M13.5 6.5l4 4"/></svg>
+<time class=article-words>2586 字</time></div><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2024-08-08</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 6 分钟</time></div></footer></div></header><section class=article-content><p>Windows 系统安装应用改的方式有很多，在 Microsoft 商店安装，下载应用安装包安装，使用包管理器(Package Manager)安装等，使用包管理器，使得软件的安装、更新和管理更加高效和便捷</p><h2 id=package-manager-的优点>Package Manager 的优点</h2><ol><li><p>自动化和简化</p><ul><li>自动化安装：通过包管理器可以自动下载、安装和配置软件，省去手动下载安装和配置的麻烦。</li><li>一键更新：可以快速更新系统中所有已安装的软件包，确保软件始终保持最新状态。</li><li>批量管理：可以通过脚本或命令批量安装、更新或卸载软件，提高效率。</li></ul></li><li><p>一致性和可重复性</p><ul><li>一致的安装体验：包管理器提供统一的命令和流程，确保所有软件的安装过程一致。</li><li>可重复性：通过配置文件或脚本，可以轻松地在不同的系统上复现相同的软件环境，特别适合开发和测试场景。</li></ul></li><li><p>版本控制</p><ul><li>版本控制：许多包管理器允许你指定软件的版本，确保使用兼容的版本或回退到之前的版本。</li><li>历史记录：可以查看软件的安装历史和更新记录，帮助跟踪软件的变更。</li></ul></li><li><p>依赖管理</p><ul><li>自动处理依赖：包管理器会自动处理软件的依赖关系，确保所有必需的组件都被安装和配置正确。</li><li>解决冲突：包管理器会处理软件之间的冲突，避免手动解决依赖问题。</li></ul></li><li><p>安全性</p><ul><li>官方源和签名：许多包管理器从官方源或经过验证的源下载软件，减少恶意软件的风险。</li><li>更新安全补丁：定期更新软件，确保及时获取安全补丁，减少系统漏洞的风险。</li></ul></li><li><p>便捷性和集成</p><ul><li>命令行操作：提供命令行工具，方便在终端中进行操作，适合高级用户和自动化脚本。</li><li>集成开发环境：一些包管理器（如 winget）与 Windows 的开发工具集成，提供更好的开发体验。</li></ul></li><li><p>社区支持</p><ul><li>广泛的软件库：包管理器通常拥有丰富的软件库，提供了大量可用的软件包和工具。</li><li>社区维护：开源包管理器（如 Chocolatey 和 Scoop）拥有活跃的社区支持，可以快速获取帮助和解决问题。</li></ul></li><li><p>减少人工干预</p><ul><li>减少人为错误：通过自动化的安装和管理过程，减少因人为操作失误带来的问题。</li><li>简化配置：自动配置和设置选项，简化软件配置过程，特别是对于复杂的软件。</li></ul></li><li><p>跨平台支持</p><ul><li>多平台兼容：某些包管理器（如 Nix）支持跨平台使用，能够在不同操作系统上提供一致的包管理体验。</li></ul></li></ol><h2 id=windows-平台的-package-manager>Windows 平台的 Package Manager</h2><p>windows 平台的包管理器主要有 <code>Scoop</code> <code>Chocolatey</code> <code>Winget</code></p><ul><li><p>Scoop</p><p>优点：</p><ul><li>简单易用：Scoop 专注于简化安装和管理，特别适合开发人员和高级用户。</li><li>不需要管理员权限：大多数操作不需要管理员权限，适合在没有管理员权限的环境中使用。</li><li>轻量级：Scoop 使用简单的 JSON 配置文件和命令行工具，易于使用和维护。</li><li>透明性：所有安装的程序和配置都存储在用户目录中，易于备份和管理。</li><li>支持多版本：可以轻松安装不同版本的软件包，支持版本管理。</li></ul><p>缺点：</p><ul><li>功能有限：相对于其他包管理器，Scoop 的功能较为基础，缺少某些高级特性。</li><li>软件源较少：默认的软件源不如 Chocolatey 或 winget 丰富，但可以通过添加自定义源来扩展。</li><li>依赖管理较弱：Scoop 的依赖管理较为基础，可能需要手动解决某些软件的依赖问题。</li></ul></li><li><p>Chocolatey</p><p>优点：</p><ul><li>功能全面：支持广泛的软件包，并提供了许多管理功能，包括安装、升级和卸载。</li><li>大型软件库：Chocolatey 拥有一个庞大的软件包库，涵盖了各种应用程序和工具。</li><li>良好的依赖管理：处理软件依赖关系，自动安装和更新依赖项。</li><li>社区支持：活跃的社区提供了丰富的包和支持。</li></ul><p>缺点：</p><ul><li>需要管理员权限：大多数操作需要管理员权限，这可能在某些环境中受限。</li><li>复杂的配置：相对于 Scoop，Chocolatey 的配置和管理可能更复杂。</li><li>软件源问题：某些包的版本可能不如预期最新，尤其是社区维护的包。</li></ul></li><li><p>Winget</p><p>优点：</p><ul><li>官方支持：由 Microsoft 提供和支持，集成在 Windows 10 和 Windows 11 中，保证了兼容性和安全性。</li><li>现代化：具有现代化的界面和功能，支持从 Microsoft Store 和第三方源安装软件。</li><li>简单易用：提供直观的命令行接口，易于使用和理解。</li><li>集成：与 Windows 系统和其他 Microsoft 工具集成良好，提供一致的用户体验。</li></ul><p>缺点：</p><ul><li>功能有限：相较于 Chocolatey，winget 的功能和包管理特性还不够丰富。</li><li>软件库较新：虽然不断增加，但相比于 Chocolatey，winget 的软件库还不够庞大。</li><li>依赖管理弱：目前对依赖关系的管理不如 Chocolatey 强大。</li></ul></li></ul><p>结合自己的需求，选择合理的包管理器。</p><p>Scoop 是一款绿色软件（通过解压压缩包就可以使用的软件），更符合我的需求，所以我选择 Scoop</p><h2 id=安装-scoop>安装 Scoop</h2><ul><li><p>先决条件<br>PowerShell 最新版本或 Windows PowerShell 5.1，为了让 PowerShell 可以执行脚本，需要设置 PowerShell 执行策略，需要执行下面的命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+</span></span></code></pre></td></tr></table></div></div></li><li><p>推荐安装方式</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>irm get.scoop.sh -outfile <span class=s1>&#39;install.ps1&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 注意设置安装目录，ScoopDir存放当前用户软件，ScoopGlobalDir存放全局软件</span>
+</span></span><span class=line><span class=cl>.<span class=se>\i</span>nstall.ps1 -ScoopDir <span class=s1>&#39;D:\Applications\Scoop&#39;</span> -ScoopGlobalDir <span class=s1>&#39;F:\GlobalScoopApps&#39;</span> -NoProxy
+</span></span></code></pre></td></tr></table></div></div></li><li><p>更多安装方式请查看官方<a class=link href=https://github.com/ScoopInstaller/Install target=_blank rel=noopener>文档</a></p></li></ul><h2 id=scoop-目录说明>Scoop 目录说明</h2><ul><li>apps：所有通过scoop安装的软件都在里面</li><li>buckets：管理软件的仓库，用于记录哪些软件可以安装、更新等信息，默认添加main仓库，主要包含无需GUI的软件，可手动添加其他仓库或自建仓库，具体在推荐软件仓库中介绍</li><li>cache：软件下载后安装包暂存目录</li><li>persit：用于储存一些用户数据，不会随软件更新而替换</li><li>shims：用于软链接应用，使应用之间不会互相干扰，实际使用过程中无用户操作不必细究</li></ul><h2 id=scoop-常用命令>Scoop 常用命令</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看帮助</span>
+</span></span><span class=line><span class=cl>scoop --help
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看命令帮助</span>
+</span></span><span class=line><span class=cl>scoop &lt;command&gt; --help
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看scoop版本和仓库版本</span>
+</span></span><span class=line><span class=cl>scoop --version
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置代理</span>
+</span></span><span class=line><span class=cl>scoop config proxy 127.0.0.1:1080
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 搜索应用</span>
+</span></span><span class=line><span class=cl>scoop search &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装应用</span>
+</span></span><span class=line><span class=cl>scoop install &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 卸载应用</span>
+</span></span><span class=line><span class=cl>scoop uninstall &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 更新所有仓库以及 scoop 软件本身</span>
+</span></span><span class=line><span class=cl>scoop update 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 更新应用</span>
+</span></span><span class=line><span class=cl>scoop update &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 更新全部应用</span>
+</span></span><span class=line><span class=cl>scoop update *
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 列出已安装应用</span>
+</span></span><span class=line><span class=cl>scoop list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 锁定软件阻止其更新</span>
+</span></span><span class=line><span class=cl>scoop hold &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 应用简要信息</span>
+</span></span><span class=line><span class=cl>scoop info &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 进入应用官网</span>
+</span></span><span class=line><span class=cl>scoop home &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 添加仓库</span>
+</span></span><span class=line><span class=cl>scoop bucket add &lt;源名称&gt; &lt;源URL&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除仓库</span>
+</span></span><span class=line><span class=cl>scoop bucket rm &lt;源名称&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理未使用的应用</span>
+</span></span><span class=line><span class=cl>scoop cleanup
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看缓存</span>
+</span></span><span class=line><span class=cl>scoop cache list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 显示缓存信息</span>
+</span></span><span class=line><span class=cl>scoop cache status
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理缓存</span>
+</span></span><span class=line><span class=cl>scoop cache cleanup
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 导出当前列表到一个文件</span>
+</span></span><span class=line><span class=cl>scoop <span class=nb>export</span> &gt; &lt;file_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 从文件导入安装列表</span>
+</span></span><span class=line><span class=cl>scoop import &lt;file_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看scoop配置</span>
+</span></span><span class=line><span class=cl>scoop config
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 充值scoop</span>
+</span></span><span class=line><span class=cl>scoop reset
+</span></span></code></pre></td></tr></table></div></div><p>我的 scoop <a class=link href='<pre>��{��
+� � � � �"�b�u�c�k�e�t�s�"�:� �[��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�h�t�t�p�s�:�/�/�g�i�t�h�u�b�.�c�o�m�/�S�c�o�o�p�I�n�s�t�a�l�l�e�r�/�M�a�i�n�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �{��
+� � � � � � � � � � � � � � � � �"�v�a�l�u�e�"�:� �"�\�/�D�a�t�e�(�1�6�8�2�6�8�5�0�1�2�0�0�0�)�\�/�"�,��
+� � � � � � � � � � � � � � � � �"�D�i�s�p�l�a�y�H�i�n�t�"�:� �2�,��
+� � � � � � � � � � � � � � � � �"�D�a�t�e�T�i�m�e�"�:� �"�2�0�2�3�t^4�g2�8��e �2�0�:�3�0�:�1�2�"��
+� � � � � � � � � � � � �}�,��
+� � � � � � � � � � � � �"�M�a�n�i�f�e�s�t�s�"�:� �1�1�9�4��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�h�t�t�p�s�:�/�/�g�i�t�h�u�b�.�c�o�m�/�l�u�k�e�s�a�m�p�s�o�n�/�s�c�o�o�p�-�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �{��
+� � � � � � � � � � � � � � � � �"�v�a�l�u�e�"�:� �"�\�/�D�a�t�e�(�1�7�2�4�1�4�2�6�8�9�0�0�0�)�\�/�"�,��
+� � � � � � � � � � � � � � � � �"�D�i�s�p�l�a�y�H�i�n�t�"�:� �2�,��
+� � � � � � � � � � � � � � � � �"�D�a�t�e�T�i�m�e�"�:� �"�2�0�2�4�t^8�g2�0��e �1�6�:�3�1�:�2�9�"��
+� � � � � � � � � � � � �}�,��
+� � � � � � � � � � � � �"�M�a�n�i�f�e�s�t�s�"�:� �2�0�5�7��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�n�e�r�d�-�f�o�n�t�s�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�h�t�t�p�s�:�/�/�g�i�t�h�u�b�.�c�o�m�/�m�a�t�t�h�e�w�j�b�e�r�g�e�r�/�s�c�o�o�p�-�n�e�r�d�-�f�o�n�t�s�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �{��
+� � � � � � � � � � � � � � � � �"�v�a�l�u�e�"�:� �"�\�/�D�a�t�e�(�1�7�2�4�0�2�3�2�6�7�0�0�0�)�\�/�"�,��
+� � � � � � � � � � � � � � � � �"�D�i�s�p�l�a�y�H�i�n�t�"�:� �2�,��
+� � � � � � � � � � � � � � � � �"�D�a�t�e�T�i�m�e�"�:� �"�2�0�2�4�t^8�g1�9��e �7�:�2�1�:�0�7�"��
+� � � � � � � � � � � � �}�,��
+� � � � � � � � � � � � �"�M�a�n�i�f�e�s�t�s�"�:� �3�3�6��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�j�a�v�a�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�h�t�t�p�s�:�/�/�g�i�t�h�u�b�.�c�o�m�/�S�c�o�o�p�I�n�s�t�a�l�l�e�r�/�J�a�v�a�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �{��
+� � � � � � � � � � � � � � � � �"�v�a�l�u�e�"�:� �"�\�/�D�a�t�e�(�1�6�8�2�6�8�4�8�1�0�0�0�0�)�\�/�"�,��
+� � � � � � � � � � � � � � � � �"�D�i�s�p�l�a�y�H�i�n�t�"�:� �2�,��
+� � � � � � � � � � � � � � � � �"�D�a�t�e�T�i�m�e�"�:� �"�2�0�2�3�t^4�g2�8��e �2�0�:�2�6�:�5�0�"��
+� � � � � � � � � � � � �}�,��
+� � � � � � � � � � � � �"�M�a�n�i�f�e�s�t�s�"�:� �2�5�3��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�d�o�r�a�d�o�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�h�t�t�p�s�:�/�/�g�i�t�h�u�b�.�c�o�m�/�c�h�a�w�y�e�h�s�u�/�d�o�r�a�d�o�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �{��
+� � � � � � � � � � � � � � � � �"�v�a�l�u�e�"�:� �"�\�/�D�a�t�e�(�1�7�2�4�1�1�6�6�4�2�0�0�0�)�\�/�"�,��
+� � � � � � � � � � � � � � � � �"�D�i�s�p�l�a�y�H�i�n�t�"�:� �2�,��
+� � � � � � � � � � � � � � � � �"�D�a�t�e�T�i�m�e�"�:� �"�2�0�2�4�t^8�g2�0��e �9�:�1�7�:�2�2�"��
+� � � � � � � � � � � � �}�,��
+� � � � � � � � � � � � �"�M�a�n�i�f�e�s�t�s�"�:� �2�5�6��
+� � � � � � � � �}��
+� � � � �]�,��
+� � � � �"�a�p�p�s�"�:� �[��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�7�z�i�p�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�2�2�.�0�1�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�6�9�8�5�8�4�3�1�2�0�5�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�a�d�b�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�3�4�.�0�.�1�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�7�8�7�7�1�4�0�8�6�8�8�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�a�p�k�t�o�o�l�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�2�.�7�.�0�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�6�9�8�5�8�4�3�8�9�8�8�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�a�r�i�a�2�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�3�6�.�0�-�1�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�3�0�2�8�6�3�0�0�7�1�3�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�a�u�t�o�h�o�t�k�e�y�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�2�.�0�.�1�0�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�9�1�0�6�5�9�4�1�0�4�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�c�c�l�e�a�n�e�r�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�6�.�2�6�.�1�1�1�6�9�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�2�2�4�1�1�2�3�5�6�9�7�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�d�o�r�a�d�o�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�c�h�a�r�l�e�s�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�4�.�6�.�7�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�2�2�4�1�1�3�0�6�1�3�7�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�e�v�e�r�y�t�h�i�n�g�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�4�.�1�.�1�0�2�4�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�9�1�0�6�5�5�0�4�7�6�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�f�o�x�i�t�-�p�d�f�-�r�e�a�d�e�r�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�2�0�2�4�.�2�.�2�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�2�2�4�1�1�6�3�8�4�5�3�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�g�o�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�2�0�.�3�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�8�1�7�1�0�4�7�4�6�7�5�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�g�o�l�d�e�n�d�i�c�t�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�5�.�0�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�9�1�0�7�2�5�1�6�6�4�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�l�u�a�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�5�.�4�.�3�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�1�7�6�7�2�1�3�0�9�6�8�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�n�o�d�e�j�s�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�2�0�.�0�.�0�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�9�1�0�6�9�3�7�6�5�8�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�j�a�v�a�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�o�p�e�n�j�d�k�1�1�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�1�.�0�.�2�-�9�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�9�7�0�3�0�9�3�6�4�1�2�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�d�o�r�a�d�o�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�p�o�w�e�r�s�h�e�l�l�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�7�.�4�.�4�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�2�2�4�1�1�6�5�8�4�2�0�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�p�r�o�c�e�s�s�h�a�c�k�e�r�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�2�.�3�9�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�3�0�5�6�9�1�7�6�7�4�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�p�y�t�h�o�n�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�3�.�1�1�.�3�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�9�1�1�0�4�6�4�0�9�5�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�s�u�d�o�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�0�.�2�0�2�0�.�0�1�.�2�6�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�1�5�8�6�1�4�5�2�1�1�9�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�v�s�c�o�d�e�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�9�2�.�2�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�2�4�1�4�8�4�7�3�8�0�8�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�w�e�c�h�a�t�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�3�.�9�.�1�0�.�1�9�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�1�6�1�9�1�4�1�2�0�7�6�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�w�i�n�d�o�w�s�-�t�e�r�m�i�n�a�l�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�1�8�.�3�1�8�1�.�0�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�7�0�9�1�0�7�2�8�4�7�5�3�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�m�a�i�n�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�w�i�n�g�e�t�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�4�.�1�0�1�7�3�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�8�2�6�6�1�5�3�1�7�0�3�)�\�/�"��
+� � � � � � � � �}�,��
+� � � � � � � � �{��
+� � � � � � � � � � � � �"�I�n�f�o�"�:� �"�"�,��
+� � � � � � � � � � � � �"�S�o�u�r�c�e�"�:� �"�e�x�t�r�a�s�"�,��
+� � � � � � � � � � � � �"�N�a�m�e�"�:� �"�w�o�x�"�,��
+� � � � � � � � � � � � �"�V�e�r�s�i�o�n�"�:� �"�1�.�3�.�5�2�4�"�,��
+� � � � � � � � � � � � �"�U�p�d�a�t�e�d�"�:� �"�\�/�D�a�t�e�(�1�6�1�6�0�4�7�7�2�4�3�4�2�)�\�/�"��
+� � � � � � � � �}��
+� � � � �]��
+�}��
+�</pre>'>列表</a></p><h2 id=补充>补充</h2><h3 id=winget-使用>WinGet 使用</h3><p>Scoop 是一款“绿色”软件，有一定的局限性，对于一些<strong>大型</strong>或者<strong>权限要求比较多</strong>的软件并不适用，对于此类软件推荐使用 WinGet 安装</p><h4 id=安装-winget>安装 WinGet</h4><ul><li>在 <a class=link href="https://apps.microsoft.com/store/detail/%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/9NBLGGH4NNS1?hl=zh-cn&amp;gl=cn&amp;rtc=1" target=_blank rel=noopener>Microsoft 商店安装</a> 获取安装</li><li>在 <a class=link href=https://github.com/microsoft/winget-cli/releases target=_blank rel=noopener>github 发布页</a>下载最新版本安装</li><li>使用 Scoop 安装（推荐）</li></ul><h4 id=常用命令>常用命令</h4><p>winget 的使用和 scoop 类似</p><p>注意：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># -l 指定安装路径，前提是安装包本身支持修改安装路径</span>
+</span></span><span class=line><span class=cl>winget install -l &lt;app_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># -i 进入交互模式安装</span>
+</span></span><span class=line><span class=cl>winget install -i &lt;app_name&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=安装包安装>安装包安装</h3><p>对于一些不常用软件，无法通过包管理器下载的，请务必到<strong>官方网站</strong>下载安装包，在安装流程中，注意<strong>修改安装路</strong>径和<strong>反选捆绑安装</strong></p></section><footer class=article-footer><section class=article-tags><a href=/tags/windows%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/>Windows开发环境</a>
+<a href=/tags/scoop/>Scoop</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-edit><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/environment/windows%e7%b3%bb%e7%bb%9f%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 2024-08-08 08:00 UTC</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><script src=//unpkg.com/@waline/client@v2/dist/waline.js></script><link href=//unpkg.com/@waline/client@v2/dist/waline.css rel=stylesheet><div id=waline class=waline-container></div><style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding);--waline-font-size:var(--article-font-size)}.waline-container .wl-count{color:var(--card-text-color-main)}</style><script>Waline.init({dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://unpkg.com/@waline/emojis@1.0.1/weibo"],locale:{admin:"Admin",placeholder:null},requiredMeta:["name","email","url"]})</script><footer class=site-footer><section class=wordcount><p>7.51k 字<br>5篇文章</p></section><section class=copyright>&copy;
+2024 君不见</section><section class=powerby></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
