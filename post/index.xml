@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 君不见</title><link>https://imhy.top/post/</link><description>Recent content in Posts on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Mon, 19 Aug 2024 15:28:43 +0800</lastBuildDate><atom:link href="https://imhy.top/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Hugo搭建个人博客</title><link>https://imhy.top/p/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link><pubDate>Mon, 19 Aug 2024 12:03:33 +0800</pubDate><guid>https://imhy.top/p/hugo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid><description>&lt;p>&lt;a class="link" href="https://gohugo.io" target="_blank" rel="noopener"
+>Hugo&lt;/a>是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;p>hugo 有两个版本，标准版和扩展版，推荐使用扩展版。&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>使用 &lt;a class="link" href="../environment/scoop%e4%bd%bf%e7%94%a8.md" >scoop&lt;/a> 安装&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">scoop install hugo-extended
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注意：*目前scoop版本过低，编译最新stack主题的时候会报错，所以推荐使用下面方法安装。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>下载二进制安装，&lt;a class="link" href="https://github.com/gohugoio/hugo/releases/tag/v0.133.0" target="_blank" rel="noopener"
+>github地址&lt;/a>&lt;/p>
+&lt;p>a. 下载二进制版本
+b. 解压文件
+c. 配置环境变量&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="查看-hugo-版本">查看 hugo 版本
+&lt;/h2>&lt;p>扩展版可以在输出种看到 +extended 标识&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo version
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="显示可用命令">显示可用命令
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo &lt;span class="nb">help&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 获取子指令的说明, 用 --help标志，例如：&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo server --help
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="新建站点">新建站点
+&lt;/h2>&lt;p>一个站点对应本地的一个文件夹，如：希望在 /site_path/site_name 路径创建一个站点&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo new site site_path/site_name
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>创建成功以后切换到对应路径&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> site_path/site_name
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>可以看到如下文件结构&lt;/p>
+&lt;p>site_name/&lt;br>
+├── archetypes/ 该目录包含新内容的模板，查看&lt;a class="link" href="https://gohugo.io/content-management/archetypes/" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;br>
+│ └── default.md&lt;br>
+├── assets/ 该目录包含通常通过资产管道传递的全局资源。这包括图像、CSS、Sass、JavaScript 和 TypeScript 等资源。查看&lt;a class="link" href="https://gohugo.io/hugo-pipes/introduction/" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;br>
+├── content/ 该目录包含标记文件（通常是 Markdown）和构成站点内容的页面资源。查看&lt;a class="link" href="https://gohugo.io/content-management/organization/" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;br>
+├── data/ 该目录包含数据文件（JSON、TOML、YAML 或 XML），用于增强内容、配置、本地化和导航。查看&lt;a class="link" href="https://gohugo.io/content-management/data-sources/" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;br>
+├── i18n/ 该目录包含多语言站点的翻译表。查看&lt;a class="link" href="https://gohugo.io/content-management/multilingual/" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;br>
+├── layouts/ layouts 目录包含用于将内容、数据和资源转换为完整网站的模板。查看&lt;a class="link" href="https://gohugo.io/templates/" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;br>
+├── static/ 该目录包含的文件将在您构建站点时复制到公共目录。例如：、 和验证站点所有权的文件。在引入页面捆绑包和资产管道之前，该目录还用于图像、CSS 和 JavaScript。&lt;br>
+├── themes/ 该目录包含一个或多个主题，每个主题都位于其自己的子目录中
+└── hugo.toml 站点配置，可能分为多个子目录和文件。对于配置最少的项目或不需要在不同环境中表现不同的项目，在项目根目录中命名的单个配置文件就足够了。查看&lt;a class="link" href="https://gohugo.io/getting-started/configuration/#configuration-directory" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;/p>
+&lt;h2 id="新建文章">新建文章
+&lt;/h2>&lt;p>新建的文章会根据 archetypes/default.md 模板创建在 content/ 目录下&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo new path/test.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="本地调试">本地调试
+&lt;/h2>&lt;p>在发布文章之前，你可能希望在本地调试，在站点根路径执行 hugo 命令进行调试&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 启动本地服务器&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo server
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># --buildDrafts 包含草稿文章&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo server --buildDrafts
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># or&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo server -D
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在浏览器打开 &lt;code>http://localhost:1313&lt;/code> 可查看生成的文章&lt;/p>
+&lt;h2 id="生成最终页面">生成最终页面
+&lt;/h2>&lt;p>将文章中的 draft 修改为 false&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#开始代码压缩&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo --minify
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>运行以后将在站点目录生成 public 目录，该目录包含生成的已发布网站。Hugo根据需要重新创建此目录及其内容。查看&lt;a class="link" href="https://gohugo.io/getting-started/usage/#build-your-site" target="_blank" rel="noopener"
+>详细资料&lt;/a>&lt;/p>
+&lt;blockquote>
+&lt;p>⚠️Hugo在构建站点前不会清空目录。 根据当前四个条件的评估结果，构建后你的目录可能包含来自以前构建的多余文件。通常的做法是在每次构建之前手动清空目录的内容以删除草稿、过期和未来的内容。&lt;/p>
+&lt;/blockquote>
+&lt;p>所以推荐使用代参构建&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 这个选项会在 Hugo 构建时清理生成目录中的内容，确保只有最新构建的文件保留&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">hugo --cleanDestinationDir
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="部署">部署
+&lt;/h2>&lt;p>如果需要部署在 &lt;code>Github pages&lt;/code> 上&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>首先在 &lt;a class="link" href="https://github.com/" target="_blank" rel="noopener"
+>github&lt;/a> 上创建一个名为 &lt;code>xxxx.github.io&lt;/code> 的仓库（ xxxx 为你个人 github 的用户名）。&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>将站点关联到 &lt;code>Github pages&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">hugo --baseUrl&lt;span class="o">=&lt;/span>&lt;span class="s2">&amp;#34;http://xxxx.github.io/&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>将 &lt;code>public&lt;/code> 文件夹关联到刚创建的仓库&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> public
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git init
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git remote add origin https://github.com/xxxx/xxxx.github.io.git
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git add .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;add test.md&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git push -u origin master
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;p>之后可在浏览器访问 &lt;code>http://xxxx.github.io&lt;/code> 即可看到发布的文章&lt;/p></description></item></channel></rss>
