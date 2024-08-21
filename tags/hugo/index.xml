@@ -24,9 +24,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;p>拉取完毕后，打开博客文件夹内的 theme/hugo-theme-stack/exampleSite，将文件夹内的 hugo.yaml 复制到站点根目录下，同时删除原有的 hugo.toml&lt;/p>
-&lt;p>本地调试，就可以预览 stack 主题啦~&lt;/p>
-&lt;h2 id="自定义-stack">自定义 stack
-&lt;/h2>&lt;p>为了打造更符合自己心意的站点，可能需要diy很多配置，所以需要将主题的资源复制到个人站点&lt;/p>
+&lt;p>为了打造更符合自己心意的站点，可能需要diy很多配置，所以需要将主题的资源复制到个人站点&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -125,7 +123,7 @@
 >Tabler Icons&lt;/a> ，搜索自己想要的图标，然后将 Size 拉到 24px ，再将 Stroke 拉到 2px&lt;/p>
 &lt;p>然后单击所需要的图标，网站会会自动复制下这个图标的svg代码，然后在网站根目录下的assets/icons/文件夹内创建一个 .svg 文件，就可以在配置中使用啦~&lt;/p>
 &lt;h2 id="文章底部添加-在-github-上编辑此页">文章底部添加 在 GitHub 上编辑此页
-&lt;/h2>&lt;p>拷贝主题目录 /layouts/partials/article/components/footer.html 到网站根目录，修改为：&lt;/p>
+&lt;/h2>&lt;p>拷贝主题目录 &lt;code>assets\layouts\partials\article\components\footer.html&lt;/code> 到网站根目录，修改为：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -186,7 +184,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">footer&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>编辑 hugo.yaml&lt;/p>
+&lt;/div>&lt;p>编辑 &lt;code>hugo.yaml&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -214,7 +212,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="自动更新文章最后修改时间">自动更新文章最后修改时间
-&lt;/h2>&lt;p>修改 hugo.yaml,在最后添加如下配置&lt;/p>
+&lt;/h2>&lt;p>修改 &lt;code>hugo.yaml&lt;/code>,在最后添加如下配置&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -240,7 +238,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="文章加入字数统计">文章加入字数统计
-&lt;/h2>&lt;p>修改 layouts\partials\article\components\details.html, 添加如下内容&lt;/p>
+&lt;/h2>&lt;p>修改 &lt;code>layouts\partials\article\components\details.html&lt;/code>, 添加如下内容&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -275,7 +273,7 @@
 &lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="站点总字数统计">站点总字数统计
-&lt;/h2>&lt;p>修改 layouts\partials\footer\footer.html，添加如下内容&lt;/p>
+&lt;/h2>&lt;p>修改 &lt;code>layouts\partials\footer\footer.html&lt;/code>，添加如下内容&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -318,7 +316,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="缩小归档页的分类卡片尺寸">缩小归档页的分类卡片尺寸
-&lt;/h2>&lt;p>默认的卡片有些太大了，修改 assets\scss\partials\layout\list.scss&lt;/p>
+&lt;/h2>&lt;p>默认的卡片有些太大了，修改 &lt;code>assets\scss\partials\layout\list.scss&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -373,8 +371,57 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="在文档列表显示内容简介">在文档列表显示内容简介
-&lt;/h2>&lt;p>修改 assets\scss\partials\article.scss&lt;/p>
+&lt;/div>&lt;h2 id="在首页文件列表显示内容简介">在首页文件列表显示内容简介
+&lt;/h2>&lt;p>在首页文件列表显示内容简介，但是在文档页隐藏简介&lt;/p>
+&lt;p>修改 &lt;code>assets\layouts\partials\article-list\default.html&lt;/code>, 添加&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">{{ with .Params.description }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">div&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;article-subtitle-wrapper&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">h3&lt;/span> &lt;span class="na">class&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;article-subtitle&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> {{ . }}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">h3&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">div&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">{{ end }}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>修改 &lt;code>assets\scss\custom.scss&lt;/code>, 添加&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">.article-subtitle-wrapper {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding-left: var(--card-padding);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding-right: var(--card-padding);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding-bottom: var(--card-padding);
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">.article-time {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> padding-top: 5PX
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>删除 &lt;code>layouts\partials\article\components\details.html&lt;/code> 中的 &lt;code>article-subtitle&lt;/code>&lt;/p>
+&lt;h2 id="在归档列表显示内容简介">在归档列表显示内容简介
+&lt;/h2>&lt;p>修改 &lt;code>assets\layouts\partials\article-list\compact.html&lt;/code>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -417,7 +464,7 @@
 &lt;li>背景框添加圆角&lt;/li>
 &lt;li>调整 copy 按钮位置&lt;/li>
 &lt;/ul>
-&lt;p>修改 assets\scss\partials\layout\article.scss, 在文件尾添加&lt;/p>
+&lt;p>修改 &lt;code>assets\scss\partials\layout\article.scss&lt;/code>, 在文件尾添加&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
