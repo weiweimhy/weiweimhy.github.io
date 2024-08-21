@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windowns-Terminal on 君不见</title><link>https://imhy.top/tags/windowns-terminal/</link><description>Recent content in Windowns-Terminal on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Mon, 19 Aug 2024 12:02:22 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/windowns-terminal/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows Terminal使用</title><link>https://imhy.top/p/windows-terminal%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 19 Aug 2024 12:02:22 +0800</pubDate><guid>https://imhy.top/p/windows-terminal%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>Windows Terminal 是一个现代化、多标签的终端应用程序，专为使用命令行工具（如 PowerShell、命令提示符、Windows Subsystem for Linux 以及其他命令行界面）设计。它提供了许多强大且灵活的功能，并且可以替代经典的命令提示符和 PowerShell 窗口&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>在 &lt;a class="link" href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=zh-cn&amp;amp;gl=cn&amp;amp;rtc=1" target="_blank" rel="noopener"
+>Mixrosoft商店&lt;/a> 获取 Windows Terminal&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>在 &lt;a class="link" href="https://github.com/microsoft/terminal/releases" target="_blank" rel="noopener"
+>github 发布页&lt;/a>下载最新版本安装&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>使用 scoop 安装（推荐）， 如果未安装 scoop , 请查看这篇&lt;a class="link" href="https://imhy.top/p/windows%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E6%8E%A8%E8%8D%90/#安装 Scoop" >文章&lt;/a>&lt;/p>
+&lt;p>先安装 powershell, 此 powershell 不是自带的 powershell，应该是 powershell core，可跨平台&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scoop install powershell
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop install windows-terminal
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>使用 winget 安装&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="常用快捷键">常用快捷键
+&lt;/h2>&lt;ul>
+&lt;li>&lt;kbd>Ctrl&lt;/kbd> + &lt;kbd>Shift&lt;/kbd> + &lt;kbd>T&lt;/kbd> 新建标签页&lt;/li>
+&lt;li>&lt;kbd>Ctrl&lt;/kbd> + &lt;kbd>Tab&lt;/kbd> 切换标签页&lt;/li>
+&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>Shift&lt;/kbd> + &lt;kbd>+&lt;/kbd> 右分屏&lt;/li>
+&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>Shift&lt;/kbd> + &lt;kbd>-&lt;/kbd> 下分屏&lt;/li>
+&lt;/ul>
+&lt;p>也可以在 settings.json 中配置自己的快捷键。例如，添加打开新的 PowerShell 标签的快捷键：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;keybindings&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;command&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;newTab&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;keys&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;ctrl+shift+p&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;profile&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;PowerShell&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="美化">美化
+&lt;/h2>&lt;h3 id="配置字体">配置字体
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>下载等宽字体，推荐使用 CascadiaCodePL ,&lt;a class="link" href="https://github.com/microsoft/cascadia-code/releases" target="_blank" rel="noopener"
+>下载地址&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开 windows terminal , &lt;kbd>shift&lt;/kbd>+&lt;kbd>ctrl&lt;/kbd>+&lt;kbd>,&lt;/kbd> 快捷键打开设置 setting.json&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>将 profiles/defaults 节点改成&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;defaults&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;font&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;face&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Cascadia Code PL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;size&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">10.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>&lt;span class="err">,&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="配置-oh-my-posh">配置 oh-my-posh
+&lt;/h3>&lt;p>oh-my-posh &lt;a class="link" href="https://ohmyposh.dev/docs/installation/windows" target="_blank" rel="noopener"
+>官方文档&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>安装&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># scoop 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># scoop 更新&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop update oh-my-posh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># winget 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">winget install JanDeDobbeleer.OhMyPosh -l D:&lt;span class="se">\o&lt;/span>h-my-posh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># winget 更新&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">winget upgrade JanDeDobbeleer.OhMyPosh -l D:&lt;span class="se">\o&lt;/span>h-my-posh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>注意&lt;/strong>：目前使用 scoop 安装的文件有问题，缺少必须的 oh-my-posh.exe 文件和 theme 文件，推荐使用 winget 安装&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>配置 oh-my-posh&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>下载主题&lt;/p>
+&lt;p>主题&lt;a class="link" href="https://ohmyposh.dev/docs/themes" target="_blank" rel="noopener"
+>预览&lt;/a>&lt;br>
+主题&lt;a class="link" href="https://github.com/JanDeDobbeleer/oh-my-posh/tree/main/themes" target="_blank" rel="noopener"
+>仓库&lt;/a>&lt;/p>
+&lt;p>选择喜欢的主题，将对于的 json 文件保存在本地， 我的路径是
+&lt;code>D:\Tools\oh-my-posh\theme&lt;/code>，后面在配置文件中要使用&lt;/p>
+&lt;p>推荐两个主题 &lt;a class="link" href="https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/powerlevel10k_lean.omp.json" target="_blank" rel="noopener"
+>powerlevel10k_lean&lt;/a> &lt;a class="link" href="https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/cobalt2.omp.json" target="_blank" rel="noopener"
+>cobalt2&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>配置&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检测是否有配置文件，没有则创建&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>!&lt;span class="o">(&lt;/span>Test-Path -Path &lt;span class="nv">$PROFILE&lt;/span> &lt;span class="o">))&lt;/span> &lt;span class="o">{&lt;/span> New-Item -Type File -Path &lt;span class="nv">$PROFILE&lt;/span> -Force &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 用 vscode 打开配置文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">code &lt;span class="nv">$PROFILE&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>添加如下内容：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">#全新的主题, 注意修改此处路径
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">oh-my-posh init pwsh --config D:\Tools\oh-my-posh\themes\powerlevel10k_lean.omp.json | Invoke-Expression
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 自动补全历史命令，逐字补全
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module PSReadLine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Set-PSReadLineOption -PredictionSource History
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#修改Tab补全为bash风格
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="更舒适的-terminal">更舒适的 Terminal
+&lt;/h2>&lt;p>在 $profile 增加一些通用方法&lt;/p>
+&lt;h3 id="增加代理的开启管理">增加代理的开启管理
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 开启代理 默认使用 http://127.0.0.1:1080&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxy-on
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置代理地址&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxy-on http:127.0.0.1:1080
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 关闭代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxy-off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="增加-open-方法打开文件夹">增加 Open 方法，打开文件夹
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 打开当前文件夹&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">open .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 打开指定文件夹&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">open &amp;lt;path&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="增加设置环境变量方法">增加设置环境变量方法
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置环境变量，u表示为当前用户设置，m表示为本机设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set-env &amp;lt;key&amp;gt; &amp;lt;value&amp;gt; &lt;span class="o">[&lt;/span>u/m&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="用-autohotkey-打开时切换到--目录">用 autohotkey 打开时切换到 ~ 目录
+&lt;/h3>&lt;p>用 autohotkey 时，默认会打开 autohotkey 配置所在目录&lt;/p>
+&lt;h3 id="我的配置文件">我的配置文件
+&lt;/h3>&lt;p>文件&lt;a href="https://imhy.top/post/environment/configs/Microsoft.PowerShell_profile.ps1" download class="link">下载&lt;/a>&lt;/p></description></item></channel></rss>

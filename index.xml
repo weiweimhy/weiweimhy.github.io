@@ -961,7 +961,254 @@ alt="create_workflow"
 &lt;/div>
 &lt;/div>&lt;p>至此，自动部署已完成，每当 push 到 main 分支的时候，github 会自动生成并且部署到个人页面&lt;/p>
 &lt;/li>
-&lt;/ol></description></item><item><title>windows软件安装及推荐</title><link>https://imhy.top/p/windows%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E6%8E%A8%E8%8D%90/</link><pubDate>Mon, 19 Aug 2024 12:01:28 +0800</pubDate><guid>https://imhy.top/p/windows%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E6%8E%A8%E8%8D%90/</guid><description>&lt;p>Windows 系统安装应用改的方式有很多，在 Microsoft 商店安装，下载应用安装包安装，使用包管理器(Package Manager)安装等，使用包管理器，使得软件的安装、更新和管理更加高效和便捷&lt;/p>
+&lt;/ol></description></item><item><title>Windows Terminal使用</title><link>https://imhy.top/p/windows-terminal%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 19 Aug 2024 12:02:22 +0800</pubDate><guid>https://imhy.top/p/windows-terminal%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>Windows Terminal 是一个现代化、多标签的终端应用程序，专为使用命令行工具（如 PowerShell、命令提示符、Windows Subsystem for Linux 以及其他命令行界面）设计。它提供了许多强大且灵活的功能，并且可以替代经典的命令提示符和 PowerShell 窗口&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>在 &lt;a class="link" href="https://apps.microsoft.com/store/detail/windows-terminal/9N0DX20HK701?hl=zh-cn&amp;amp;gl=cn&amp;amp;rtc=1" target="_blank" rel="noopener"
+>Mixrosoft商店&lt;/a> 获取 Windows Terminal&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>在 &lt;a class="link" href="https://github.com/microsoft/terminal/releases" target="_blank" rel="noopener"
+>github 发布页&lt;/a>下载最新版本安装&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>使用 scoop 安装（推荐）， 如果未安装 scoop , 请查看这篇&lt;a class="link" href="https://imhy.top/p/windows%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E6%8E%A8%E8%8D%90/#安装 Scoop" >文章&lt;/a>&lt;/p>
+&lt;p>先安装 powershell, 此 powershell 不是自带的 powershell，应该是 powershell core，可跨平台&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">scoop install powershell
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop install windows-terminal
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>使用 winget 安装&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="常用快捷键">常用快捷键
+&lt;/h2>&lt;ul>
+&lt;li>&lt;kbd>Ctrl&lt;/kbd> + &lt;kbd>Shift&lt;/kbd> + &lt;kbd>T&lt;/kbd> 新建标签页&lt;/li>
+&lt;li>&lt;kbd>Ctrl&lt;/kbd> + &lt;kbd>Tab&lt;/kbd> 切换标签页&lt;/li>
+&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>Shift&lt;/kbd> + &lt;kbd>+&lt;/kbd> 右分屏&lt;/li>
+&lt;li>&lt;kbd>Alt&lt;/kbd> + &lt;kbd>Shift&lt;/kbd> + &lt;kbd>-&lt;/kbd> 下分屏&lt;/li>
+&lt;/ul>
+&lt;p>也可以在 settings.json 中配置自己的快捷键。例如，添加打开新的 PowerShell 标签的快捷键：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;keybindings&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;command&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;newTab&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;keys&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;ctrl+shift+p&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;profile&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;PowerShell&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="美化">美化
+&lt;/h2>&lt;h3 id="配置字体">配置字体
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>下载等宽字体，推荐使用 CascadiaCodePL ,&lt;a class="link" href="https://github.com/microsoft/cascadia-code/releases" target="_blank" rel="noopener"
+>下载地址&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>打开 windows terminal , &lt;kbd>shift&lt;/kbd>+&lt;kbd>ctrl&lt;/kbd>+&lt;kbd>,&lt;/kbd> 快捷键打开设置 setting.json&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>将 profiles/defaults 节点改成&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl"> &lt;span class="s2">&amp;#34;defaults&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;font&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;face&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;Cascadia Code PL&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;size&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="mf">10.0&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>&lt;span class="err">,&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="配置-oh-my-posh">配置 oh-my-posh
+&lt;/h3>&lt;p>oh-my-posh &lt;a class="link" href="https://ohmyposh.dev/docs/installation/windows" target="_blank" rel="noopener"
+>官方文档&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>安装&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># scoop 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop install https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># scoop 更新&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop update oh-my-posh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># winget 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">winget install JanDeDobbeleer.OhMyPosh -l D:&lt;span class="se">\o&lt;/span>h-my-posh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># winget 更新&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">winget upgrade JanDeDobbeleer.OhMyPosh -l D:&lt;span class="se">\o&lt;/span>h-my-posh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;strong>注意&lt;/strong>：目前使用 scoop 安装的文件有问题，缺少必须的 oh-my-posh.exe 文件和 theme 文件，推荐使用 winget 安装&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>配置 oh-my-posh&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>下载主题&lt;/p>
+&lt;p>主题&lt;a class="link" href="https://ohmyposh.dev/docs/themes" target="_blank" rel="noopener"
+>预览&lt;/a>&lt;br>
+主题&lt;a class="link" href="https://github.com/JanDeDobbeleer/oh-my-posh/tree/main/themes" target="_blank" rel="noopener"
+>仓库&lt;/a>&lt;/p>
+&lt;p>选择喜欢的主题，将对于的 json 文件保存在本地， 我的路径是
+&lt;code>D:\Tools\oh-my-posh\theme&lt;/code>，后面在配置文件中要使用&lt;/p>
+&lt;p>推荐两个主题 &lt;a class="link" href="https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/powerlevel10k_lean.omp.json" target="_blank" rel="noopener"
+>powerlevel10k_lean&lt;/a> &lt;a class="link" href="https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/cobalt2.omp.json" target="_blank" rel="noopener"
+>cobalt2&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>配置&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检测是否有配置文件，没有则创建&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="o">(&lt;/span>!&lt;span class="o">(&lt;/span>Test-Path -Path &lt;span class="nv">$PROFILE&lt;/span> &lt;span class="o">))&lt;/span> &lt;span class="o">{&lt;/span> New-Item -Type File -Path &lt;span class="nv">$PROFILE&lt;/span> -Force &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 用 vscode 打开配置文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">code &lt;span class="nv">$PROFILE&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>添加如下内容：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">#全新的主题, 注意修改此处路径
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">oh-my-posh init pwsh --config D:\Tools\oh-my-posh\themes\powerlevel10k_lean.omp.json | Invoke-Expression
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"># 自动补全历史命令，逐字补全
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Import-Module PSReadLine
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Set-PSReadLineOption -PredictionSource History
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">#修改Tab补全为bash风格
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cls
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="更舒适的-terminal">更舒适的 Terminal
+&lt;/h2>&lt;p>在 $profile 增加一些通用方法&lt;/p>
+&lt;h3 id="增加代理的开启管理">增加代理的开启管理
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 开启代理 默认使用 http://127.0.0.1:1080&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxy-on
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置代理地址&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxy-on http:127.0.0.1:1080
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 关闭代理&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">proxy-off
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="增加-open-方法打开文件夹">增加 Open 方法，打开文件夹
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 打开当前文件夹&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">open .
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 打开指定文件夹&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">open &amp;lt;path&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="增加设置环境变量方法">增加设置环境变量方法
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置环境变量，u表示为当前用户设置，m表示为本机设置&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">set-env &amp;lt;key&amp;gt; &amp;lt;value&amp;gt; &lt;span class="o">[&lt;/span>u/m&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="用-autohotkey-打开时切换到--目录">用 autohotkey 打开时切换到 ~ 目录
+&lt;/h3>&lt;p>用 autohotkey 时，默认会打开 autohotkey 配置所在目录&lt;/p>
+&lt;h3 id="我的配置文件">我的配置文件
+&lt;/h3>&lt;p>文件&lt;a href="https://imhy.top/post/environment/configs/Microsoft.PowerShell_profile.ps1" download class="link">下载&lt;/a>&lt;/p></description></item><item><title>windows软件安装及推荐</title><link>https://imhy.top/p/windows%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E6%8E%A8%E8%8D%90/</link><pubDate>Mon, 19 Aug 2024 12:01:28 +0800</pubDate><guid>https://imhy.top/p/windows%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E5%8F%8A%E6%8E%A8%E8%8D%90/</guid><description>&lt;p>Windows 系统安装应用改的方式有很多，在 Microsoft 商店安装，下载应用安装包安装，使用包管理器(Package Manager)安装等，使用包管理器，使得软件的安装、更新和管理更加高效和便捷&lt;/p>
 &lt;h2 id="package-manager">Package Manager
 &lt;/h2>&lt;h3 id="package-manager-的优点">Package Manager 的优点
 &lt;/h3>&lt;ol>
@@ -1292,6 +1539,17 @@ PowerShell 最新版本或 Windows PowerShell 5.1，为了让 PowerShell 可以�
 &lt;li>wox&lt;/li>
 &lt;/ul>
 &lt;p>我的 scoop &lt;a href="https://imhy.top/post/environment/configs/scoop.json" download class="link">列表下载&lt;/a>&lt;/p>
+&lt;h5 id="autohotkey使用">autohotkey使用
+&lt;/h5>&lt;ul>
+&lt;li>&lt;code>#&lt;/code> 号代表 &lt;code>Win&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>!&lt;/code> 号代表 &lt;code>Alt&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>^&lt;/code> 号代表 &lt;code>Ctrl&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>+&lt;/code> 号代表 &lt;code>shift&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>::&lt;/code> 号(两个英文冒号)起分隔作用&lt;/li>
+&lt;li>&lt;code>run&lt;/code> 非常常用 的 AHK 命令之一，打开网站或者应用&lt;/li>
+&lt;li>&lt;code>;&lt;/code> 号代表 注释后面一行内容&lt;/li>
+&lt;/ul>
+&lt;p>我的 autohotkey &lt;a href="https://imhy.top/post/environment/configs/my-hotkey.ahk" download class="link">配置下载&lt;/a>&lt;/p>
 &lt;h3 id="winget-使用">WinGet 使用
 &lt;/h3>&lt;p>Scoop 是一款“绿色”软件，有一定的局限性，对于一些&lt;strong>大型&lt;/strong>或者&lt;strong>权限要求比较多&lt;/strong>的软件并不适用，对于此类软件推荐使用 WinGet 安装&lt;/p>
 &lt;h4 id="安装-winget">安装 WinGet
@@ -1369,4 +1627,238 @@ alt="Edge UA 修改"
 &lt;li>重启电脑进入 bios&lt;/li>
 &lt;li>选择U盘启动&lt;/li>
 &lt;li>在 WinPE 中选择系统镜像安装&lt;/li>
+&lt;/ol></description></item><item><title>Wsl使用</title><link>https://imhy.top/p/wsl%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 19 Aug 2024 12:01:13 +0800</pubDate><guid>https://imhy.top/p/wsl%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>WSL (Windows Subsystem for Linux) 是一个微软开发的工具，允许用户在 Windows 系统上直接运行 Linux 二进制可执行文件。这意味着你可以在 Windows 上运行一个完整的 Linux 环境，而无需虚拟机或双启动配置&lt;/p>
+&lt;h2 id="主要功能">主要功能
+&lt;/h2>&lt;ul>
+&lt;li>直接在 Windows 上运行 Linux 环境：你可以运行 Linux 发行版（如 Ubuntu、Debian、Kali 等），-无需虚拟机&lt;/li>
+&lt;li>双操作系统体验：能够访问 Linux 的大多数命令行工具（如 Bash、Git、SSH）以及应用程序，同时保留对 Windows 文件系统的完全访问权限&lt;/li>
+&lt;li>开发环境：方便开发人员在 Windows 上使用 Linux 工具链进行开发，比如 Web 开发、数据科学等&lt;/li>
+&lt;/ul>
+&lt;h2 id="两个版本的-wsl">两个版本的 WSL
+&lt;/h2>&lt;ul>
+&lt;li>WSL1：传统的 WSL 版本，轻量级，直接将 Linux 调用映射到 Windows 的内核。WSL 1 的优点是它的启动速度快，适用于文件操作较多的任务&lt;/li>
+&lt;li>WSL2：引入了完整的 Linux 内核，带来了更好的性能和完全的 Linux 内核兼容性。它使用虚拟机技术（轻量级的虚拟机），提高了 I/O 性能，并且支持 Docker 等工具&lt;/li>
+&lt;/ul>
+&lt;p>推荐使用 WSL2&lt;/p>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;h3 id="便捷安装">便捷安装
+&lt;/h3>&lt;p>使用 wsl 命令安装，官方说明&lt;a class="link" href="https://learn.microsoft.com/zh-cn/windows/wsl/install" target="_blank" rel="noopener"
+>文档&lt;/a>&lt;/p>
+&lt;p>必须运行 Windows 10 版本 2004 及更高版本（内部版本 19041 及更高版本）或 Windows 11 才能使用以下命令&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装ubuntu&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --install
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看可下载的 linux 发行版&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --list --online
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl -l -o
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装指定发行版&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --install -d &amp;lt;Distribution Name&amp;gt;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 查看运行版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl -l -v
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 设置版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --set-default-version &lt;span class="m">1&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --set-default-version &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 删除linux&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">wsl --unregister &amp;lt;Distribution Name&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="手动安装">手动安装
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>开启&amp;quot;虚拟机平台&amp;quot;&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>重启计算机&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>下载 &lt;a class="link" href="https://wslstorestorage.blob.core.windows.net/wslblob/wsl_update_x64.msi" target="_blank" rel="noopener"
+>wsl2 内核更新包&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>设置 wsl 版本&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">wsl --set-default-version &lt;span class="m">2&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>安装 linux 发行版，&lt;a class="link" href="https://aka.ms/wslstore" target="_blank" rel="noopener"
+>链接&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="配置-wsl">配置 Wsl
+&lt;/h2>&lt;h3 id="设置-root">设置 root
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo passwd root
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="设置代理">设置代理
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">http_proxy&lt;/span>&lt;span class="o">=&lt;/span>http://127.0.0.1:1080
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">export&lt;/span> &lt;span class="nv">https_proxy&lt;/span>&lt;span class="o">=&lt;/span>http://127.0.0.1:1080
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="terminal-美化">Terminal 美化
+&lt;/h3>&lt;p>使用 ohmyzsh 美化 Terminal，&lt;a class="link" href="https://github.com/ohmyzsh/ohmyzsh" target="_blank" rel="noopener"
+>github文档&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>安装 zsh&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">sudo apt-get install zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>安装 oh-my-zsh&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.zshrc
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">chsh -s /bin/zsh
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>配置主题&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>编辑 ~/.zshrc 文件，设置 powerlevel10k 主题&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git clone --depth&lt;span class="o">=&lt;/span>&lt;span class="m">1&lt;/span> https://github.com/romkatv/powerlevel10k.git ~/.oh-my-zsh/themes/powerlevel10k
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>所有的主题都保存在 ~/.oh-my-zsh/themes，可查看修改&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">ZSH_THEME=&amp;#34;powerlevel10k/powerlevel10k&amp;#34;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>应用生效&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">source&lt;/span> ~/.zshrc
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>查看当前主题&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">echo&lt;/span> &lt;span class="nv">$ZSH_THEME&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;li>
+&lt;p>插件&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>所有的插件都保存在 ~/.oh-my-zsh/plugins&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>编辑 ~/.zshrc 文件，使用插件&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">plugins=(git zsh-syntax-highlighting)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>如果要安装第三方的插件，编辑 ~/.zshrc 文件，添加&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">source &amp;lt;/path/to/plugin&amp;gt;
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
 &lt;/ol></description></item><item><title>关于</title><link>https://imhy.top/%E5%85%B3%E4%BA%8E/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://imhy.top/%E5%85%B3%E4%BA%8E/</guid><description/></item><item><title>搜索</title><link>https://imhy.top/%E6%90%9C%E7%B4%A2/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://imhy.top/%E6%90%9C%E7%B4%A2/</guid><description/></item></channel></rss>

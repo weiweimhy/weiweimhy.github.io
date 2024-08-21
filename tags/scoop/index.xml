@@ -329,6 +329,17 @@ PowerShell 最新版本或 Windows PowerShell 5.1，为了让 PowerShell 可以�
 &lt;li>wox&lt;/li>
 &lt;/ul>
 &lt;p>我的 scoop &lt;a href="https://imhy.top/post/environment/configs/scoop.json" download class="link">列表下载&lt;/a>&lt;/p>
+&lt;h5 id="autohotkey使用">autohotkey使用
+&lt;/h5>&lt;ul>
+&lt;li>&lt;code>#&lt;/code> 号代表 &lt;code>Win&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>!&lt;/code> 号代表 &lt;code>Alt&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>^&lt;/code> 号代表 &lt;code>Ctrl&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>+&lt;/code> 号代表 &lt;code>shift&lt;/code> 键&lt;/li>
+&lt;li>&lt;code>::&lt;/code> 号(两个英文冒号)起分隔作用&lt;/li>
+&lt;li>&lt;code>run&lt;/code> 非常常用 的 AHK 命令之一，打开网站或者应用&lt;/li>
+&lt;li>&lt;code>;&lt;/code> 号代表 注释后面一行内容&lt;/li>
+&lt;/ul>
+&lt;p>我的 autohotkey &lt;a href="https://imhy.top/post/environment/configs/my-hotkey.ahk" download class="link">配置下载&lt;/a>&lt;/p>
 &lt;h3 id="winget-使用">WinGet 使用
 &lt;/h3>&lt;p>Scoop 是一款“绿色”软件，有一定的局限性，对于一些&lt;strong>大型&lt;/strong>或者&lt;strong>权限要求比较多&lt;/strong>的软件并不适用，对于此类软件推荐使用 WinGet 安装&lt;/p>
 &lt;h4 id="安装-winget">安装 WinGet
