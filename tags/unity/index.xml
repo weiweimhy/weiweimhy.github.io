@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unity on 君不见</title><link>https://imhy.top/tags/unity/</link><description>Recent content in Unity on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 21 Aug 2024 15:18:16 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/unity/index.xml" rel="self" type="application/rss+xml"/><item><title>Unity 使用 MultiDex 库</title><link>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</link><pubDate>Wed, 21 Aug 2024 15:18:16 +0800</pubDate><guid>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</guid><description>&lt;p>Unity导出 Android Apk 非常方便，但当游戏使用大量的第三方 SDK 时，导出 APK 就很容易达到 Android 方法数 65536 的限制&lt;/p>
+&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;ul>
+&lt;li>Unity 2018.4.9，使用&lt;code>Gradle&lt;/code>构建 Android Project/Apk&lt;br>
+&lt;em>注：Unity 5.x 开始支持使用 aar 文件，Unity 5.4 开始支持 Gradle&lt;/em>&lt;/li>
+&lt;li>Android &lt;code>minSdkVersion&lt;/code> 16&lt;/li>
+&lt;/ul>
+&lt;h2 id="multidex-使用">MultiDex 使用
+&lt;/h2>&lt;p>&lt;code>MultiDex&lt;/code>的使用需要修改 Gradle 配置文件，Unity 开启 Gradle build 后 Gradle 配置文件路径 &lt;code>*Assets/Plugins/Android/mainTemplate.gradle*&lt;/code>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>开启&lt;code>MultiDex&lt;/code>支持&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">android {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> defaultConfig {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minSdkVersion 21
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> targetSdkVersion 28
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> multiDexEnabled true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>特殊处理&lt;/p>
+&lt;blockquote>
+&lt;p>Android 5.0(21) 之前平台版本使用&lt;code>Dalvik&lt;/code>运行时来执行应用代码，
+&lt;code>Dalvik&lt;/code>将应用限制每个Apk只能使用一个&lt;code>classes.dex&lt;/code>字节码文件。&lt;/p>
+&lt;p>Android 5.0(21) 以及更高的版本使用ART的运行时，它本身支持从Apk文件加载多个dex文件。&lt;/p>
+&lt;/blockquote>
+&lt;p>当 Android &lt;code>minSdkVersion&lt;/code>版本低于 Android 5（21），需要做如下处理：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>添加依赖&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dependencies {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implementation &amp;#39;androidx.multidex:multidex:2.0.1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果项目未使用 &lt;code>AndroidX&lt;/code>, 需要改为添加&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dependencies {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implementation &amp;#39;com.android.support:multidex:1.0.3&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>修改&lt;code>Application&lt;/code>&lt;/p>
+&lt;p>需要修改 &lt;em>Assets/Plugins/Android/AndroidManifest.xml&lt;/em>，在&lt;code>&amp;lt;application&amp;gt;&lt;/code>标记中的
+&lt;code>android：name&lt;/code>改为如下所示：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="na">xmlns:android=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span> &lt;span class="na">package=&lt;/span>&lt;span class="s">&amp;#34;xxxx.xxxx.com&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;application&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;android.support.multidex.MultiDexApplication&amp;#34;&lt;/span> &lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/manifest&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参见">参见
+&lt;/h2>&lt;p>更多文档说明，请参见&lt;a class="link" href="https://developer.android.com/studio/build/multidex.html?hl=zh-cn" target="_blank" rel="noopener"
+>Google MultiDex 使用说明&lt;/a>&lt;/p></description></item></channel></rss>

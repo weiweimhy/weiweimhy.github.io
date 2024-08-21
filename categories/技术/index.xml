@@ -1,4 +1,267 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>技术 on 君不见</title><link>https://imhy.top/categories/%E6%8A%80%E6%9C%AF/</link><description>Recent content in 技术 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><atom:link href="https://imhy.top/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>Git 的使用和相关问题</title><link>https://imhy.top/p/git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 20 Aug 2024 16:39:37 +0800</pubDate><guid>https://imhy.top/p/git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="git-新特性">Git 新特性
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>技术 on 君不见</title><link>https://imhy.top/categories/%E6%8A%80%E6%9C%AF/</link><description>Recent content in 技术 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><atom:link href="https://imhy.top/categories/%E6%8A%80%E6%9C%AF/index.xml" rel="self" type="application/rss+xml"/><item><title>Any、unknown和never类型</title><link>https://imhy.top/p/anyunknown%E5%92%8Cnever%E7%B1%BB%E5%9E%8B/</link><pubDate>Wed, 21 Aug 2024 15:27:36 +0800</pubDate><guid>https://imhy.top/p/anyunknown%E5%92%8Cnever%E7%B1%BB%E5%9E%8B/</guid><description>&lt;h2 id="any">any
+&lt;/h2>&lt;p>any 类型表示没有任何限制，该类型的变量可以赋予任意类型的值&lt;/p>
+&lt;p>从集合论的角度看，any类型可以看成是所有其他类型的全集，包含了一切可能的类型。TypeScript 将这种类型称为“顶层类型”（top type），意为涵盖了所有下层&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">x&lt;/span>:&lt;span class="kt">any&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;hello&amp;#34;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>变量类型一旦设为any，TypeScript 实际上会关闭这个变量的类型检查。即使有明显的类型错误，只要句法正确，都不会报错&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">x&lt;/span>:&lt;span class="kt">any&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;hello&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">x&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">1&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="c1">// 不报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">x&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">foo&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">100&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 不报错
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>由于这个原因，应该尽量避免使用any类型，否则就失去了使用 TypeScript 的意义&lt;/p>
+&lt;p>实际开发中，any类型主要适用以下两个场合:&lt;/p>
+&lt;ul>
+&lt;li>出于特殊原因，需要关闭某些变量的类型检查，就可以把该变量的类型设为any&lt;/li>
+&lt;li>为了适配以前老的 JavaScript 项目，让代码快速迁移到 TypeScript，可以把变量类型设为any。有些年代很久的大型 JavaScript 项目，尤其是别人的代码，很难为每一行适配正确的类型，这时你为那些类型复杂的变量加上any，TypeScript 编译时就不会报错&lt;/li>
+&lt;/ul>
+&lt;p>注意：any 存在污染问题&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-typescript" data-lang="typescript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">x&lt;/span>:&lt;span class="kt">any&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;hello&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">y&lt;/span>:&lt;span class="kt">number&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">y&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 不报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">y&lt;/span> &lt;span class="o">*&lt;/span> &lt;span class="mi">123&lt;/span> &lt;span class="c1">// 不报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">y&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">toFixed&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1">// 不报错
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="unknown">unknown
+&lt;/h2>&lt;p>为了解决any类型“污染”其他变量的问题，TypeScript 3.0 引入了unknown类型&lt;/p>
+&lt;p>它与any含义相同，表示类型不确定，可能是任意类型，但是它的使用有一些限制，不像any那样自由，可以视为严格版的any。&lt;/p>
+&lt;p>unknown跟any的相似之处，在于所有类型的值都可以分配给unknown类型，但是unknown不能赋值给任何类型，也不能直接调用unknown类型变量的方法和属性&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-TypeScript" data-lang="TypeScript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">x&lt;/span>:&lt;span class="kt">unknown&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 正确
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">42&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 正确
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">x&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;Hello World&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 正确
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">v&lt;/span>:&lt;span class="kt">unknown&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">123&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">v1&lt;/span>:&lt;span class="kt">boolean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">v&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">v2&lt;/span>:&lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">v&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">v1&lt;/span>:&lt;span class="kt">unknown&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">{&lt;/span> &lt;span class="nx">foo&lt;/span>: &lt;span class="kt">123&lt;/span> &lt;span class="p">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v1&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">foo&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">v2&lt;/span>:&lt;span class="kt">unknown&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s1">&amp;#39;hello&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v2&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="nx">trim&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">v3&lt;/span>:&lt;span class="kt">unknown&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">n&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">0&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">=&amp;gt;&lt;/span> &lt;span class="nx">n&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">v3&lt;/span>&lt;span class="p">()&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>unknown类型变量能够进行的运算是有限的，只能进行比较运算（运算符==、===、!=、!==、||、&amp;amp;&amp;amp;、?）、取反运算（运算符!）、typeof运算符和instanceof运算符这几种&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-TypeScript" data-lang="TypeScript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">a&lt;/span>:&lt;span class="kt">unknown&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">a&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">a&lt;/span> &lt;span class="o">===&lt;/span> &lt;span class="mi">1&lt;/span> &lt;span class="c1">// 正确
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="never">never
+&lt;/h2>&lt;p>为了保持与集合论的对应关系，以及类型运算的完整性，TypeScript 还引入了“空类型”的概念，即该类型为空，不包含任何值&lt;/p>
+&lt;p>never变量不能赋值，但是可以赋值给其他任何类型&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-TypeScript" data-lang="TypeScript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="err">：&lt;/span>&lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//正确
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">a&lt;/span>:&lt;span class="kt">never&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 报错
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">y&lt;/span>:&lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//正确
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="总结">总结
+&lt;/h2>&lt;p>any和unknown相同点:&lt;/p>
+&lt;ul>
+&lt;li>可以赋值任何类型&lt;/li>
+&lt;li>类型收窄以后可能进行对应类型的操作&lt;/li>
+&lt;/ul>
+&lt;p>any和unknown不同点：&lt;/p>
+&lt;ul>
+&lt;li>unknown 变量不能赋值给其他变量&lt;/li>
+&lt;li>不能访问 unknown 的属性&lt;/li>
+&lt;li>unknown 的变量只能进行 比较运算（== 、===、!= 、!== ）逻辑运算（！、&amp;amp;&amp;amp; 、|| 、？） typeof 和 instanceof，其他运算会报错&lt;/li>
+&lt;/ul>
+&lt;p>顶层类型:（可以承接任何类型）&lt;/p>
+&lt;ul>
+&lt;li>any&lt;/li>
+&lt;li>unknown&lt;/li>
+&lt;/ul>
+&lt;p>底层类型:(可以赋值给任何类型)&lt;/p>
+&lt;ul>
+&lt;li>never&lt;/li>
+&lt;/ul></description></item><item><title>Unity 使用 MultiDex 库</title><link>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</link><pubDate>Wed, 21 Aug 2024 15:18:16 +0800</pubDate><guid>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</guid><description>&lt;p>Unity导出 Android Apk 非常方便，但当游戏使用大量的第三方 SDK 时，导出 APK 就很容易达到 Android 方法数 65536 的限制&lt;/p>
+&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;ul>
+&lt;li>Unity 2018.4.9，使用&lt;code>Gradle&lt;/code>构建 Android Project/Apk&lt;br>
+&lt;em>注：Unity 5.x 开始支持使用 aar 文件，Unity 5.4 开始支持 Gradle&lt;/em>&lt;/li>
+&lt;li>Android &lt;code>minSdkVersion&lt;/code> 16&lt;/li>
+&lt;/ul>
+&lt;h2 id="multidex-使用">MultiDex 使用
+&lt;/h2>&lt;p>&lt;code>MultiDex&lt;/code>的使用需要修改 Gradle 配置文件，Unity 开启 Gradle build 后 Gradle 配置文件路径 &lt;code>*Assets/Plugins/Android/mainTemplate.gradle*&lt;/code>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>开启&lt;code>MultiDex&lt;/code>支持&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">android {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> defaultConfig {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minSdkVersion 21
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> targetSdkVersion 28
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> multiDexEnabled true
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>特殊处理&lt;/p>
+&lt;blockquote>
+&lt;p>Android 5.0(21) 之前平台版本使用&lt;code>Dalvik&lt;/code>运行时来执行应用代码，
+&lt;code>Dalvik&lt;/code>将应用限制每个Apk只能使用一个&lt;code>classes.dex&lt;/code>字节码文件。&lt;/p>
+&lt;p>Android 5.0(21) 以及更高的版本使用ART的运行时，它本身支持从Apk文件加载多个dex文件。&lt;/p>
+&lt;/blockquote>
+&lt;p>当 Android &lt;code>minSdkVersion&lt;/code>版本低于 Android 5（21），需要做如下处理：&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>添加依赖&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dependencies {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implementation &amp;#39;androidx.multidex:multidex:2.0.1&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>如果项目未使用 &lt;code>AndroidX&lt;/code>, 需要改为添加&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dependencies {
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implementation &amp;#39;com.android.support:multidex:1.0.3&amp;#39;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>修改&lt;code>Application&lt;/code>&lt;/p>
+&lt;p>需要修改 &lt;em>Assets/Plugins/Android/AndroidManifest.xml&lt;/em>，在&lt;code>&amp;lt;application&amp;gt;&lt;/code>标记中的
+&lt;code>android：name&lt;/code>改为如下所示：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="na">xmlns:android=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span> &lt;span class="na">package=&lt;/span>&lt;span class="s">&amp;#34;xxxx.xxxx.com&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;application&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;android.support.multidex.MultiDexApplication&amp;#34;&lt;/span> &lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/manifest&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参见">参见
+&lt;/h2>&lt;p>更多文档说明，请参见&lt;a class="link" href="https://developer.android.com/studio/build/multidex.html?hl=zh-cn" target="_blank" rel="noopener"
+>Google MultiDex 使用说明&lt;/a>&lt;/p></description></item><item><title>Git 的使用和相关问题</title><link>https://imhy.top/p/git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</link><pubDate>Tue, 20 Aug 2024 16:39:37 +0800</pubDate><guid>https://imhy.top/p/git-%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="git-新特性">Git 新特性
 &lt;/h2>&lt;ol>
 &lt;li>
 &lt;p>Git 2.23&lt;/p>
