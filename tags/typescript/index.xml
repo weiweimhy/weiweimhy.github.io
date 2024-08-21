@@ -139,16 +139,11 @@
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;span class="lnt">11
 &lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
-&lt;/span>&lt;span class="lnt">16
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code class="language-TypeScript" data-lang="TypeScript">&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="err">：&lt;/span>&lt;span class="kt">never&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//正确
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">a&lt;/span>:&lt;span class="kt">never&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="mi">1&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 报错
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&amp;lt;&lt;/span> &lt;span class="nx">HEAD&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">y&lt;/span>:&lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">// 报错
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">function&lt;/span> &lt;span class="nx">f&lt;/span>&lt;span class="p">()&lt;/span>&lt;span class="o">:&lt;/span>&lt;span class="kt">never&lt;/span> &lt;span class="p">{&lt;/span>
@@ -158,10 +153,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">v1&lt;/span>:&lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">f&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 正确
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">v2&lt;/span>:&lt;span class="kt">string&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">f&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 正确
 &lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="kd">let&lt;/span> &lt;span class="nx">v3&lt;/span>:&lt;span class="kt">boolean&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">f&lt;/span>&lt;span class="p">();&lt;/span> &lt;span class="c1">// 正确
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">=======&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kd">let&lt;/span> &lt;span class="nx">y&lt;/span>:&lt;span class="kt">number&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">x&lt;/span>&lt;span class="p">;&lt;/span> &lt;span class="c1">//正确
-&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span> &lt;span class="mi">2&lt;/span>&lt;span class="nx">cdb4677082cb92a7818f5c3b90c9a25dda6e2be&lt;/span>
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="总结">总结
 &lt;/h2>&lt;p>any和unknown相同点:&lt;/p>
