@@ -167,7 +167,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>如果未授权，需要调用微信插件提供的&lt;code>CreateUserInfoButton&lt;/code>方法创建一个&amp;lt;font #color=red&amp;gt;透明&lt;/font>按钮，用户点击按钮，会弹出授权弹框，所以最好将按钮覆盖在功能按钮上，例如打开排行榜需要读取用户头像，用户还未授权，就应该将透明按钮覆盖在排行榜按钮上&lt;/p>
+&lt;/div>&lt;p>如果未授权，需要调用微信插件提供的&lt;code>CreateUserInfoButton&lt;/code>方法创建一个&lt;span style="color: red;">透明&lt;/span>按钮，用户点击按钮，会弹出授权弹框，所以最好将按钮覆盖在功能按钮上，例如打开排行榜需要读取用户头像，用户还未授权，就应该将透明按钮覆盖在排行榜按钮上&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
