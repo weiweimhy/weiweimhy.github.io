@@ -38,7 +38,7 @@
 &lt;li>出于特殊原因，需要关闭某些变量的类型检查，就可以把该变量的类型设为any&lt;/li>
 &lt;li>为了适配以前老的 JavaScript 项目，让代码快速迁移到 TypeScript，可以把变量类型设为any。有些年代很久的大型 JavaScript 项目，尤其是别人的代码，很难为每一行适配正确的类型，这时你为那些类型复杂的变量加上any，TypeScript 编译时就不会报错&lt;/li>
 &lt;/ul>
-&lt;p>注意：any 存在污染问题&lt;/p>
+&lt;p>注意：any 存在污染问题，使用any，将关闭类型检测，所以any可以赋值给其他任何类型&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
