@@ -167,7 +167,7 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>如果未授权，需要调用微信插件提供的&lt;code>CreateUserInfoButton&lt;/code>方法创建一个&lt;span style="color: red;">透明&lt;/span>按钮，用户点击按钮，会弹出授权弹框，所以最好将按钮覆盖在功能按钮上，例如打开排行榜需要读取用户头像，用户还未授权，就应该将透明按钮覆盖在排行榜按钮上&lt;/p>
+&lt;/div>&lt;p>如果未授权，需要调用微信插件提供的&lt;code>CreateUserInfoButton&lt;/code>方法创建一个&lt;span style="color: blue;">透明&lt;/span>按钮，用户点击按钮，会弹出授权弹框，所以最好将按钮覆盖在功能按钮上，例如打开排行榜需要读取用户头像，用户还未授权，就应该将透明按钮覆盖在排行榜按钮上&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -201,7 +201,7 @@
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h3 id="小技巧">小技巧
-&lt;/h3>&lt;p>因为授权按钮是透明的，很不好调试，在微信开发者工具中，鼠标移动到授权按钮的时候，鼠标会从暗示圈变成箭头&lt;/p>
+&lt;/h3>&lt;p>因为授权按钮是透明的，很不好调试，在微信开发者工具中，鼠标移动到授权按钮的时候，鼠标会从圈变成箭头&lt;/p>
 &lt;p>&lt;img src="https://imhy.top/post/%e5%be%ae%e4%bf%a1%e5%b0%8f%e6%b8%b8%e6%88%8f/images/wechat_userinfo_btn.gif"
 loading="lazy"
 alt="鼠标变化"
