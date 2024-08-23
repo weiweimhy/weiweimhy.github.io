@@ -156,7 +156,7 @@ alt="鼠标变化"
 &lt;p>区别：&lt;/p>
 &lt;ul>
 &lt;li>
-&lt;p>CreateGameClubButton 创建游戏圈按钮，是相对于逻辑分辨率，需要通过 &lt;code>GetSystemInfoOption&lt;/code> 获取&lt;/p>
+&lt;p>CreateGameClubButton 创建游戏圈按钮，是相对于&lt;strong>逻辑分辨率&lt;/strong>，需要通过 &lt;code>GetSystemInfoOption&lt;/code> 获取&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -183,7 +183,7 @@ alt="鼠标变化"
 &lt;/div>
 &lt;/div>&lt;/li>
 &lt;li>
-&lt;p>CreateUserInfoButton 创建授权按钮，是相对于物理分辨率，在 unity 中通过 &lt;code>Screen.width&lt;/code> 和 &lt;code>Screen.height&lt;/code> 获得物理分辨率&lt;/p>
+&lt;p>CreateUserInfoButton 创建授权按钮，是相对于&lt;strong>物理分辨率&lt;/strong>，在 unity 中通过 &lt;code>Screen.width&lt;/code> 和 &lt;code>Screen.height&lt;/code> 获得物理分辨率&lt;/p>
 &lt;/li>
 &lt;/ul>
 &lt;h2 id="分辨率区别">分辨率区别

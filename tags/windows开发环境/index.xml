@@ -554,29 +554,7 @@ PowerShell 最新版本或 Windows PowerShell 5.1，为了让 PowerShell 可以�
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">scoop reset
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h4 id="推荐应用列表">推荐应用列表
-&lt;/h4>&lt;ul>
-&lt;li>aria2&lt;/li>
-&lt;li>sudo&lt;/li>
-&lt;li>vscode&lt;/li>
-&lt;li>windows-terminal&lt;/li>
-&lt;li>7zip&lt;/li>
-&lt;li>adb&lt;/li>
-&lt;li>apktool&lt;/li>
-&lt;li>autohotkey&lt;/li>
-&lt;li>beyondcompare&lt;/li>
-&lt;li>calibre-normal&lt;/li>
-&lt;li>ccleaner&lt;/li>
-&lt;li>charles&lt;/li>
-&lt;li>everything&lt;/li>
-&lt;li>foxit-pdf-reader&lt;/li>
-&lt;li>goldendict&lt;/li>
-&lt;li>potplayer&lt;/li>
-&lt;li>sharex&lt;/li>
-&lt;li>wox&lt;/li>
-&lt;/ul>
-&lt;p>我的 scoop &lt;a href="https://imhy.top/post/environment/configs/scoop.json" download class="link">列表下载&lt;/a>&lt;/p>
-&lt;h5 id="autohotkey使用">autohotkey使用
+&lt;/div>&lt;h5 id="autohotkey使用">autohotkey使用
 &lt;/h5>&lt;ul>
 &lt;li>&lt;code>#&lt;/code> 号代表 &lt;code>Win&lt;/code> 键&lt;/li>
 &lt;li>&lt;code>!&lt;/code> 号代表 &lt;code>Alt&lt;/code> 键&lt;/li>
@@ -617,7 +595,30 @@ PowerShell 最新版本或 Windows PowerShell 5.1，为了让 PowerShell 可以�
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;h2 id="安装包安装">安装包安装
-&lt;/h2>&lt;p>对于一些不常用软件，无法通过包管理器下载的，请务必到&lt;strong>官方网站&lt;/strong>下载安装包，在安装流程中，注意&lt;strong>修改安装路&lt;/strong>径和&lt;strong>反选捆绑安装&lt;/strong>&lt;/p></description></item><item><title>Windows重装系统</title><link>https://imhy.top/p/windows%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</link><pubDate>Mon, 19 Aug 2024 12:01:13 +0800</pubDate><guid>https://imhy.top/p/windows%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</guid><description>&lt;h2 id="下载官方镜像iso">下载官方镜像(.iso)
+&lt;/h2>&lt;p>对于一些不常用软件，无法通过包管理器下载的，请务必到&lt;strong>官方网站&lt;/strong>下载安装包，在安装流程中，注意&lt;strong>修改安装路&lt;/strong>径和&lt;strong>反选捆绑安装&lt;/strong>&lt;/p>
+&lt;h2 id="推荐应用">推荐应用
+&lt;/h2>&lt;p>推荐一些 scoop 安装的应用&lt;/p>
+&lt;ul>
+&lt;li>aria2&lt;/li>
+&lt;li>sudo&lt;/li>
+&lt;li>vscode&lt;/li>
+&lt;li>windows-terminal&lt;/li>
+&lt;li>7zip&lt;/li>
+&lt;li>adb&lt;/li>
+&lt;li>apktool&lt;/li>
+&lt;li>autohotkey&lt;/li>
+&lt;li>beyondcompare&lt;/li>
+&lt;li>calibre-normal&lt;/li>
+&lt;li>ccleaner&lt;/li>
+&lt;li>charles&lt;/li>
+&lt;li>everything&lt;/li>
+&lt;li>foxit-pdf-reader&lt;/li>
+&lt;li>goldendict&lt;/li>
+&lt;li>potplayer&lt;/li>
+&lt;li>sharex&lt;/li>
+&lt;li>wox&lt;/li>
+&lt;/ul>
+&lt;p>我的 scoop &lt;a href="https://imhy.top/post/environment/configs/scoop.json" download class="link">列表下载&lt;/a>&lt;/p></description></item><item><title>Windows重装系统</title><link>https://imhy.top/p/windows%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</link><pubDate>Mon, 19 Aug 2024 12:01:13 +0800</pubDate><guid>https://imhy.top/p/windows%E9%87%8D%E8%A3%85%E7%B3%BB%E7%BB%9F/</guid><description>&lt;h2 id="下载官方镜像iso">下载官方镜像(.iso)
 &lt;/h2>&lt;ul>
 &lt;li>
 &lt;p>windows11 官方&lt;a class="link" href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" rel="noopener"
