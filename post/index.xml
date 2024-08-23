@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 君不见</title><link>https://imhy.top/post/</link><description>Recent content in Posts on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Fri, 23 Aug 2024 11:09:00 +0800</lastBuildDate><atom:link href="https://imhy.top/post/index.xml" rel="self" type="application/rss+xml"/><item><title>打开游戏圈和获取用户信息</title><link>https://imhy.top/p/%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</link><pubDate>Fri, 23 Aug 2024 09:59:22 +0800</pubDate><guid>https://imhy.top/p/%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</guid><description>&lt;p>unity 开发微信小游戏，有一些常用功能，例如微信登录，微信支付，打开游戏圈，获取用户头像、名字等功能，查看对应的开发文档即可，但是在开发过程中还遇到一些坑，特此记录一下打开游戏圈和获取用户权限踩坑&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on 君不见</title><link>https://imhy.top/post/</link><description>Recent content in Posts on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Fri, 23 Aug 2024 11:09:00 +0800</lastBuildDate><atom:link href="https://imhy.top/post/index.xml" rel="self" type="application/rss+xml"/><item><title>微信小游戏版本升级</title><link>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/</link><pubDate>Fri, 23 Aug 2024 11:09:00 +0800</pubDate><guid>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/</guid><description>&lt;p>微信小游戏开发&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/update-mechanism.html" target="_blank" rel="noopener"
+>文档&lt;/a>中写到&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>未启动更新逻辑&lt;/p>
+&lt;blockquote>
+&lt;p>开发者在管理后台发布新版本的小程序之后，如果某个用户本地有小程序的历史版本，此时打开的可能还是旧版本。微信客户端会有若干个时机去检查本地缓存的小程序有没有更新版本，如果有则会静默更新到新版本。总的来说，开发者在后台发布新版本之后，无法立刻影响到所有现网用户，但最差情况下，也在发布之后 24 小时之内下发新版本信息到用户。用户下次打开时会先更新最新版本再打开&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;li>
+&lt;p>启动时更新&lt;/p>
+&lt;blockquote>
+&lt;p>小程序每次冷启动时，都会检查是否有更新版本，如果发现有新版本，将会异步下载新版本的代码包，并同时用客户端本地的包进行启动，即新版本的小程序需要等下一次冷启动才会应用上&lt;/p>
+&lt;/blockquote>
+&lt;/li>
+&lt;/ul>
+&lt;p>小程序运行机制&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/operating-mechanism.html" target="_blank" rel="noopener"
+>文档&lt;/a>中指出，冷启动是指用户首次打开小游戏，或者小游戏被销毁再次打开，但是销毁时机并不是关闭小游戏🤡，需要等进入后台一定时间，或者系统资源占用过高，才会被销毁，可以用以下方式冷启动&lt;/p>
+&lt;ol>
+&lt;li>删除小游戏重新打开（不推荐）&lt;/li>
+&lt;li>关闭微信（杀掉后台）重新打开微信&lt;/li>
+&lt;/ol>
+&lt;h2 id="立即更新">立即更新
+&lt;/h2>&lt;p>如果需要马上应用最新版本，可以使用 &lt;code>WX.GetUpdateManager&lt;/code> API 进行处理&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">updateManager&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetUpdateManager&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnCheckForUpdate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// noting&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnUpdateFailed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// show error tips&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CanvasManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Instance&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Open&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">TipsUI&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">TipsUI&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">View&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">failedText&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">callback&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Invoke&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnUpdateReady&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ApplyUpdate&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div></description></item><item><title>打开游戏圈和获取用户信息</title><link>https://imhy.top/p/%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</link><pubDate>Fri, 23 Aug 2024 09:59:22 +0800</pubDate><guid>https://imhy.top/p/%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</guid><description>&lt;p>unity 开发微信小游戏，有一些常用功能，例如微信登录，微信支付，打开游戏圈，获取用户头像、名字等功能，查看对应的开发文档即可，但是在开发过程中还遇到一些坑，特此记录一下打开游戏圈和获取用户权限踩坑&lt;/p>
 &lt;h2 id="打开游戏圈">打开游戏圈
 &lt;/h2>&lt;p>创建一个打开游戏圈的按钮，点击按钮跳转微信游戏圈&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
