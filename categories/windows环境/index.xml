@@ -1,4 +1,220 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows环境 on 君不见</title><link>https://imhy.top/categories/windows%E7%8E%AF%E5%A2%83/</link><description>Recent content in Windows环境 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/categories/windows%E7%8E%AF%E5%A2%83/index.xml" rel="self" type="application/rss+xml"/><item><title>PowerToys 使用指南</title><link>https://imhy.top/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="什么是-powertoys">什么是 PowerToys？
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Windows环境 on 君不见</title><link>https://imhy.top/categories/windows%E7%8E%AF%E5%A2%83/</link><description>Recent content in Windows环境 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/categories/windows%E7%8E%AF%E5%A2%83/index.xml" rel="self" type="application/rss+xml"/><item><title>GoldenDict 使用指南</title><link>https://imhy.top/p/goldendict-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/goldendict-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="简介">简介
+&lt;/h2>&lt;p>GoldenDict 是一款功能强大的开源词典软件，支持多种词典格式，可以集成在线翻译服务，是学习和工作中不可或缺的翻译工具。&lt;/p>
+&lt;p>主要特点：&lt;/p>
+&lt;ul>
+&lt;li>支持多种词典格式（StarDict、Babylon、Lingvo 等）&lt;/li>
+&lt;li>可集成在线翻译服务（Google、DeepL 等）&lt;/li>
+&lt;li>支持全文搜索&lt;/li>
+&lt;li>跨平台支持（Windows、Linux、macOS）&lt;/li>
+&lt;li>可定制的界面和快捷键&lt;/li>
+&lt;/ul>
+&lt;h2 id="安装">安装
+&lt;/h2>&lt;h3 id="使用-scoop-安装">使用 Scoop 安装
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 安装 GoldenDict&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">scoop&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">goldendict&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="便携模式说明">便携模式说明
+&lt;/h3>&lt;p>Scoop 安装的 GoldenDict 默认启用便携模式（Portable Mode），这意味着：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>配置目录&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在程序目录下会自动创建 &lt;code>portable&lt;/code> 文件夹&lt;/li>
+&lt;li>所有配置文件都存储在这个文件夹中&lt;/li>
+&lt;li>路径通常为：&lt;code>%SCOOP%/apps/goldendict/current/portable&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>词典目录限制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>便携模式下只能识别 &lt;code>content&lt;/code> 文件夹中的词典&lt;/li>
+&lt;li>无法通过界面添加其他目录的词典&lt;/li>
+&lt;li>路径为：&lt;code>%SCOOP%/apps/goldendict/current/content&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>解决方案&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>
+&lt;p>将词典文件复制到 &lt;code>content&lt;/code> 文件夹中&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>或者创建符号链接指向其他词典目录：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 以管理员身份运行&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">mklink&lt;/span> &lt;span class="p">/&lt;/span>&lt;span class="n">D&lt;/span> &lt;span class="s2">&amp;#34;%SCOOP%\apps\goldendict\current\content\词典名称&amp;#34;&lt;/span> &lt;span class="s2">&amp;#34;实际词典目录路径&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="手动安装">手动安装
+&lt;/h3>&lt;ol>
+&lt;li>访问 &lt;a class="link" href="http://goldendict.org/" target="_blank" rel="noopener"
+>GoldenDict 官网&lt;/a> 或 &lt;a class="link" href="https://github.com/goldendict/goldendict/releases" target="_blank" rel="noopener"
+>GitHub 发布页&lt;/a>&lt;/li>
+&lt;li>下载最新版本安装包&lt;/li>
+&lt;li>运行安装程序&lt;/li>
+&lt;/ol>
+&lt;h2 id="词典推荐">词典推荐
+&lt;/h2>&lt;h3 id="词典下载">词典下载
+&lt;/h3>&lt;p>推荐网站：&lt;a class="link" href="https://mdict.org/" target="_blank" rel="noopener"
+>词典网站&lt;/a>&lt;/p>
+&lt;p>将词典文件放到 &lt;code>%SCOOP%/apps/goldendict/current/content&lt;/code> 路径&lt;/p>
+&lt;h3 id="1-英语词典">1. 英语词典
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>离线词典&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>朗文当代英语词典（Longman）：英英释义详尽，例句地道&lt;/li>
+&lt;li>牛津高阶英汉双解词典（Oxford）：权威性强，释义准确&lt;/li>
+&lt;li>柯林斯高阶英汉双解词典（Collins）：例句丰富，搭配详细&lt;/li>
+&lt;li>剑桥高阶英汉双解词典（Cambridge）：英美发音齐全&lt;/li>
+&lt;li>韦氏高阶英汉双解词典（Merriam-Webster）：美式英语为主&lt;/li>
+&lt;li>Vocabulary.com Dictionary：词源解释详细，助记功能强&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>IT 专业词典&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>计算机英语词典：收录专业术语&lt;/li>
+&lt;li>信息技术词典：包含最新 IT 领域词汇&lt;/li>
+&lt;li>编程语言词典：各种编程语言的专业术语&lt;/li>
+&lt;li>GitHub Glossary：开源社区常用术语&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-词典格式说明">2. 词典格式说明
+&lt;/h3>&lt;p>GoldenDict 支持以下主流词典格式：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Babylon (BGL)&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>文件扩展名：&lt;code>.bgl&lt;/code>&lt;/li>
+&lt;li>特点：压缩率高，加载速度快&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>StarDict&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>文件扩展名：&lt;code>.ifo&lt;/code>, &lt;code>.dict&lt;/code>, &lt;code>.idx&lt;/code>&lt;/li>
+&lt;li>特点：开源格式，兼容性好&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Lingvo (DSL)&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>文件扩展名：&lt;code>.dsl&lt;/code>, &lt;code>.dsl.dz&lt;/code>&lt;/li>
+&lt;li>特点：支持复杂格式，显示效果好&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>MDict&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>文件扩展名：&lt;code>.mdx&lt;/code>, &lt;code>.mdd&lt;/code>&lt;/li>
+&lt;li>特点：广泛使用，资源丰富&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-词典下载地址">3. 词典下载地址
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>开源词典&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/skywind3000/ECDICT" target="_blank" rel="noopener"
+>ECDICT&lt;/a>：英汉词典数据库&lt;/li>
+&lt;li>&lt;a class="link" href="http://freedict.org/" target="_blank" rel="noopener"
+>FreeDictionaryProject&lt;/a>：自由词典项目&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>专业词典&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;a class="link" href="https://github.com/skywind3000/IT-Dictionary" target="_blank" rel="noopener"
+>IT-Dictionary&lt;/a>：IT 专业词典&lt;/li>
+&lt;li>&lt;a class="link" href="http://download.huzheng.org/" target="_blank" rel="noopener"
+>MDX/MDD 词典下载&lt;/a>：胡正维护的词典下载站&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="在线翻译配置">在线翻译配置
+&lt;/h2>&lt;h3 id="1-google-翻译">1. Google 翻译
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>安装翻译工具&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 安装 Python（如果未安装）&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">scoop&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">python&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 安装 Google 翻译工具&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">pip3&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="nb">google-translate&lt;/span>&lt;span class="n">-for-goldendict&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置 GoldenDict&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>编辑&lt;/code> &amp;gt; &lt;code>词典&lt;/code> &amp;gt; &lt;code>词典来源&lt;/code> &amp;gt; &lt;code>程式&lt;/code>&lt;/li>
+&lt;li>点击 &lt;code>添加&lt;/code>&lt;/li>
+&lt;li>设置以下参数：
+&lt;ul>
+&lt;li>类型：&lt;code>Html&lt;/code>&lt;/li>
+&lt;li>名称：&lt;code>Google Translate&lt;/code>&lt;/li>
+&lt;li>命令行：&lt;code>python -m googletranslate zh-CN %GDWORD%&lt;/code>&lt;/li>
+&lt;li>图示：可选，下载 &lt;a class="link" href="https://raw.githubusercontent.com/xinebf/google-translate-for-goldendict/master/google_translate.png" target="_blank" rel="noopener"
+>google_translate.png&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="使用技巧">使用技巧
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>快速切换词典&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 Tab 键在结果中切换&lt;/li>
+&lt;li>使用数字键快速选择词典组&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>自定义样式&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用自定义 CSS 美化界面&lt;/li>
+&lt;li>调整字体和颜色&lt;/li>
+&lt;li>优化显示布局&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>批量查询&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用文本文件导入&lt;/li>
+&lt;li>导出查询历史&lt;/li>
+&lt;li>生成生词本&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>PowerToys 使用指南</title><link>https://imhy.top/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="什么是-powertoys">什么是 PowerToys？
 &lt;/h2>&lt;p>PowerToys 是微软开发的一套实用工具集，旨在帮助高级用户调整和简化 Windows 体验以提高工作效率。它包含多个实用工具，如快速启动器、窗口管理、颜色选择器等。&lt;/p>
 &lt;h2 id="安装方法">安装方法
 &lt;/h2>&lt;h3 id="使用-scoop-安装">使用 Scoop 安装
