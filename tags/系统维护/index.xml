@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>系统维护 on 君不见</title><link>https://imhy.top/tags/%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4/</link><description>Recent content in 系统维护 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/%E7%B3%BB%E7%BB%9F%E7%BB%B4%E6%8A%A4/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows C盘空间优化指南</title><link>https://imhy.top/p/windows-c%E7%9B%98%E7%A9%BA%E9%97%B4%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/windows-c%E7%9B%98%E7%A9%BA%E9%97%B4%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="为什么需要管理c盘空间">为什么需要管理C盘空间？
+&lt;/h2>&lt;p>在 Windows 系统中，C 盘作为系统主分区，存储着：&lt;/p>
+&lt;ul>
+&lt;li>操作系统文件（Windows 文件夹）&lt;/li>
+&lt;li>系统程序（Program Files）&lt;/li>
+&lt;li>用户配置文件&lt;/li>
+&lt;li>系统引导文件&lt;/li>
+&lt;/ul>
+&lt;p>C盘空间不足可能导致：&lt;/p>
+&lt;ul>
+&lt;li>系统运行变慢&lt;/li>
+&lt;li>无法安装新软件&lt;/li>
+&lt;li>系统更新失败&lt;/li>
+&lt;li>文件损坏&lt;/li>
+&lt;li>系统不稳定&lt;/li>
+&lt;/ul>
+&lt;h2 id="空间占用分析">空间占用分析
+&lt;/h2>&lt;h3 id="1-软件安装位置">1. 软件安装位置
+&lt;/h3>&lt;p>很多软件默认安装在C盘的原因：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>标准化与兼容性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>默认安装到 Program Files 文件夹&lt;/li>
+&lt;li>更好的系统整合性&lt;/li>
+&lt;li>避免兼容性问题&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>访问权限与路径依赖&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>C盘是系统管理员控制的分区&lt;/li>
+&lt;li>软件依赖特定路径存储资源&lt;/li>
+&lt;li>系统API默认路径指向C盘&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-应用数据存储">2. 应用数据存储
+&lt;/h3>&lt;p>即使软件安装在其他盘，仍可能在C盘占用空间：&lt;/p>
+&lt;ul>
+&lt;li>用户配置文件（&lt;code>C:\Users\用户名\AppData&lt;/code>）&lt;/li>
+&lt;li>缓存文件&lt;/li>
+&lt;li>临时文件&lt;/li>
+&lt;li>日志文件&lt;/li>
+&lt;/ul>
+&lt;h2 id="空间优化方案">空间优化方案
+&lt;/h2>&lt;h3 id="1-软件安装优化">1. 软件安装优化
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>使用包管理器安装&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>推荐使用 &lt;a class="link" href="https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" >Scoop&lt;/a> 安装软件&lt;/li>
+&lt;li>可自定义安装路径&lt;/li>
+&lt;li>便于管理和更新&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>自定义安装路径&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>安装时修改默认路径&lt;/li>
+&lt;li>选择其他磁盘分区&lt;/li>
+&lt;li>避免安装在C盘&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-应用数据迁移">2. 应用数据迁移
+&lt;/h3>&lt;h4 id="使用-wiztree-分析空间占用">使用 WizTree 分析空间占用
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>安装 WizTree&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">scoop&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">wiztree&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>扫描分析&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>快速扫描磁盘&lt;/li>
+&lt;li>可视化空间占用&lt;/li>
+&lt;li>定位大文件/文件夹&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://imhy.top/post/Windows%e7%8e%af%e5%a2%83/images/wiztree_1.png"
+loading="lazy"
+alt="C盘占用分析"
+>&lt;/p>
+&lt;h4 id="常见大空间占用目录">常见大空间占用目录
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>开发工具&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>JetBrains IDE：&lt;code>C:\Users\用户名\AppData\Local\JetBrains&lt;/code>&lt;/li>
+&lt;li>Unity：&lt;code>C:\Users\用户名\AppData\Local\Unity&lt;/code>&lt;/li>
+&lt;li>Visual Studio：&lt;code>C:\Users\用户名\AppData\Local\Microsoft\VisualStudio&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>应用缓存&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Chrome：&lt;code>C:\Users\用户名\AppData\Local\Google\Chrome\User Data&lt;/code>&lt;/li>
+&lt;li>Firefox：&lt;code>C:\Users\用户名\AppData\Local\Mozilla\Firefox\Profiles&lt;/code>&lt;/li>
+&lt;li>Edge：&lt;code>C:\Users\用户名\AppData\Local\Microsoft\Edge\User Data&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="迁移步骤">迁移步骤
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>移动文件夹&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 创建目标目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">New-Item&lt;/span> &lt;span class="n">-ItemType&lt;/span> &lt;span class="n">Directory&lt;/span> &lt;span class="n">-Force&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;G:\AppData\JetBrains&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 移动文件夹&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Move-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\用户名\AppData\Local\JetBrains&amp;#34;&lt;/span> &lt;span class="n">-Destination&lt;/span> &lt;span class="s2">&amp;#34;G:\AppData\JetBrains&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>创建符号链接&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 需要管理员权限&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">New-Item&lt;/span> &lt;span class="n">-ItemType&lt;/span> &lt;span class="n">SymbolicLink&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\用户名\AppData\Local\JetBrains&amp;#34;&lt;/span> &lt;span class="n">-Target&lt;/span> &lt;span class="s2">&amp;#34;G:\AppData\JetBrains&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-系统清理">3. 系统清理
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>清理临时文件&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清理 Windows 临时文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Remove-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env:TEMP&lt;/span>&lt;span class="s2">\*&amp;#34;&lt;/span> &lt;span class="n">-Recurse&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清理系统临时文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Remove-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Windows\Temp\*&amp;#34;&lt;/span> &lt;span class="n">-Recurse&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>清理系统更新缓存&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清理 Windows 更新缓存&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Remove-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Windows\SoftwareDistribution\Download\*&amp;#34;&lt;/span> &lt;span class="n">-Recurse&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>清理回收站&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清空回收站&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Clear-RecycleBin&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>备份重要数据&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>迁移前备份重要文件&lt;/li>
+&lt;li>记录原始路径&lt;/li>
+&lt;li>保存配置信息&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>权限管理&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用管理员权限执行命令&lt;/li>
+&lt;li>确保目标路径有写入权限&lt;/li>
+&lt;li>检查文件访问权限&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>系统稳定性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>迁移后测试软件功能&lt;/li>
+&lt;li>检查系统更新&lt;/li>
+&lt;li>监控系统性能&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="定期维护">定期维护
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>定期清理&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>清理临时文件&lt;/li>
+&lt;li>删除不需要的软件&lt;/li>
+&lt;li>整理用户文件&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>空间监控&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 WizTree 定期扫描&lt;/li>
+&lt;li>监控空间变化&lt;/li>
+&lt;li>及时处理大文件&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>软件管理&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>及时更新软件&lt;/li>
+&lt;li>卸载不常用软件&lt;/li>
+&lt;li>使用包管理器管理&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item><item><title>Windows 系统重装指南</title><link>https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="准备工作">准备工作
+&lt;/h2>&lt;h3 id="1-备份重要数据">1. 备份重要数据
+&lt;/h3>&lt;p>在重装系统前，请确保：&lt;/p>
+&lt;ul>
+&lt;li>备份重要文档、图片等个人文件&lt;/li>
+&lt;li>导出浏览器书签和密码&lt;/li>
+&lt;li>记录已安装的软件列表&lt;/li>
+&lt;li>保存系统激活信息（如果有）&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-下载系统镜像">2. 下载系统镜像
+&lt;/h3>&lt;h4 id="windows-11-下载">Windows 11 下载
+&lt;/h4>&lt;ol>
+&lt;li>访问&lt;a class="link" href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" rel="noopener"
+>官方下载页面&lt;/a>&lt;/li>
+&lt;li>选择 Windows 11 版本（建议选择最新版本）&lt;/li>
+&lt;li>选择语言（建议选择简体中文）&lt;/li>
+&lt;li>点击下载按钮，等待下载完成&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://imhy.top/post/Windows%e7%8e%af%e5%a2%83/images/download_w11.png"
+loading="lazy"
+alt="windows11 下载截图"
+>&lt;/p>
+&lt;h4 id="windows-10-下载">Windows 10 下载
+&lt;/h4>&lt;ol>
+&lt;li>访问&lt;a class="link" href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" rel="noopener"
+>官方下载页面&lt;/a>&lt;/li>
+&lt;li>由于页面限制，需要修改浏览器 UA 才能下载 ISO 文件&lt;/li>
+&lt;/ol>
+&lt;p>修改 UA 方法：&lt;/p>
+&lt;p>&lt;strong>Chrome 浏览器&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>打开开发者工具（F12）&lt;/li>
+&lt;li>More Tools -&amp;gt; Network conditions&lt;/li>
+&lt;li>User agent 修改为 BlackBerry-BB10&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>Edge 浏览器&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>打开开发者工具（F12）&lt;/li>
+&lt;li>在底部选择网络条件&lt;/li>
+&lt;li>将用户代理修改为 BlackBerry-BB10&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://imhy.top/post/Windows%e7%8e%af%e5%a2%83/images/download_w10_edge2.png"
+loading="lazy"
+alt="Edge UA 修改"
+>&lt;/p>
+&lt;p>修改 UA 后刷新页面，即可选择对应的 ISO 文件下载。&lt;/p>
+&lt;h3 id="3-准备启动工具">3. 准备启动工具
+&lt;/h3>&lt;ol>
+&lt;li>下载 &lt;a class="link" href="http://www.wepe.com.cn/" target="_blank" rel="noopener"
+>WePE&lt;/a>（推荐使用最新版本）&lt;/li>
+&lt;li>准备一个 8GB 以上的 U 盘&lt;/li>
+&lt;li>使用 WePE 制作启动盘（注意：此过程会格式化 U 盘，请提前备份数据）&lt;/li>
+&lt;/ol>
+&lt;h2 id="重装系统">重装系统
+&lt;/h2>&lt;h3 id="1-进入-bios">1. 进入 BIOS
+&lt;/h3>&lt;ol>
+&lt;li>重启电脑&lt;/li>
+&lt;li>在开机时按特定按键进入 BIOS（常见按键：F2、F10、Del、Esc）&lt;/li>
+&lt;li>找到 Boot 选项&lt;/li>
+&lt;li>将 U 盘设置为第一启动项&lt;/li>
+&lt;li>保存设置并退出&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-安装系统">2. 安装系统
+&lt;/h3>&lt;ol>
+&lt;li>进入 WinPE 系统&lt;/li>
+&lt;li>使用分区工具（如 DiskGenius）进行分区（如果需要）&lt;/li>
+&lt;li>运行系统安装程序&lt;/li>
+&lt;li>选择系统镜像文件&lt;/li>
+&lt;li>选择安装位置（通常是 C 盘）&lt;/li>
+&lt;li>等待安装完成&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-首次启动设置">3. 首次启动设置
+&lt;/h3>&lt;ol>
+&lt;li>设置系统语言和输入法&lt;/li>
+&lt;li>创建用户账户&lt;/li>
+&lt;li>设置密码（建议设置）&lt;/li>
+&lt;li>配置隐私选项&lt;/li>
+&lt;li>等待系统完成初始化&lt;/li>
+&lt;/ol>
+&lt;h3 id="4-跳过联网激活可选">4. 跳过联网激活（可选）
+&lt;/h3>&lt;p>Windows 11 首次启动时需要联网激活，可以通过以下方法跳过：&lt;/p>
+&lt;ol>
+&lt;li>在首次启动界面，按 &lt;code>Shift + F10&lt;/code> 打开命令提示符&lt;/li>
+&lt;li>输入以下命令：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">oobe\bypassnro.cmd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol>
+&lt;li>系统会自动重启&lt;/li>
+&lt;li>重启后，在联网界面选择&amp;quot;我没有 Internet 连接&amp;quot;&lt;/li>
+&lt;li>继续完成设置即可&lt;/li>
+&lt;/ol>
+&lt;p>注意：跳过联网激活后，建议在系统设置完成后手动连接网络并激活系统。&lt;/p>
+&lt;h2 id="系统优化">系统优化
+&lt;/h2>&lt;h3 id="1-安装必要驱动">1. 安装必要驱动
+&lt;/h3>&lt;ol>
+&lt;li>检查设备管理器&lt;/li>
+&lt;li>下载并安装主板驱动&lt;/li>
+&lt;li>安装显卡驱动&lt;/li>
+&lt;li>安装网卡驱动&lt;/li>
+&lt;li>安装其他设备驱动&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-系统更新">2. 系统更新
+&lt;/h3>&lt;ol>
+&lt;li>检查 Windows 更新&lt;/li>
+&lt;li>安装所有重要更新&lt;/li>
+&lt;li>安装可选更新（根据需要）&lt;/li>
+&lt;/ol></description></item><item><title>无法访问 WindowsApps 文件夹的解决方案</title><link>https://imhy.top/p/%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-windowsapps-%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-windowsapps-%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid><description>&lt;h2 id="问题描述">问题描述
+&lt;/h2>&lt;p>在 Windows 系统中，即使你的账户是管理员账户，也可能无法直接访问 &lt;code>C:\Program Files\WindowsApps&lt;/code> 文件夹。这是因为该文件夹受到特殊权限保护，属于系统受限区域，主要用于存储 Microsoft Store 应用程序的数据。为了防止意外修改或恶意操作，Windows 默认限制了对该文件夹的访问权限，即使是管理员用户也需要额外步骤才能进入。&lt;/p>
+&lt;h2 id="原因分析">原因分析
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>权限限制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>WindowsApps 文件夹的所有权通常属于系统账户（如 TrustedInstaller）&lt;/li>
+&lt;li>普通管理员账户没有直接访问权限&lt;/li>
+&lt;li>系统默认限制了对该文件夹的访问&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>UAC（用户账户控制）&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>即使使用管理员账户，UAC 可能仍然要求额外的权限提升&lt;/li>
+&lt;li>系统安全机制限制了对系统文件夹的直接访问&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>文件夹保护机制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>该文件夹默认是隐藏的&lt;/li>
+&lt;li>受到 Windows 文件保护机制的限制&lt;/li>
+&lt;li>属于系统关键目录&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="解决方案">解决方案
+&lt;/h2>&lt;h3 id="步骤-1显示隐藏文件夹">步骤 1：显示隐藏文件夹
+&lt;/h3>&lt;ol>
+&lt;li>打开文件资源管理器&lt;/li>
+&lt;li>点击顶部菜单的&amp;quot;查看&amp;quot; &amp;gt; &amp;ldquo;选项&amp;rdquo; &amp;gt; &amp;ldquo;查看&amp;quot;选项卡&lt;/li>
+&lt;li>在&amp;quot;高级设置&amp;quot;中：
+&lt;ul>
+&lt;li>勾选&amp;quot;显示隐藏的文件、文件夹和驱动器&amp;rdquo;&lt;/li>
+&lt;li>取消勾选&amp;quot;隐藏受保护的操作系统文件&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>点击&amp;quot;应用&amp;quot;和&amp;quot;确定&amp;quot;&lt;/li>
+&lt;/ol>
+&lt;h3 id="步骤-2获取文件夹访问权限">步骤 2：获取文件夹访问权限
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>打开文件夹属性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>右键点击 &lt;code>C:\Program Files\WindowsApps&lt;/code> 文件夹&lt;/li>
+&lt;li>选择&amp;quot;属性&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>修改安全设置&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>切换到&amp;quot;安全&amp;quot;选项卡&lt;/li>
+&lt;li>点击&amp;quot;高级&amp;quot;按钮&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>更改所有者&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在&amp;quot;高级安全设置&amp;quot;窗口中，检查&amp;quot;所有者&amp;quot;是否为 TrustedInstaller&lt;/li>
+&lt;li>点击&amp;quot;更改&amp;quot;所有者&lt;/li>
+&lt;li>输入你的用户名（例如：&lt;code>你的电脑名\你的用户名&lt;/code>）&lt;/li>
+&lt;li>点击&amp;quot;检查名称&amp;quot;确认&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>查看当前用户名&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 在命令提示符或 PowerShell 中执行&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">whoami
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>应用权限更改&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>勾选&amp;quot;替换子容器和对象的所有者&amp;quot;&lt;/li>
+&lt;li>点击&amp;quot;确定&amp;quot;保存更改&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>添加完全控制权限&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>返回&amp;quot;安全&amp;quot;选项卡&lt;/li>
+&lt;li>点击&amp;quot;编辑&amp;quot;按钮&lt;/li>
+&lt;li>为你的账户添加&amp;quot;完全控制&amp;quot;权限&lt;/li>
+&lt;li>点击&amp;quot;应用&amp;quot;和&amp;quot;确定&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>谨慎操作&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>修改系统文件夹权限可能导致系统问题&lt;/li>
+&lt;li>建议在修改前备份重要数据&lt;/li>
+&lt;li>如非必要，不建议修改系统文件夹权限&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>潜在风险&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>修改系统文件夹可能导致应用程序无法正常运行&lt;/li>
+&lt;li>可能影响系统更新和应用程序更新&lt;/li>
+&lt;li>可能触发系统安全机制&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>最佳实践&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>仅在必要时访问该文件夹&lt;/li>
+&lt;li>完成操作后建议恢复原始权限&lt;/li>
+&lt;li>保持系统安全性的同时满足访问需求&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://learn.microsoft.com/zh-cn/windows/security/identity-protection/access-control/file-permissions" target="_blank" rel="noopener"
+>Windows 文件权限管理&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://learn.microsoft.com/zh-cn/windows/security/" target="_blank" rel="noopener"
+>Windows 安全最佳实践&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

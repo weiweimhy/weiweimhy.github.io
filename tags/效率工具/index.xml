@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>效率工具 on 君不见</title><link>https://imhy.top/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/</link><description>Recent content in 效率工具 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/%E6%95%88%E7%8E%87%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml"/><item><title>PowerToys 使用指南</title><link>https://imhy.top/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="什么是-powertoys">什么是 PowerToys？
+&lt;/h2>&lt;p>PowerToys 是微软开发的一套实用工具集，旨在帮助高级用户调整和简化 Windows 体验以提高工作效率。它包含多个实用工具，如快速启动器、窗口管理、颜色选择器等。&lt;/p>
+&lt;h2 id="安装方法">安装方法
+&lt;/h2>&lt;h3 id="使用-scoop-安装">使用 Scoop 安装
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">scoop&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">powertoys&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="使用-winget-安装">使用 Winget 安装
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">winget&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">Microsoft&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="py">PowerToys&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="手动安装">手动安装
+&lt;/h3>&lt;ol>
+&lt;li>访问 &lt;a class="link" href="https://github.com/microsoft/PowerToys/releases" target="_blank" rel="noopener"
+>PowerToys GitHub 发布页面&lt;/a>&lt;/li>
+&lt;li>下载最新版本的安装包&lt;/li>
+&lt;li>运行安装程序&lt;/li>
+&lt;/ol>
+&lt;h2 id="核心功能配置">核心功能配置
+&lt;/h2>&lt;h3 id="1-颜色选择器-color-picker">1. 颜色选择器 (Color Picker)
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>快捷键&lt;/strong>：&lt;code>Win + Shift + C&lt;/code>&lt;/li>
+&lt;li>&lt;strong>功能&lt;/strong>：快速获取屏幕任意位置的颜色值&lt;/li>
+&lt;li>&lt;strong>支持格式&lt;/strong>：HEX、RGB、HSL、CMYK 等&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-powertoys-run">2. PowerToys Run
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>快捷键&lt;/strong>：&lt;code>Alt + Space&lt;/code>&lt;/li>
+&lt;li>&lt;strong>功能&lt;/strong>：快速启动应用程序和文件&lt;/li>
+&lt;li>&lt;strong>特点&lt;/strong>：
+&lt;ul>
+&lt;li>支持模糊搜索&lt;/li>
+&lt;li>可安装插件扩展功能&lt;/li>
+&lt;li>支持计算器和单位转换&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-file-locksmith">3. File Locksmith
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>功能&lt;/strong>：显示正在使用文件的进程&lt;/li>
+&lt;li>&lt;strong>使用方法&lt;/strong>：
+&lt;ol>
+&lt;li>右键点击文件&lt;/li>
+&lt;li>选择&amp;quot;查看哪些进程正在使用此文件&amp;quot;&lt;/li>
+&lt;li>查看并管理相关进程&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ul>
+&lt;h3 id="4-fancyzones">4. FancyZones
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>功能&lt;/strong>：增强的窗口管理工具&lt;/li>
+&lt;li>&lt;strong>特点&lt;/strong>：
+&lt;ul>
+&lt;li>自定义窗口布局&lt;/li>
+&lt;li>支持多显示器&lt;/li>
+&lt;li>可保存常用布局&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="插件安装与配置">插件安装与配置
+&lt;/h2>&lt;h3 id="powertoys-run-everything-插件">PowerToys Run Everything 插件
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>安装插件&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">scoop install everything-powertoys
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置步骤&lt;/strong>&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>下载 &lt;a class="link" href="https://github.com/lin-ycv/EverythingPowerToys/tree/lib" target="_blank" rel="noopener"
+>Everything64.dll&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>将 DLL 文件复制到 everything-powertoys 安装目录&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>将插件复制到 PowerToys 插件目录：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">C:\Users\&amp;lt;用户名&amp;gt;\AppData\Local\Microsoft\PowerToys\PowerToys Run\Plugins
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>在 PowerToys Run 设置中：&lt;/p>
+&lt;ul>
+&lt;li>启用 Everything 插件&lt;/li>
+&lt;li>设置 Everything 运行路径&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>重启 PowerToys&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="其他推荐插件">其他推荐插件
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Window Walker&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>快速切换窗口&lt;/li>
+&lt;li>支持模糊搜索&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Registry Preview&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>预览注册表文件&lt;/li>
+&lt;li>支持语法高亮&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>PowerRename&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>批量重命名文件&lt;/li>
+&lt;li>支持正则表达式&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="快捷键设置">快捷键设置
+&lt;/h2>&lt;h3 id="常用快捷键">常用快捷键
+&lt;/h3>&lt;ul>
+&lt;li>&lt;code>Win + Shift + C&lt;/code>：颜色选择器&lt;/li>
+&lt;li>&lt;code>Alt + Space&lt;/code>：PowerToys Run&lt;/li>
+&lt;li>&lt;code>Win + Shift + D&lt;/code>：快速桌面&lt;/li>
+&lt;li>&lt;code>Win + Shift + T&lt;/code>：文本提取器&lt;/li>
+&lt;/ul>
+&lt;h3 id="自定义快捷键">自定义快捷键
+&lt;/h3>&lt;ol>
+&lt;li>打开 PowerToys 设置&lt;/li>
+&lt;li>选择&amp;quot;键盘管理器&amp;quot;&lt;/li>
+&lt;li>点击&amp;quot;添加新的快捷键&amp;quot;&lt;/li>
+&lt;li>设置快捷键组合和对应功能&lt;/li>
+&lt;/ol>
+&lt;h2 id="性能优化">性能优化
+&lt;/h2>&lt;h3 id="启动项管理">启动项管理
+&lt;/h3>&lt;ol>
+&lt;li>打开 PowerToys 设置&lt;/li>
+&lt;li>选择&amp;quot;启动项&amp;quot;&lt;/li>
+&lt;li>配置开机自启动项&lt;/li>
+&lt;/ol>
+&lt;h3 id="资源占用">资源占用
+&lt;/h3>&lt;ul>
+&lt;li>建议关闭不常用的功能&lt;/li>
+&lt;li>定期检查后台进程&lt;/li>
+&lt;li>根据需要调整功能配置&lt;/li>
+&lt;/ul>
+&lt;h2 id="常见问题">常见问题
+&lt;/h2>&lt;h3 id="1-插件无法加载">1. 插件无法加载
+&lt;/h3>&lt;ul>
+&lt;li>检查插件安装路径&lt;/li>
+&lt;li>确认 DLL 文件位置&lt;/li>
+&lt;li>验证插件兼容性&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-快捷键冲突">2. 快捷键冲突
+&lt;/h3>&lt;ul>
+&lt;li>检查系统快捷键设置&lt;/li>
+&lt;li>调整 PowerToys 快捷键&lt;/li>
+&lt;li>避免与其他软件冲突&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-性能问题">3. 性能问题
+&lt;/h3>&lt;ul>
+&lt;li>关闭不必要的功能&lt;/li>
+&lt;li>更新到最新版本&lt;/li>
+&lt;li>检查系统资源占用&lt;/li>
+&lt;/ul>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://learn.microsoft.com/zh-cn/windows/powertoys/" target="_blank" rel="noopener"
+>PowerToys 官方文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/microsoft/PowerToys" target="_blank" rel="noopener"
+>PowerToys GitHub&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://github.com/microsoft/PowerToys/wiki/Plugin-Overview" target="_blank" rel="noopener"
+>PowerToys 插件市场&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

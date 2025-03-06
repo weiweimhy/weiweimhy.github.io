@@ -1,0 +1,256 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="Git 版本控制系统使用指南：从基础命令到高级特性，以及常见问题解决方案"><title>Git 使用指南</title>
+<link rel=canonical href=https://imhy.top/p/git-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/><link rel=stylesheet href=/scss/style.min.9c7d8f47c42e5c9e849d9136eac0dba7d38eb242f4d63c101364d7fb84143805.css><meta property='og:title' content="Git 使用指南"><meta property='og:description' content="Git 版本控制系统使用指南：从基础命令到高级特性，以及常见问题解决方案"><meta property='og:url' content='https://imhy.top/p/git-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/'><meta property='og:site_name' content='君不见'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='git'><meta property='article:tag' content='版本控制'><meta property='article:published_time' content='2024-08-20T16:39:37+08:00'><meta property='article:modified_time' content='2025-03-06T08:31:42+00:00'><meta name=twitter:title content="Git 使用指南"><meta name=twitter:description content="Git 版本控制系统使用指南：从基础命令到高级特性，以及常见问题解决方案"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu9769813113213727679.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍦</span></figure><div class=site-meta><h1 class=site-name><a href=/>君不见</a></h1><h2 class=site-description>每天记录一点点🌱</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/%E6%90%9C%E7%B4%A2/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#git-基础配置>Git 基础配置</a><ol><li><a href=#1-全局配置>1. 全局配置</a></li><li><a href=#2-常用别名配置>2. 常用别名配置</a></li></ol></li><li><a href=#git-新特性>Git 新特性</a><ol><li><a href=#git-223-及以后版本>Git 2.23 及以后版本</a></li></ol></li><li><a href=#常用操作>常用操作</a><ol><li><a href=#1-仓库初始化>1. 仓库初始化</a></li><li><a href=#2-分支操作>2. 分支操作</a></li><li><a href=#3-提交操作>3. 提交操作</a></li><li><a href=#4-远程操作>4. 远程操作</a></li></ol></li><li><a href=#高级操作>高级操作</a><ol><li><a href=#1-覆盖所有提交>1. 覆盖所有提交</a></li><li><a href=#2-交互式变基>2. 交互式变基</a></li><li><a href=#3-暂存操作>3. 暂存操作</a></li></ol></li><li><a href=#常见问题>常见问题</a><ol><li><a href=#1-中文显示问题>1. 中文显示问题</a></li><li><a href=#2-大文件处理>2. 大文件处理</a></li><li><a href=#3-凭证管理>3. 凭证管理</a></li></ol></li><li><a href=#最佳实践>最佳实践</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF/ style=background-color:#2a9d8f;color:#fff>技术</a></header><a href=/p/git-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/><div class=article-title-wrapper><h2 class=article-title>Git 使用指南</h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#597e8d" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4L18.5 9.5a2.828 2.828.0 10-4-4L4 16v4"/><path d="M13.5 6.5l4 4"/></svg>
+<time class=article-words>1123 字</time></div><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2024-08-20</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></a></div></header><section class=article-content><h2 id=git-基础配置>Git 基础配置</h2><h3 id=1-全局配置>1. 全局配置</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 配置用户信息</span>
+</span></span><span class=line><span class=cl>git config --global user.name <span class=s2>&#34;Your Name&#34;</span>
+</span></span><span class=line><span class=cl>git config --global user.email <span class=s2>&#34;your.email@example.com&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置默认编辑器</span>
+</span></span><span class=line><span class=cl>git config --global core.editor <span class=s2>&#34;code --wait&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置默认分支名</span>
+</span></span><span class=line><span class=cl>git config --global init.defaultBranch main
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置中文显示</span>
+</span></span><span class=line><span class=cl>git config --global core.quotepath <span class=nb>false</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-常用别名配置>2. 常用别名配置</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 配置常用命令别名</span>
+</span></span><span class=line><span class=cl>git config --global alias.st status
+</span></span><span class=line><span class=cl>git config --global alias.co checkout
+</span></span><span class=line><span class=cl>git config --global alias.br branch
+</span></span><span class=line><span class=cl>git config --global alias.ci commit
+</span></span><span class=line><span class=cl>git config --global alias.lg <span class=s2>&#34;log --color --graph --pretty=format:&#39;%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)&lt;%an&gt;%Creset&#39; --abbrev-commit&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=git-新特性>Git 新特性</h2><h3 id=git-223-及以后版本>Git 2.23 及以后版本</h3><div class=table-wrapper><table><thead><tr><th>版本</th><th>新特性</th><th>说明</th></tr></thead><tbody><tr><td>2.23</td><td><code>git switch</code></td><td>简化分支切换操作，替代部分 <code>git checkout</code> 功能</td></tr><tr><td>2.23</td><td><code>git restore</code></td><td>恢复文件状态的新命令，替代部分 <code>git checkout</code> 和 <code>git reset</code> 功能</td></tr><tr><td>2.24</td><td><code>git sparse-checkout</code></td><td>允许只检出仓库部分内容，节省空间</td></tr><tr><td>2.25</td><td><code>git switch/restore</code> 增强</td><td>改进功能和稳定性</td></tr><tr><td>2.26</td><td><code>git restore --source</code></td><td>允许指定恢复内容的源</td></tr><tr><td>2.27</td><td><code>git commit --verbose</code></td><td>提交时显示详细变更信息</td></tr><tr><td>2.28</td><td><code>git config includeIf</code></td><td>支持条件性包含配置文件</td></tr><tr><td>2.29</td><td><code>git diff --inter-hunk-context</code></td><td>增强 diff 上下文显示</td></tr><tr><td>2.30</td><td><code>git commit --no-verify</code></td><td>跳过钩子验证的提交选项</td></tr><tr><td>2.31</td><td><code>git switch --orphan</code></td><td>创建新的孤立分支</td></tr><tr><td>2.32</td><td><code>git commit --dry-run</code></td><td>预查看提交内容</td></tr><tr><td>2.33</td><td><code>git branch --show-current</code></td><td>显示当前分支的简化命令</td></tr><tr><td>2.34</td><td><code>git rebase --exec</code></td><td>在变基操作后执行指定命令</td></tr></tbody></table></div><h2 id=常用操作>常用操作</h2><h3 id=1-仓库初始化>1. 仓库初始化</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 初始化新仓库</span>
+</span></span><span class=line><span class=cl>git init
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 克隆远程仓库</span>
+</span></span><span class=line><span class=cl>git clone &lt;repository_url&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 克隆特定分支</span>
+</span></span><span class=line><span class=cl>git clone -b &lt;branch_name&gt; &lt;repository_url&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 浅克隆（只获取最新版本）</span>
+</span></span><span class=line><span class=cl>git clone --depth <span class=m>1</span> &lt;repository_url&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-分支操作>2. 分支操作</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建并切换分支</span>
+</span></span><span class=line><span class=cl>git switch -c &lt;branch_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 切换分支</span>
+</span></span><span class=line><span class=cl>git switch &lt;branch_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看分支</span>
+</span></span><span class=line><span class=cl>git branch
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除分支</span>
+</span></span><span class=line><span class=cl>git branch -d &lt;branch_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 强制删除分支</span>
+</span></span><span class=line><span class=cl>git branch -D &lt;branch_name&gt;
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-提交操作>3. 提交操作</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 暂存文件</span>
+</span></span><span class=line><span class=cl>git add &lt;file_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 暂存所有更改</span>
+</span></span><span class=line><span class=cl>git add .
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 提交更改</span>
+</span></span><span class=line><span class=cl>git commit -m <span class=s2>&#34;commit message&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 修改最后一次提交</span>
+</span></span><span class=line><span class=cl>git commit --amend
+</span></span></code></pre></td></tr></table></div></div><h3 id=4-远程操作>4. 远程操作</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 添加远程仓库</span>
+</span></span><span class=line><span class=cl>git remote add &lt;remote_name&gt; &lt;repository_url&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 推送到远程</span>
+</span></span><span class=line><span class=cl>git push &lt;remote_name&gt; &lt;branch_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 拉取更新</span>
+</span></span><span class=line><span class=cl>git pull &lt;remote_name&gt; &lt;branch_name&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 强制推送（谨慎使用）</span>
+</span></span><span class=line><span class=cl>git push -f &lt;remote_name&gt; &lt;branch_name&gt;
+</span></span></code></pre></td></tr></table></div></div><h2 id=高级操作>高级操作</h2><h3 id=1-覆盖所有提交>1. 覆盖所有提交</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建孤立分支</span>
+</span></span><span class=line><span class=cl>git checkout --orphan temp_branch
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 添加所有文件</span>
+</span></span><span class=line><span class=cl>git add .
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 提交更改</span>
+</span></span><span class=line><span class=cl>git commit -m <span class=s2>&#34;init&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除主分支</span>
+</span></span><span class=line><span class=cl>git branch -D main
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重命名分支</span>
+</span></span><span class=line><span class=cl>git branch -m temp_branch main
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 强制推送到远程</span>
+</span></span><span class=line><span class=cl>git push -f origin main
+</span></span></code></pre></td></tr></table></div></div><p><strong>注意：此操作不可撤销，请谨慎使用！</strong></p><h3 id=2-交互式变基>2. 交互式变基</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 开始交互式变基</span>
+</span></span><span class=line><span class=cl>git rebase -i HEAD~3  <span class=c1># 修改最近3次提交</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 常用变基命令</span>
+</span></span><span class=line><span class=cl><span class=c1># p, pick = 使用提交</span>
+</span></span><span class=line><span class=cl><span class=c1># r, reword = 使用提交，但修改提交信息</span>
+</span></span><span class=line><span class=cl><span class=c1># e, edit = 使用提交，但停止修改</span>
+</span></span><span class=line><span class=cl><span class=c1># s, squash = 使用提交，但合并到前一个提交</span>
+</span></span><span class=line><span class=cl><span class=c1># f, fixup = 类似 squash，但丢弃提交信息</span>
+</span></span><span class=line><span class=cl><span class=c1># d, drop = 删除提交</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-暂存操作>3. 暂存操作</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 暂存当前更改</span>
+</span></span><span class=line><span class=cl>git stash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 暂存并添加描述</span>
+</span></span><span class=line><span class=cl>git stash push -m <span class=s2>&#34;stash message&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看暂存列表</span>
+</span></span><span class=line><span class=cl>git stash list
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 应用暂存</span>
+</span></span><span class=line><span class=cl>git stash pop  <span class=c1># 应用并删除</span>
+</span></span><span class=line><span class=cl>git stash apply  <span class=c1># 应用但保留</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除暂存</span>
+</span></span><span class=line><span class=cl>git stash drop &lt;stash_id&gt;
+</span></span></code></pre></td></tr></table></div></div><h2 id=常见问题>常见问题</h2><h3 id=1-中文显示问题>1. 中文显示问题</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 解决中文文件名显示问题</span>
+</span></span><span class=line><span class=cl>git config --global core.quotepath <span class=nb>false</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-大文件处理>2. 大文件处理</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 使用 Git LFS 管理大文件</span>
+</span></span><span class=line><span class=cl>git lfs install
+</span></span><span class=line><span class=cl>git lfs track <span class=s2>&#34;*.psd&#34;</span>
+</span></span><span class=line><span class=cl>git lfs track <span class=s2>&#34;*.zip&#34;</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-凭证管理>3. 凭证管理</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 配置凭证缓存</span>
+</span></span><span class=line><span class=cl>git config --global credential.helper cache
+</span></span><span class=line><span class=cl>git config --global credential.helper <span class=s1>&#39;cache --timeout=3600&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=最佳实践>最佳实践</h2><ol><li><p><strong>提交规范</strong></p><ul><li>使用清晰的提交信息</li><li>遵循约定式提交规范</li><li>保持提交粒度适中</li></ul></li><li><p><strong>分支管理</strong></p><ul><li>使用功能分支开发</li><li>定期合并主分支</li><li>及时删除无用分支</li></ul></li><li><p><strong>代码审查</strong></p><ul><li>提交前自测</li><li>使用 Pull Request</li><li>进行代码审查</li></ul></li><li><p><strong>安全实践</strong></p><ul><li>定期备份仓库</li><li>谨慎使用强制推送</li><li>保护敏感信息</li></ul></li></ol></section><footer class=article-footer><section class=article-tags><a href=/tags/git/>Git</a>
+<a href=/tags/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/>版本控制</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-edit><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/%e6%8a%80%e6%9c%af/git/Git%20%e4%bd%bf%e7%94%a8.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 2025-03-06</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/5.-go-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/><div class=article-details><h2 class=article-title>5. Go 基础数据类型</h2></div></a></article><article><a href=/p/6.-go-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/><div class=article-details><h2 class=article-title>6. Go 数据类型注意事项</h2></div></a></article><article><a href=/p/7.-go-%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C/><div class=article-details><h2 class=article-title>7. Go 文件操作</h2></div></a></article><article><a href=/p/8.-go-%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/><div class=article-details><h2 class=article-title>8. Go 并发编程</h2></div></a></article><article><a href=/p/9.-go-%E7%BD%91%E7%BB%9C%E6%93%8D%E4%BD%9C/><div class=article-details><h2 class=article-title>9. Go 网络操作</h2></div></a></article></div></div></aside><script src=//unpkg.com/@waline/client@v2/dist/waline.js></script><link href=//unpkg.com/@waline/client@v2/dist/waline.css rel=stylesheet><div id=waline class=waline-container></div><style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding);--waline-font-size:var(--article-font-size)}.waline-container .wl-count{color:var(--card-text-color-main)}</style><script>Waline.init({dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://unpkg.com/@waline/emojis@1.0.1/weibo"],locale:{admin:"Admin",placeholder:null},requiredMeta:["name","email","url"]})</script><footer class=site-footer><section class=wordcount><p>26.50k 字<br>28篇文章</p></section><section class=copyright>&copy;
+2024 -
+2025 君不见</section><section class=powerby></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cocos Creator on 君不见</title><link>https://imhy.top/tags/cocos-creator/</link><description>Recent content in Cocos Creator on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Thu, 06 Mar 2025 10:41:48 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/cocos-creator/index.xml" rel="self" type="application/rss+xml"/><item><title>Cocos Creator 微信小游戏试玩导出指南</title><link>https://imhy.top/p/cocos-creator-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AF%95%E7%8E%A9%E5%AF%BC%E5%87%BA%E6%8C%87%E5%8D%97/</link><pubDate>Thu, 06 Mar 2025 10:41:48 +0800</pubDate><guid>https://imhy.top/p/cocos-creator-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E8%AF%95%E7%8E%A9%E5%AF%BC%E5%87%BA%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="概述">概述
+&lt;/h2>&lt;p>微信小游戏试玩是一种特殊的游戏体验方式，允许用户在正式下载游戏之前先体验游戏内容。本文将介绍两种在 Cocos Creator 中导出微信小游戏试玩的方法，以及可能遇到的问题和解决方案。&lt;/p>
+&lt;h2 id="导出方式">导出方式
+&lt;/h2>&lt;h3 id="1-传统方式使用-adapter">1. 传统方式（使用 adapter）
+&lt;/h3>&lt;h4 id="前置准备">前置准备
+&lt;/h4>&lt;ul>
+&lt;li>下载官方 demo 工程：&lt;a class="link" href="https://github.com/wechat-miniprogram/minigame-playable" target="_blank" rel="noopener"
+>wechat-miniprogram/minigame-playable&lt;/a>&lt;/li>
+&lt;li>准备试玩小程序的 AppID&lt;/li>
+&lt;/ul>
+&lt;h4 id="构建步骤">构建步骤
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>准备构建模板&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>将 &lt;code>build-templates&lt;/code> 文件夹复制到试玩工程目录下&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置小程序信息&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在项目设置中配置试玩小程序的 AppID&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>构建小程序&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在 Cocos Creator 中选择&amp;quot;构建微信小游戏&amp;quot;&lt;/li>
+&lt;li>确保选择正确的构建模板&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>整合到主游戏&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>将构建的小程序工程复制到主游戏的 &lt;code>playableDemo&lt;/code> 文件夹下&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置分包信息&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>修改主工程的 &lt;code>game.json&lt;/code>，添加试玩分包配置：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-json" data-lang="json">&lt;span class="line">&lt;span class="cl">&lt;span class="s2">&amp;#34;subPackages&amp;#34;&lt;/span>&lt;span class="err">:&lt;/span> &lt;span class="p">[&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;moduleA&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;root&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;/moduleA/&amp;#34;&lt;/span> &lt;span class="c1">// 普通分包
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="p">},&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;independent&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;name&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;playableDemo&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;root&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;/playableDemo/&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;meta&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;type&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;playable&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;#34;playableOrientation&amp;#34;&lt;/span>&lt;span class="p">:&lt;/span> &lt;span class="s2">&amp;#34;portrait&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>构建分包&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>新建分包构建配置&lt;/li>
+&lt;li>选择&amp;quot;分包构建&amp;quot;模式&lt;/li>
+&lt;li>执行构建&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="常见问题">常见问题
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>资源文件缺失&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>问题：编译时提示 &lt;code>logo.png&lt;/code> 和 &lt;code>slogan.png&lt;/code> 缺失&lt;/li>
+&lt;li>解决：复制或创建所需的图片资源文件&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>引擎裁剪问题&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>问题：&lt;code>TypeError: Cannot read property 'passes' of undefined&lt;/code>&lt;/li>
+&lt;li>解决：在 Cocos Creator 中修改引擎裁剪设置
+&lt;ul>
+&lt;li>打开 Project Settings&lt;/li>
+&lt;li>选择 Feature Cropping&lt;/li>
+&lt;li>在 2D 选项中勾选：
+&lt;ul>
+&lt;li>User Interface&lt;/li>
+&lt;li>Tiled Map&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>音频加载失败&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>问题：&lt;code>cc.js:88919 failed to load innerAudioContext&lt;/code>&lt;/li>
+&lt;li>解决：由于 adapter 方式的限制，建议使用新的构建方式&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-新构建方式推荐">2. 新构建方式（推荐）
+&lt;/h3>&lt;h4 id="构建步骤-1">构建步骤
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>配置小程序信息&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在项目设置中配置试玩小程序的 AppID&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>构建微信小游戏&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>选择&amp;quot;构建微信小游戏&amp;quot;&lt;/li>
+&lt;li>使用默认构建配置&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>导入开发工具&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在微信开发者工具中导入构建结果&lt;/li>
+&lt;li>工具会自动识别为试玩版本&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>编译上传&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>执行编译&lt;/li>
+&lt;li>上传到微信平台&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="优势">优势
+&lt;/h4>&lt;ul>
+&lt;li>构建流程更简单&lt;/li>
+&lt;li>更好的兼容性&lt;/li>
+&lt;li>更少的配置步骤&lt;/li>
+&lt;li>更稳定的运行效果&lt;/li>
+&lt;/ul>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>资源限制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>注意试玩包大小限制&lt;/li>
+&lt;li>合理规划资源加载&lt;/li>
+&lt;li>避免资源浪费&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>功能限制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>了解试玩版本的功能限制&lt;/li>
+&lt;li>避免使用不支持的特性&lt;/li>
+&lt;li>做好功能降级处理&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>兼容性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>测试不同设备&lt;/li>
+&lt;li>验证各种场景&lt;/li>
+&lt;li>处理异常情况&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/game-engine/unity/playable.html" target="_blank" rel="noopener"
+>微信小游戏试玩文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://docs.cocos.com/creator/manual/zh/" target="_blank" rel="noopener"
+>Cocos Creator 文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/" target="_blank" rel="noopener"
+>微信小游戏开发文档&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

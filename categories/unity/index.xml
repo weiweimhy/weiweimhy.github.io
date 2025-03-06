@@ -1,67 +1,184 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unity on 君不见</title><link>https://imhy.top/categories/unity/</link><description>Recent content in Unity on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Fri, 23 Aug 2024 11:09:00 +0800</lastBuildDate><atom:link href="https://imhy.top/categories/unity/index.xml" rel="self" type="application/rss+xml"/><item><title>微信小游戏版本升级</title><link>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/</link><pubDate>Fri, 23 Aug 2024 11:09:00 +0800</pubDate><guid>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/</guid><description>&lt;h2 id="小游戏更新机制">小游戏更新机制
-&lt;/h2>&lt;p>微信小游戏开发&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/update-mechanism.html" target="_blank" rel="noopener"
->文档&lt;/a>中写到&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>未启动更新逻辑&lt;/p>
-&lt;blockquote>
-&lt;p>开发者在管理后台发布新版本的小程序之后，如果某个用户本地有小程序的历史版本，此时打开的可能还是旧版本。微信客户端会有若干个时机去检查本地缓存的小程序有没有更新版本，如果有则会静默更新到新版本。总的来说，开发者在后台发布新版本之后，无法立刻影响到所有现网用户，但最差情况下，也在发布之后 24 小时之内下发新版本信息到用户。用户下次打开时会先更新最新版本再打开&lt;/p>
-&lt;/blockquote>
-&lt;/li>
-&lt;li>
-&lt;p>启动时更新&lt;/p>
-&lt;blockquote>
-&lt;p>小程序每次冷启动时，都会检查是否有更新版本，如果发现有新版本，将会异步下载新版本的代码包，并同时用客户端本地的包进行启动，即新版本的小程序需要等下一次冷启动才会应用上&lt;/p>
-&lt;/blockquote>
-&lt;/li>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unity on 君不见</title><link>https://imhy.top/categories/unity/</link><description>Recent content in Unity on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 05 Mar 2025 16:03:30 +0800</lastBuildDate><atom:link href="https://imhy.top/categories/unity/index.xml" rel="self" type="application/rss+xml"/><item><title>Unity 项目中的 System.Private.CoreLib 引用问题</title><link>https://imhy.top/p/unity-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84-system.private.corelib-%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/</link><pubDate>Wed, 05 Mar 2025 16:03:30 +0800</pubDate><guid>https://imhy.top/p/unity-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84-system.private.corelib-%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;ul>
+&lt;li>Unity 2022.3.46f1&lt;/li>
+&lt;li>Rider 2024.3.33&lt;/li>
+&lt;li>.NET 6.0.201&lt;/li>
+&lt;li>Obfuscar 2.2.40&lt;/li>
 &lt;/ul>
-&lt;p>小程序运行机制&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/operating-mechanism.html" target="_blank" rel="noopener"
->文档&lt;/a>中指出，冷启动是指用户首次打开小游戏，或者小游戏被销毁再次打开，但是销毁时机并不是关闭小游戏🤡，需要等进入后台一定时间，或者系统资源占用过高，才会被销毁，可以用以下方式冷启动&lt;/p>
-&lt;ol>
-&lt;li>删除小游戏重新打开（不推荐）&lt;/li>
-&lt;li>关闭微信（杀掉后台）重新打开微信&lt;/li>
-&lt;/ol>
-&lt;h2 id="立即更新">立即更新
-&lt;/h2>&lt;p>如果需要马上应用最新版本，可以使用 &lt;code>WX.GetUpdateManager&lt;/code> API 进行处理&lt;/p>
+&lt;h2 id="问题背景">问题背景
+&lt;/h2>&lt;p>为了防代码泄露，需要隔离开发工程和美术工程，将开发工程代码编译成 DLL，并且混淆后导入美术工程使用。&lt;/p>
+&lt;p>遇到了一个错误：混淆后的 DLL 在 Unity 中报错 &lt;code>Unable to resolve reference 'System.Private.CoreLib'&lt;/code>，而未混淆的 DLL 没有这个问题。&lt;/p>
+&lt;h2 id="问题现象">问题现象
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>正常情况&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>未混淆的 &lt;code>Dave.CodeGen.dll&lt;/code> 在 Unity 中正常运行&lt;/li>
+&lt;li>使用 &lt;code>ILSpy&lt;/code> 检查发现引用的是 &lt;code>mscorlib&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>异常情况&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 &lt;code>Obfuscar.Console&lt;/code> 混淆后，Unity 报错：&lt;/li>
+&lt;/ul>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
-&lt;/span>&lt;span class="lnt"> 2
-&lt;/span>&lt;span class="lnt"> 3
-&lt;/span>&lt;span class="lnt"> 4
-&lt;/span>&lt;span class="lnt"> 5
-&lt;/span>&lt;span class="lnt"> 6
-&lt;/span>&lt;span class="lnt"> 7
-&lt;/span>&lt;span class="lnt"> 8
-&lt;/span>&lt;span class="lnt"> 9
-&lt;/span>&lt;span class="lnt">10
-&lt;/span>&lt;span class="lnt">11
-&lt;/span>&lt;span class="lnt">12
-&lt;/span>&lt;span class="lnt">13
-&lt;/span>&lt;span class="lnt">14
-&lt;/span>&lt;span class="lnt">15
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl"> &lt;span class="kt">var&lt;/span> &lt;span class="n">updateManager&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetUpdateManager&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnCheckForUpdate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// noting&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnUpdateFailed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// show error tips&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">CanvasManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Instance&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Open&lt;/span>&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="n">TipsUI&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">TipsUI&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">View&lt;/span>&lt;span class="p">&amp;gt;(&lt;/span>&lt;span class="kc">true&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">failedText&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">callback&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">Invoke&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnUpdateReady&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ApplyUpdate&lt;/span>&lt;span class="p">();&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">Unable to resolve reference &amp;#39;System.Private.CoreLib&amp;#39;. Is the assembly missing or incompatible with the current platform
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div></description></item><item><title>打开游戏圈和获取用户信息</title><link>https://imhy.top/p/%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</link><pubDate>Fri, 23 Aug 2024 09:59:22 +0800</pubDate><guid>https://imhy.top/p/%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</guid><description>&lt;p>unity 开发微信小游戏，有一些常用功能，例如微信登录，微信支付，打开游戏圈，获取用户头像、名字等功能，查看对应的开发文档即可，但是在开发过程中还遇到一些坑，特此记录一下打开游戏圈和获取用户权限踩坑&lt;/p>
+&lt;/div>&lt;ul>
+&lt;li>使用 &lt;code>ILSpy&lt;/code> 检查发现引用了 &lt;code>System.Private.CoreLib&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="问题分析">问题分析
+&lt;/h2>&lt;h3 id="1-初步猜测">1. 初步猜测
+&lt;/h3>&lt;ul>
+&lt;li>&lt;code>System.Private.CoreLib&lt;/code> 是 .NET Core / .NET 5+ 的核心库&lt;/li>
+&lt;li>Unity 使用的是 .NET Framework 4.8（基于 &lt;code>mscorlib&lt;/code>）&lt;/li>
+&lt;li>混淆过程可能引入了不兼容的引用&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-排查过程">2. 排查过程
+&lt;/h3>&lt;h4 id="检查-net-版本">检查 .NET 版本
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>操作步骤&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 &lt;code>ILSpy&lt;/code> 打开混淆后的 &lt;code>Dave.CodeGen.dll&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>发现&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>目标框架是 &lt;code>.NET Framework 4.7.2&lt;/code>，与预期一致&lt;/li>
+&lt;li>引用中出现了 &lt;code>System.Private.CoreLib&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>结论&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>.NET 版本正确，问题不在目标框架&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="对比未混淆的-dll">对比未混淆的 DLL
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>操作步骤&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>用 &lt;code>ILSpy&lt;/code> 打开未混淆的 &lt;code>Dave.CodeGen.dll&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>发现&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>未混淆的 DLL 引用的是 &lt;code>mscorlib&lt;/code>&lt;/li>
+&lt;li>没有 &lt;code>System.Private.CoreLib&lt;/code> 引用&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>结论&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>混淆过程引入了 &lt;code>System.Private.CoreLib&lt;/code> 的引用&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="环境检查">环境检查
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>.NET 环境&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检查 SDK 版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet --list-sdks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检查运行时版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet --info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Unity 编译&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Unity 自动编译&lt;/li>
+&lt;li>Unity 命令行编译&lt;/li>
+&lt;li>输出位置：&lt;code>Library/ScriptAssemblies/&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obfuscar 工具&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet tool install --global Obfuscar.GlobalTool --version 2.2.40
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 卸载&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet tool uninstall --global Obfuscar.GlobalTool
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="解决方案">解决方案
+&lt;/h2>&lt;h3 id="1-调整混淆配置">1. 调整混淆配置
+&lt;/h3>&lt;p>在 Obfuscar 配置文件中添加 mscorlib.dll 的路径（&lt;code>./obfuscar_dependencies/mscorlib.dll&lt;/code>）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;AssemblySearchPath&lt;/span> &lt;span class="na">path=&lt;/span>&lt;span class="s">&amp;#34;./obfuscar_dependencies&amp;#34;&lt;/span> &lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2-配置步骤">2. 配置步骤
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>创建依赖目录&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在项目目录下创建 &lt;code>obfuscar_dependencies&lt;/code> 文件夹&lt;/li>
+&lt;li>将 &lt;code>mscorlib.dll&lt;/code> 复制到该目录&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>验证配置&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>混淆后的 DLL 引用 mscorlib&lt;/li>
+&lt;li>无 System.Private.CoreLib 引用&lt;/li>
+&lt;li>在 Unity 中运行正常&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="问题根源">问题根源
+&lt;/h2>&lt;h3 id="原因分析">原因分析
+&lt;/h3>&lt;p>Obfuscar 在混淆时未找到 mscorlib.dll，可能从系统路径（.NET 6 SDK）加载了 System.Private.CoreLib。这是因为：&lt;/p>
+&lt;ol>
+&lt;li>Obfuscar 默认会搜索系统路径&lt;/li>
+&lt;li>系统中安装了 .NET 6 SDK&lt;/li>
+&lt;li>没有明确指定 mscorlib.dll 的路径&lt;/li>
+&lt;/ol></description></item><item><title>微信小游戏：打开游戏圈和获取用户信息</title><link>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</link><pubDate>Fri, 23 Aug 2024 09:59:22 +0800</pubDate><guid>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E6%89%93%E5%BC%80%E6%B8%B8%E6%88%8F%E5%9C%88%E5%92%8C%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF/</guid><description>&lt;h2 id="概述">概述
+&lt;/h2>&lt;p>在 Unity 开发微信小游戏时，打开游戏圈和获取用户信息是两个常用的功能。本文将详细介绍这两个功能的实现方法，以及在开发过程中可能遇到的问题和解决方案。&lt;/p>
 &lt;h2 id="打开游戏圈">打开游戏圈
-&lt;/h2>&lt;p>创建一个打开游戏圈的按钮，点击按钮跳转微信游戏圈&lt;/p>
+&lt;/h2>&lt;h3 id="基本实现">基本实现
+&lt;/h3>&lt;p>创建打开游戏圈的按钮，点击后跳转到微信游戏圈：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -79,7 +196,7 @@
 &lt;/span>&lt;span class="lnt">13
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">btn&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WXBase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CreateGameClubButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">WXCreateGameClubButtonParam&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">btn&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WXBase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CreateGameClubButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">WXCreateGameClubButtonParam&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">type&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">GameClubButtonType&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">image&lt;/span>&lt;span class="p">,&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">icon&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">GameClubButtonIcon&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">light&lt;/span>&lt;span class="p">,&lt;/span>
@@ -94,8 +211,32 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h2 id="获取用户信息">获取用户信息
-&lt;/h2>&lt;p>获取用户信息之前，需要判断用户是否授权&lt;/p>
+&lt;/div>&lt;h3 id="按钮样式说明">按钮样式说明
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>type&lt;/strong>：按钮类型
+&lt;ul>
+&lt;li>&lt;code>image&lt;/code>：图片按钮&lt;/li>
+&lt;li>&lt;code>text&lt;/code>：文字按钮&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>icon&lt;/strong>：按钮图标
+&lt;ul>
+&lt;li>&lt;code>light&lt;/code>：浅色图标&lt;/li>
+&lt;li>&lt;code>dark&lt;/code>：深色图标&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>&lt;strong>style&lt;/strong>：按钮样式
+&lt;ul>
+&lt;li>&lt;code>left&lt;/code>：左边距&lt;/li>
+&lt;li>&lt;code>top&lt;/code>：上边距&lt;/li>
+&lt;li>&lt;code>width&lt;/code>：宽度&lt;/li>
+&lt;li>&lt;code>height&lt;/code>：高度&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="获取用户信息">获取用户信息
+&lt;/h2>&lt;h3 id="1-检查授权状态">1. 检查授权状态
+&lt;/h3>&lt;p>在获取用户信息之前，需要先检查用户是否已授权：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -110,7 +251,7 @@
 &lt;/span>&lt;span class="lnt">10
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetSetting&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">GetSettingOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetSetting&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">GetSettingOption&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">success&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
@@ -122,7 +263,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>如果已经授权，便可直接读取用户信息&lt;/p>
+&lt;/div>&lt;h3 id="2-获取用户信息">2. 获取用户信息
+&lt;/h3>&lt;p>如果用户已授权，可以直接获取用户信息：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -146,7 +288,7 @@
 &lt;/span>&lt;span class="lnt">19
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetUserInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">GetUserInfoOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetUserInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">GetUserInfoOption&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">success&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
@@ -167,7 +309,8 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;p>如果未授权，需要调用微信插件提供的&lt;code>CreateUserInfoButton&lt;/code>方法创建一个&lt;span style="color: blue;">透明&lt;/span>按钮，用户点击按钮，会弹出授权弹框，所以最好将按钮覆盖在功能按钮上，例如打开排行榜需要读取用户头像，用户还未授权，就应该将透明按钮覆盖在排行榜按钮上&lt;/p>
+&lt;/div>&lt;h3 id="3-创建授权按钮">3. 创建授权按钮
+&lt;/h3>&lt;p>如果用户未授权，需要创建授权按钮：&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
@@ -185,7 +328,7 @@
 &lt;/span>&lt;span class="lnt">13
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">btn&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WXBase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CreateUserInfoButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">left&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">top&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">w&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;zh_CN&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">btn&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WXBase&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">CreateUserInfoButton&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">left&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">top&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">w&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">h&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s">&amp;#34;zh_CN&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="kc">false&lt;/span>&lt;span class="p">);&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">btn&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnTap&lt;/span>&lt;span class="p">((&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 拒绝授权&lt;/span>
@@ -200,24 +343,45 @@
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
-&lt;/div>&lt;h3 id="小技巧">小技巧
-&lt;/h3>&lt;p>因为授权按钮是透明的，很不好调试，在微信开发者工具中，鼠标移动到授权按钮的时候，鼠标会从圈变成箭头&lt;/p>
-&lt;p>&lt;img src="https://imhy.top/post/%e5%be%ae%e4%bf%a1%e5%b0%8f%e6%b8%b8%e6%88%8f/images/wechat_userinfo_btn.gif"
+&lt;/div>&lt;h3 id="调试技巧">调试技巧
+&lt;/h3>&lt;p>在微信开发者工具中，可以通过鼠标指针变化来识别授权按钮的位置：&lt;/p>
+&lt;ul>
+&lt;li>当鼠标移动到授权按钮区域时，指针会从圈变成箭头&lt;/li>
+&lt;li>这个特性可以帮助开发者准确定位按钮位置&lt;/li>
+&lt;/ul>
+&lt;p>&lt;img src="https://imhy.top/post/%e6%8a%80%e6%9c%af/%e6%b8%b8%e6%88%8f%e5%bc%80%e5%8f%91/%e5%be%ae%e4%bf%a1%e5%b0%8f%e6%b8%b8%e6%88%8f/images/wechat_userinfo_btn.gif"
 loading="lazy"
 alt="鼠标变化"
 >&lt;/p>
-&lt;h2 id="坑点">坑点
-&lt;/h2>&lt;p>创建游戏圈按钮和授权按钮，都需要指定按钮的位置&lt;/p>
-&lt;ul>
-&lt;li>left 相对屏幕左上角的 x 坐标&lt;/li>
-&lt;li>top 相对屏幕左上角的 y 坐标&lt;/li>
-&lt;li>width 按钮宽度&lt;/li>
-&lt;li>height 按钮高度&lt;/li>
-&lt;/ul>
-&lt;p>区别：&lt;/p>
-&lt;ul>
+&lt;h2 id="分辨率问题">分辨率问题
+&lt;/h2>&lt;h3 id="分辨率类型">分辨率类型
+&lt;/h3>&lt;ol>
 &lt;li>
-&lt;p>CreateGameClubButton 创建游戏圈按钮，是相对于&lt;strong>逻辑分辨率&lt;/strong>，需要通过 &lt;code>GetSystemInfoOption&lt;/code> 获取&lt;/p>
+&lt;p>&lt;strong>物理分辨率&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>设备实际的像素点数&lt;/li>
+&lt;li>例如：iPhone 14 Pro Max 为 1290*2796&lt;/li>
+&lt;li>通过 &lt;code>Screen.width&lt;/code> 和 &lt;code>Screen.height&lt;/code> 获取&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>逻辑分辨率&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>用于界面适配的抽象概念&lt;/li>
+&lt;li>例如：iPhone 14 Pro Max 为 430*932&lt;/li>
+&lt;li>通过 &lt;code>GetSystemInfoOption&lt;/code> 获取&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="按钮位置计算">按钮位置计算
+&lt;/h3>&lt;p>不同按钮使用不同的分辨率系统：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>游戏圈按钮&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用逻辑分辨率&lt;/li>
+&lt;li>获取方式：&lt;/li>
+&lt;/ul>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -231,7 +395,7 @@ alt="鼠标变化"
 &lt;/span>&lt;span class="lnt">9
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-c#" data-lang="c#">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetSystemInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">GetSystemInfoOption&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetSystemInfo&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="k">new&lt;/span> &lt;span class="n">GetSystemInfoOption&lt;/span>&lt;span class="p">()&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">success&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="n">info&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
 &lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">{&lt;/span>
@@ -244,12 +408,416 @@ alt="鼠标变化"
 &lt;/div>
 &lt;/div>&lt;/li>
 &lt;li>
-&lt;p>CreateUserInfoButton 创建授权按钮，是相对于&lt;strong>物理分辨率&lt;/strong>，在 unity 中通过 &lt;code>Screen.width&lt;/code> 和 &lt;code>Screen.height&lt;/code> 获得物理分辨率&lt;/p>
+&lt;p>&lt;strong>授权按钮&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用物理分辨率&lt;/li>
+&lt;li>获取方式：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">width&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Screen&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">width&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">height&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">Screen&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">height&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="分辨率转换">分辨率转换
+&lt;/h3>&lt;ul>
+&lt;li>DPR（Device Pixel Ratio）= 物理分辨率 / 逻辑分辨率&lt;/li>
+&lt;li>例如：iPhone 14 Pro Max 的 DPR = 3&lt;/li>
+&lt;/ul>
+&lt;h2 id="常见问题">常见问题
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>按钮位置不准确&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>检查是否使用了正确的分辨率系统&lt;/li>
+&lt;li>验证坐标计算是否正确&lt;/li>
+&lt;li>考虑设备适配问题&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>授权失败&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>检查网络连接&lt;/li>
+&lt;li>验证用户是否拒绝授权&lt;/li>
+&lt;li>确认微信版本是否支持&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>按钮显示异常&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>检查按钮样式设置&lt;/li>
+&lt;li>验证按钮大小是否合适&lt;/li>
+&lt;li>确认按钮层级是否正确&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/" target="_blank" rel="noopener"
+>微信小游戏开发文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/api/open-api/user-info/wx.getUserInfo.html" target="_blank" rel="noopener"
+>微信小游戏用户信息接口&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/api/open-api/game-club/wx.createGameClubButton.html" target="_blank" rel="noopener"
+>微信小游戏游戏圈接口&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Unity 使用 MultiDex 库</title><link>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</link><pubDate>Tue, 05 Mar 2024 16:03:30 +0800</pubDate><guid>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</guid><description>&lt;h2 id="问题背景">问题背景
+&lt;/h2>&lt;p>当 Unity 导出 Android APK 时，如果项目使用了大量的第三方 SDK 或库，很容易达到 Android 方法数 65536 的限制。这是因为：&lt;/p>
+&lt;ul>
+&lt;li>Android 的 DEX 文件格式限制每个 APK 最多包含 65536 个方法&lt;/li>
+&lt;li>现代游戏开发中经常使用多个第三方 SDK&lt;/li>
+&lt;li>Unity 项目本身也会引入大量方法&lt;/li>
+&lt;/ul>
+&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;ul>
+&lt;li>Unity 2022.3.46f1&lt;/li>
+&lt;li>Android Gradle Plugin 7.3.1&lt;/li>
+&lt;li>Android SDK 33&lt;/li>
+&lt;li>minSdkVersion 21&lt;/li>
+&lt;li>targetSdkVersion 33&lt;/li>
+&lt;/ul>
+&lt;h2 id="multidex-解决方案">MultiDex 解决方案
+&lt;/h2>&lt;h3 id="1-基础配置">1. 基础配置
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>开启 Gradle 构建&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在 Unity 中：Edit &amp;gt; Project Settings &amp;gt; Player &amp;gt; Android&lt;/li>
+&lt;li>勾选 &amp;ldquo;Custom Main Gradle Template&amp;rdquo;&lt;/li>
+&lt;li>勾选 &amp;ldquo;Custom Gradle Properties Template&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置 Gradle 文件&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>路径：&lt;code>Assets/Plugins/Android/mainTemplate.gradle&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">defaultConfig&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">minSdkVersion&lt;/span> &lt;span class="mi">21&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">targetSdkVersion&lt;/span> &lt;span class="mi">33&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">multiDexEnabled&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用 R8 优化
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">minifyEnabled&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">proguardFiles&lt;/span> &lt;span class="nf">getDefaultProguardFile&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;proguard-android-optimize.txt&amp;#39;&lt;/span>&lt;span class="o">),&lt;/span> &lt;span class="s1">&amp;#39;proguard-unity.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-依赖配置">2. 依赖配置
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>AndroidX 支持&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">dependencies&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">implementation&lt;/span> &lt;span class="s1">&amp;#39;androidx.multidex:multidex:2.0.1&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 其他依赖...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>旧版支持库&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">dependencies&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">implementation&lt;/span> &lt;span class="s1">&amp;#39;com.android.support:multidex:1.0.3&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 其他依赖...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-application-配置">3. Application 配置
+&lt;/h3>&lt;p>修改 &lt;code>Assets/Plugins/Android/AndroidManifest.xml&lt;/code>：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="na">xmlns:android=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">package=&lt;/span>&lt;span class="s">&amp;#34;com.yourcompany.gamename&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;androidx.multidex.MultiDexApplication&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:allowBackup=&lt;/span>&lt;span class="s">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:icon=&lt;/span>&lt;span class="s">&amp;#34;@drawable/app_icon&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:label=&lt;/span>&lt;span class="s">&amp;#34;@string/app_name&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:theme=&lt;/span>&lt;span class="s">&amp;#34;@style/UnityThemeSelector&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 其他配置... --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/manifest&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="性能优化">性能优化
+&lt;/h2>&lt;h3 id="1-启动优化">1. 启动优化
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>预加载配置&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">defaultConfig&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用预加载
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">multiDexKeepProguard&lt;/span> &lt;span class="nf">file&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;multidex-config.pro&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>主 DEX 配置&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>创建 &lt;code>multidex-config.pro&lt;/code> 文件&lt;/li>
+&lt;li>指定需要预加载的类&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-构建优化">2. 构建优化
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>R8 优化&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">buildTypes&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">release&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">minifyEnabled&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">shrinkResources&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">proguardFiles&lt;/span> &lt;span class="nf">getDefaultProguardFile&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;proguard-android-optimize.txt&amp;#39;&lt;/span>&lt;span class="o">),&lt;/span> &lt;span class="s1">&amp;#39;proguard-unity.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>DEX 优化&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dexOptions&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preDexLibraries&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">maxProcessCount&lt;/span> &lt;span class="mi">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">javaMaxHeapSize&lt;/span> &lt;span class="s2">&amp;#34;4g&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>版本兼容&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Android 5.0 (API 21) 以上默认支持 MultiDex&lt;/li>
+&lt;li>低版本需要额外配置&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>性能影响&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>首次启动时间可能增加&lt;/li>
+&lt;li>内存占用可能增加&lt;/li>
+&lt;li>需要合理优化&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>调试建议&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 Android Studio 的 APK Analyzer&lt;/li>
+&lt;li>监控启动时间&lt;/li>
+&lt;li>检查内存使用&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://developer.android.com/studio/build/multidex" target="_blank" rel="noopener"
+>Google MultiDex 官方文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://docs.unity3d.com/Manual/android-BuildProcess.html" target="_blank" rel="noopener"
+>Unity Android 构建文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developer.android.com/studio/releases/gradle-plugin" target="_blank" rel="noopener"
+>Android Gradle Plugin 文档&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>微信小游戏版本升级</title><link>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/</link><pubDate>Tue, 05 Mar 2024 16:03:30 +0800</pubDate><guid>https://imhy.top/p/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%E7%89%88%E6%9C%AC%E5%8D%87%E7%BA%A7/</guid><description>&lt;h2 id="小游戏更新机制">小游戏更新机制
+&lt;/h2>&lt;p>微信小游戏开发&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/update-mechanism.html" target="_blank" rel="noopener"
+>文档&lt;/a>中描述了两种更新机制：&lt;/p>
+&lt;h3 id="1-静默更新">1. 静默更新
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>特点&lt;/strong>：无需用户操作，自动更新&lt;/li>
+&lt;li>&lt;strong>时机&lt;/strong>：微信客户端会在多个时机检查更新&lt;/li>
+&lt;li>&lt;strong>限制&lt;/strong>：无法立即影响所有用户&lt;/li>
+&lt;li>&lt;strong>时间&lt;/strong>：最长 24 小时内完成更新&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-启动时更新">2. 启动时更新
+&lt;/h3>&lt;ul>
+&lt;li>&lt;strong>特点&lt;/strong>：冷启动时检查更新&lt;/li>
+&lt;li>&lt;strong>流程&lt;/strong>：
+&lt;ol>
+&lt;li>检查新版本&lt;/li>
+&lt;li>异步下载新版本&lt;/li>
+&lt;li>使用本地包启动&lt;/li>
+&lt;li>下次冷启动应用新版本&lt;/li>
+&lt;/ol>
 &lt;/li>
 &lt;/ul>
-&lt;h2 id="分辨率区别">分辨率区别
-&lt;/h2>&lt;ul>
-&lt;li>物理分辨率：物理设备真实的像素点，例如iphone 14 pro max, 物理分辨率 1290*2796&lt;/li>
-&lt;li>逻辑分辨率：为了抹平物理分辨率的差异，更好的做界面适配，在物理分辨率上层抽象出来的一个概念，例如iphone 14 pro max，逻辑分辨率 430*932&lt;/li>
+&lt;h3 id="冷启动说明">冷启动说明
+&lt;/h3>&lt;p>根据小程序运行机制&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/operating-mechanism.html" target="_blank" rel="noopener"
+>文档&lt;/a>，冷启动是指：&lt;/p>
+&lt;ul>
+&lt;li>用户首次打开小游戏&lt;/li>
+&lt;li>小游戏被销毁后再次打开&lt;/li>
 &lt;/ul>
-&lt;p>物理分辨率和逻辑分辨率的比值，即 &lt;code>Dpr=物理分辨率/逻辑分辨率&lt;/code>，iphone 14 pro max 的 &lt;code>Dpr = 3&lt;/code>&lt;/p></description></item></channel></rss>
+&lt;p>&lt;strong>注意&lt;/strong>：关闭小游戏并不会立即触发销毁，需要满足以下条件之一：&lt;/p>
+&lt;ul>
+&lt;li>进入后台一定时间&lt;/li>
+&lt;li>系统资源占用过高&lt;/li>
+&lt;/ul>
+&lt;h2 id="强制更新原因">强制更新原因
+&lt;/h2>&lt;p>在某些情况下，我们需要强制用户更新到最新版本，主要包括：&lt;/p>
+&lt;h3 id="1-功能兼容性">1. 功能兼容性
+&lt;/h3>&lt;ul>
+&lt;li>新版本包含重要的功能更新&lt;/li>
+&lt;li>旧版本可能无法正常运行新功能&lt;/li>
+&lt;li>需要确保所有用户使用相同版本的功能&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-安全性考虑">2. 安全性考虑
+&lt;/h3>&lt;ul>
+&lt;li>修复了严重的安全漏洞&lt;/li>
+&lt;li>防止用户使用存在安全隐患的版本&lt;/li>
+&lt;li>保护用户数据和账号安全&lt;/li>
+&lt;/ul>
+&lt;h3 id="3-游戏平衡性">3. 游戏平衡性
+&lt;/h3>&lt;ul>
+&lt;li>修复了影响游戏平衡的 bug&lt;/li>
+&lt;li>更新了游戏规则或机制&lt;/li>
+&lt;li>确保所有玩家在公平的环境下游戏&lt;/li>
+&lt;/ul>
+&lt;h3 id="4-运营需求">4. 运营需求
+&lt;/h3>&lt;ul>
+&lt;li>新版本包含重要的运营活动&lt;/li>
+&lt;li>需要统一用户版本以支持新活动&lt;/li>
+&lt;li>确保活动规则对所有玩家一致&lt;/li>
+&lt;/ul>
+&lt;h3 id="5-技术维护">5. 技术维护
+&lt;/h3>&lt;ul>
+&lt;li>修复了导致崩溃的严重 bug&lt;/li>
+&lt;li>优化了游戏性能&lt;/li>
+&lt;li>减少了服务器压力&lt;/li>
+&lt;/ul>
+&lt;h2 id="强制更新实现">强制更新实现
+&lt;/h2>&lt;h3 id="1-基础实现">1. 基础实现
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-csharp" data-lang="csharp">&lt;span class="line">&lt;span class="cl">&lt;span class="kt">var&lt;/span> &lt;span class="n">updateManager&lt;/span> &lt;span class="p">=&lt;/span> &lt;span class="n">WX&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">GetUpdateManager&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnCheckForUpdate&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// noting&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnUpdateFailed&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// show error tips&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">OnUpdateReady&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span> &lt;span class="p">=&amp;gt;&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 新的版本已经下载好，调用 applyUpdate 应用新版本并重启&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">updateManager&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">ApplyUpdate&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">});&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/update-mechanism.html" target="_blank" rel="noopener"
+>微信小游戏更新机制文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/runtime/operating-mechanism.html" target="_blank" rel="noopener"
+>微信小游戏运行机制文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developers.weixin.qq.com/minigame/dev/guide/" target="_blank" rel="noopener"
+>微信小游戏开发文档&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>系统安装 on 君不见</title><link>https://imhy.top/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/</link><description>Recent content in 系统安装 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows 系统重装指南</title><link>https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="准备工作">准备工作
+&lt;/h2>&lt;h3 id="1-备份重要数据">1. 备份重要数据
+&lt;/h3>&lt;p>在重装系统前，请确保：&lt;/p>
+&lt;ul>
+&lt;li>备份重要文档、图片等个人文件&lt;/li>
+&lt;li>导出浏览器书签和密码&lt;/li>
+&lt;li>记录已安装的软件列表&lt;/li>
+&lt;li>保存系统激活信息（如果有）&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-下载系统镜像">2. 下载系统镜像
+&lt;/h3>&lt;h4 id="windows-11-下载">Windows 11 下载
+&lt;/h4>&lt;ol>
+&lt;li>访问&lt;a class="link" href="https://www.microsoft.com/en-us/software-download/windows11" target="_blank" rel="noopener"
+>官方下载页面&lt;/a>&lt;/li>
+&lt;li>选择 Windows 11 版本（建议选择最新版本）&lt;/li>
+&lt;li>选择语言（建议选择简体中文）&lt;/li>
+&lt;li>点击下载按钮，等待下载完成&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://imhy.top/post/Windows%e7%8e%af%e5%a2%83/images/download_w11.png"
+loading="lazy"
+alt="windows11 下载截图"
+>&lt;/p>
+&lt;h4 id="windows-10-下载">Windows 10 下载
+&lt;/h4>&lt;ol>
+&lt;li>访问&lt;a class="link" href="https://www.microsoft.com/en-us/software-download/windows10" target="_blank" rel="noopener"
+>官方下载页面&lt;/a>&lt;/li>
+&lt;li>由于页面限制，需要修改浏览器 UA 才能下载 ISO 文件&lt;/li>
+&lt;/ol>
+&lt;p>修改 UA 方法：&lt;/p>
+&lt;p>&lt;strong>Chrome 浏览器&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>打开开发者工具（F12）&lt;/li>
+&lt;li>More Tools -&amp;gt; Network conditions&lt;/li>
+&lt;li>User agent 修改为 BlackBerry-BB10&lt;/li>
+&lt;/ol>
+&lt;p>&lt;strong>Edge 浏览器&lt;/strong>：&lt;/p>
+&lt;ol>
+&lt;li>打开开发者工具（F12）&lt;/li>
+&lt;li>在底部选择网络条件&lt;/li>
+&lt;li>将用户代理修改为 BlackBerry-BB10&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://imhy.top/post/Windows%e7%8e%af%e5%a2%83/images/download_w10_edge2.png"
+loading="lazy"
+alt="Edge UA 修改"
+>&lt;/p>
+&lt;p>修改 UA 后刷新页面，即可选择对应的 ISO 文件下载。&lt;/p>
+&lt;h3 id="3-准备启动工具">3. 准备启动工具
+&lt;/h3>&lt;ol>
+&lt;li>下载 &lt;a class="link" href="http://www.wepe.com.cn/" target="_blank" rel="noopener"
+>WePE&lt;/a>（推荐使用最新版本）&lt;/li>
+&lt;li>准备一个 8GB 以上的 U 盘&lt;/li>
+&lt;li>使用 WePE 制作启动盘（注意：此过程会格式化 U 盘，请提前备份数据）&lt;/li>
+&lt;/ol>
+&lt;h2 id="重装系统">重装系统
+&lt;/h2>&lt;h3 id="1-进入-bios">1. 进入 BIOS
+&lt;/h3>&lt;ol>
+&lt;li>重启电脑&lt;/li>
+&lt;li>在开机时按特定按键进入 BIOS（常见按键：F2、F10、Del、Esc）&lt;/li>
+&lt;li>找到 Boot 选项&lt;/li>
+&lt;li>将 U 盘设置为第一启动项&lt;/li>
+&lt;li>保存设置并退出&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-安装系统">2. 安装系统
+&lt;/h3>&lt;ol>
+&lt;li>进入 WinPE 系统&lt;/li>
+&lt;li>使用分区工具（如 DiskGenius）进行分区（如果需要）&lt;/li>
+&lt;li>运行系统安装程序&lt;/li>
+&lt;li>选择系统镜像文件&lt;/li>
+&lt;li>选择安装位置（通常是 C 盘）&lt;/li>
+&lt;li>等待安装完成&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-首次启动设置">3. 首次启动设置
+&lt;/h3>&lt;ol>
+&lt;li>设置系统语言和输入法&lt;/li>
+&lt;li>创建用户账户&lt;/li>
+&lt;li>设置密码（建议设置）&lt;/li>
+&lt;li>配置隐私选项&lt;/li>
+&lt;li>等待系统完成初始化&lt;/li>
+&lt;/ol>
+&lt;h3 id="4-跳过联网激活可选">4. 跳过联网激活（可选）
+&lt;/h3>&lt;p>Windows 11 首次启动时需要联网激活，可以通过以下方法跳过：&lt;/p>
+&lt;ol>
+&lt;li>在首次启动界面，按 &lt;code>Shift + F10&lt;/code> 打开命令提示符&lt;/li>
+&lt;li>输入以下命令：&lt;/li>
+&lt;/ol>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">oobe\bypassnro.cmd
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ol>
+&lt;li>系统会自动重启&lt;/li>
+&lt;li>重启后，在联网界面选择&amp;quot;我没有 Internet 连接&amp;quot;&lt;/li>
+&lt;li>继续完成设置即可&lt;/li>
+&lt;/ol>
+&lt;p>注意：跳过联网激活后，建议在系统设置完成后手动连接网络并激活系统。&lt;/p>
+&lt;h2 id="系统优化">系统优化
+&lt;/h2>&lt;h3 id="1-安装必要驱动">1. 安装必要驱动
+&lt;/h3>&lt;ol>
+&lt;li>检查设备管理器&lt;/li>
+&lt;li>下载并安装主板驱动&lt;/li>
+&lt;li>安装显卡驱动&lt;/li>
+&lt;li>安装网卡驱动&lt;/li>
+&lt;li>安装其他设备驱动&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-系统更新">2. 系统更新
+&lt;/h3>&lt;ol>
+&lt;li>检查 Windows 更新&lt;/li>
+&lt;li>安装所有重要更新&lt;/li>
+&lt;li>安装可选更新（根据需要）&lt;/li>
+&lt;/ol></description></item></channel></rss>

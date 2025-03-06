@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>系统设置 on 君不见</title><link>https://imhy.top/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE/</link><description>Recent content in 系统设置 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E7%BD%AE/index.xml" rel="self" type="application/rss+xml"/><item><title>无法访问 WindowsApps 文件夹的解决方案</title><link>https://imhy.top/p/%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-windowsapps-%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/%E6%97%A0%E6%B3%95%E8%AE%BF%E9%97%AE-windowsapps-%E6%96%87%E4%BB%B6%E5%A4%B9%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/</guid><description>&lt;h2 id="问题描述">问题描述
+&lt;/h2>&lt;p>在 Windows 系统中，即使你的账户是管理员账户，也可能无法直接访问 &lt;code>C:\Program Files\WindowsApps&lt;/code> 文件夹。这是因为该文件夹受到特殊权限保护，属于系统受限区域，主要用于存储 Microsoft Store 应用程序的数据。为了防止意外修改或恶意操作，Windows 默认限制了对该文件夹的访问权限，即使是管理员用户也需要额外步骤才能进入。&lt;/p>
+&lt;h2 id="原因分析">原因分析
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>权限限制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>WindowsApps 文件夹的所有权通常属于系统账户（如 TrustedInstaller）&lt;/li>
+&lt;li>普通管理员账户没有直接访问权限&lt;/li>
+&lt;li>系统默认限制了对该文件夹的访问&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>UAC（用户账户控制）&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>即使使用管理员账户，UAC 可能仍然要求额外的权限提升&lt;/li>
+&lt;li>系统安全机制限制了对系统文件夹的直接访问&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>文件夹保护机制&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>该文件夹默认是隐藏的&lt;/li>
+&lt;li>受到 Windows 文件保护机制的限制&lt;/li>
+&lt;li>属于系统关键目录&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="解决方案">解决方案
+&lt;/h2>&lt;h3 id="步骤-1显示隐藏文件夹">步骤 1：显示隐藏文件夹
+&lt;/h3>&lt;ol>
+&lt;li>打开文件资源管理器&lt;/li>
+&lt;li>点击顶部菜单的&amp;quot;查看&amp;quot; &amp;gt; &amp;ldquo;选项&amp;rdquo; &amp;gt; &amp;ldquo;查看&amp;quot;选项卡&lt;/li>
+&lt;li>在&amp;quot;高级设置&amp;quot;中：
+&lt;ul>
+&lt;li>勾选&amp;quot;显示隐藏的文件、文件夹和驱动器&amp;rdquo;&lt;/li>
+&lt;li>取消勾选&amp;quot;隐藏受保护的操作系统文件&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>点击&amp;quot;应用&amp;quot;和&amp;quot;确定&amp;quot;&lt;/li>
+&lt;/ol>
+&lt;h3 id="步骤-2获取文件夹访问权限">步骤 2：获取文件夹访问权限
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>打开文件夹属性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>右键点击 &lt;code>C:\Program Files\WindowsApps&lt;/code> 文件夹&lt;/li>
+&lt;li>选择&amp;quot;属性&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>修改安全设置&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>切换到&amp;quot;安全&amp;quot;选项卡&lt;/li>
+&lt;li>点击&amp;quot;高级&amp;quot;按钮&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>更改所有者&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在&amp;quot;高级安全设置&amp;quot;窗口中，检查&amp;quot;所有者&amp;quot;是否为 TrustedInstaller&lt;/li>
+&lt;li>点击&amp;quot;更改&amp;quot;所有者&lt;/li>
+&lt;li>输入你的用户名（例如：&lt;code>你的电脑名\你的用户名&lt;/code>）&lt;/li>
+&lt;li>点击&amp;quot;检查名称&amp;quot;确认&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>查看当前用户名&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 在命令提示符或 PowerShell 中执行&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">whoami
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>应用权限更改&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>勾选&amp;quot;替换子容器和对象的所有者&amp;quot;&lt;/li>
+&lt;li>点击&amp;quot;确定&amp;quot;保存更改&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>添加完全控制权限&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>返回&amp;quot;安全&amp;quot;选项卡&lt;/li>
+&lt;li>点击&amp;quot;编辑&amp;quot;按钮&lt;/li>
+&lt;li>为你的账户添加&amp;quot;完全控制&amp;quot;权限&lt;/li>
+&lt;li>点击&amp;quot;应用&amp;quot;和&amp;quot;确定&amp;quot;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>谨慎操作&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>修改系统文件夹权限可能导致系统问题&lt;/li>
+&lt;li>建议在修改前备份重要数据&lt;/li>
+&lt;li>如非必要，不建议修改系统文件夹权限&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>潜在风险&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>修改系统文件夹可能导致应用程序无法正常运行&lt;/li>
+&lt;li>可能影响系统更新和应用程序更新&lt;/li>
+&lt;li>可能触发系统安全机制&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>最佳实践&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>仅在必要时访问该文件夹&lt;/li>
+&lt;li>完成操作后建议恢复原始权限&lt;/li>
+&lt;li>保持系统安全性的同时满足访问需求&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://learn.microsoft.com/zh-cn/windows/security/identity-protection/access-control/file-permissions" target="_blank" rel="noopener"
+>Windows 文件权限管理&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://learn.microsoft.com/zh-cn/windows/security/" target="_blank" rel="noopener"
+>Windows 安全最佳实践&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>磁盘管理 on 君不见</title><link>https://imhy.top/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/</link><description>Recent content in 磁盘管理 on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 06 Mar 2024 14:11:27 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/%E7%A3%81%E7%9B%98%E7%AE%A1%E7%90%86/index.xml" rel="self" type="application/rss+xml"/><item><title>Windows C盘空间优化指南</title><link>https://imhy.top/p/windows-c%E7%9B%98%E7%A9%BA%E9%97%B4%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</link><pubDate>Wed, 06 Mar 2024 14:11:27 +0800</pubDate><guid>https://imhy.top/p/windows-c%E7%9B%98%E7%A9%BA%E9%97%B4%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/</guid><description>&lt;h2 id="为什么需要管理c盘空间">为什么需要管理C盘空间？
+&lt;/h2>&lt;p>在 Windows 系统中，C 盘作为系统主分区，存储着：&lt;/p>
+&lt;ul>
+&lt;li>操作系统文件（Windows 文件夹）&lt;/li>
+&lt;li>系统程序（Program Files）&lt;/li>
+&lt;li>用户配置文件&lt;/li>
+&lt;li>系统引导文件&lt;/li>
+&lt;/ul>
+&lt;p>C盘空间不足可能导致：&lt;/p>
+&lt;ul>
+&lt;li>系统运行变慢&lt;/li>
+&lt;li>无法安装新软件&lt;/li>
+&lt;li>系统更新失败&lt;/li>
+&lt;li>文件损坏&lt;/li>
+&lt;li>系统不稳定&lt;/li>
+&lt;/ul>
+&lt;h2 id="空间占用分析">空间占用分析
+&lt;/h2>&lt;h3 id="1-软件安装位置">1. 软件安装位置
+&lt;/h3>&lt;p>很多软件默认安装在C盘的原因：&lt;/p>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>标准化与兼容性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>默认安装到 Program Files 文件夹&lt;/li>
+&lt;li>更好的系统整合性&lt;/li>
+&lt;li>避免兼容性问题&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>访问权限与路径依赖&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>C盘是系统管理员控制的分区&lt;/li>
+&lt;li>软件依赖特定路径存储资源&lt;/li>
+&lt;li>系统API默认路径指向C盘&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-应用数据存储">2. 应用数据存储
+&lt;/h3>&lt;p>即使软件安装在其他盘，仍可能在C盘占用空间：&lt;/p>
+&lt;ul>
+&lt;li>用户配置文件（&lt;code>C:\Users\用户名\AppData&lt;/code>）&lt;/li>
+&lt;li>缓存文件&lt;/li>
+&lt;li>临时文件&lt;/li>
+&lt;li>日志文件&lt;/li>
+&lt;/ul>
+&lt;h2 id="空间优化方案">空间优化方案
+&lt;/h2>&lt;h3 id="1-软件安装优化">1. 软件安装优化
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>使用包管理器安装&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>推荐使用 &lt;a class="link" href="https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/" >Scoop&lt;/a> 安装软件&lt;/li>
+&lt;li>可自定义安装路径&lt;/li>
+&lt;li>便于管理和更新&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>自定义安装路径&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>安装时修改默认路径&lt;/li>
+&lt;li>选择其他磁盘分区&lt;/li>
+&lt;li>避免安装在C盘&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-应用数据迁移">2. 应用数据迁移
+&lt;/h3>&lt;h4 id="使用-wiztree-分析空间占用">使用 WizTree 分析空间占用
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>安装 WizTree&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="n">scoop&lt;/span> &lt;span class="n">install&lt;/span> &lt;span class="n">wiztree&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>扫描分析&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>快速扫描磁盘&lt;/li>
+&lt;li>可视化空间占用&lt;/li>
+&lt;li>定位大文件/文件夹&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;p>&lt;img src="https://imhy.top/post/Windows%e7%8e%af%e5%a2%83/images/wiztree_1.png"
+loading="lazy"
+alt="C盘占用分析"
+>&lt;/p>
+&lt;h4 id="常见大空间占用目录">常见大空间占用目录
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>开发工具&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>JetBrains IDE：&lt;code>C:\Users\用户名\AppData\Local\JetBrains&lt;/code>&lt;/li>
+&lt;li>Unity：&lt;code>C:\Users\用户名\AppData\Local\Unity&lt;/code>&lt;/li>
+&lt;li>Visual Studio：&lt;code>C:\Users\用户名\AppData\Local\Microsoft\VisualStudio&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>应用缓存&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Chrome：&lt;code>C:\Users\用户名\AppData\Local\Google\Chrome\User Data&lt;/code>&lt;/li>
+&lt;li>Firefox：&lt;code>C:\Users\用户名\AppData\Local\Mozilla\Firefox\Profiles&lt;/code>&lt;/li>
+&lt;li>Edge：&lt;code>C:\Users\用户名\AppData\Local\Microsoft\Edge\User Data&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="迁移步骤">迁移步骤
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>移动文件夹&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 创建目标目录&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">New-Item&lt;/span> &lt;span class="n">-ItemType&lt;/span> &lt;span class="n">Directory&lt;/span> &lt;span class="n">-Force&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;G:\AppData\JetBrains&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 移动文件夹&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Move-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\用户名\AppData\Local\JetBrains&amp;#34;&lt;/span> &lt;span class="n">-Destination&lt;/span> &lt;span class="s2">&amp;#34;G:\AppData\JetBrains&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>创建符号链接&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 需要管理员权限&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">New-Item&lt;/span> &lt;span class="n">-ItemType&lt;/span> &lt;span class="n">SymbolicLink&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Users\用户名\AppData\Local\JetBrains&amp;#34;&lt;/span> &lt;span class="n">-Target&lt;/span> &lt;span class="s2">&amp;#34;G:\AppData\JetBrains&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-系统清理">3. 系统清理
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>清理临时文件&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清理 Windows 临时文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Remove-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="nv">$env:TEMP&lt;/span>&lt;span class="s2">\*&amp;#34;&lt;/span> &lt;span class="n">-Recurse&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清理系统临时文件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Remove-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Windows\Temp\*&amp;#34;&lt;/span> &lt;span class="n">-Recurse&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>清理系统更新缓存&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清理 Windows 更新缓存&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Remove-Item&lt;/span> &lt;span class="n">-Path&lt;/span> &lt;span class="s2">&amp;#34;C:\Windows\SoftwareDistribution\Download\*&amp;#34;&lt;/span> &lt;span class="n">-Recurse&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>清理回收站&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-powershell" data-lang="powershell">&lt;span class="line">&lt;span class="cl">&lt;span class="c"># 清空回收站&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">Clear-RecycleBin&lt;/span> &lt;span class="n">-Force&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>备份重要数据&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>迁移前备份重要文件&lt;/li>
+&lt;li>记录原始路径&lt;/li>
+&lt;li>保存配置信息&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>权限管理&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用管理员权限执行命令&lt;/li>
+&lt;li>确保目标路径有写入权限&lt;/li>
+&lt;li>检查文件访问权限&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>系统稳定性&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>迁移后测试软件功能&lt;/li>
+&lt;li>检查系统更新&lt;/li>
+&lt;li>监控系统性能&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="定期维护">定期维护
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>定期清理&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>清理临时文件&lt;/li>
+&lt;li>删除不需要的软件&lt;/li>
+&lt;li>整理用户文件&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>空间监控&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 WizTree 定期扫描&lt;/li>
+&lt;li>监控空间变化&lt;/li>
+&lt;li>及时处理大文件&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>软件管理&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>及时更新软件&lt;/li>
+&lt;li>卸载不常用软件&lt;/li>
+&lt;li>使用包管理器管理&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol></description></item></channel></rss>

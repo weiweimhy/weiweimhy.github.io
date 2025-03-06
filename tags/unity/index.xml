@@ -1,15 +1,343 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unity on 君不见</title><link>https://imhy.top/tags/unity/</link><description>Recent content in Unity on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 21 Aug 2024 15:18:16 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/unity/index.xml" rel="self" type="application/rss+xml"/><item><title>Unity 使用 MultiDex 库</title><link>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</link><pubDate>Wed, 21 Aug 2024 15:18:16 +0800</pubDate><guid>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</guid><description>&lt;p>Unity导出 Android Apk 非常方便，但当游戏使用大量的第三方 SDK 时，导出 APK 就很容易达到 Android 方法数 65536 的限制&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Unity on 君不见</title><link>https://imhy.top/tags/unity/</link><description>Recent content in Unity on 君不见</description><generator>Hugo -- gohugo.io</generator><language>zh-cn</language><copyright>君不见</copyright><lastBuildDate>Wed, 05 Mar 2025 16:03:30 +0800</lastBuildDate><atom:link href="https://imhy.top/tags/unity/index.xml" rel="self" type="application/rss+xml"/><item><title>Unity 项目中的 System.Private.CoreLib 引用问题</title><link>https://imhy.top/p/unity-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84-system.private.corelib-%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/</link><pubDate>Wed, 05 Mar 2025 16:03:30 +0800</pubDate><guid>https://imhy.top/p/unity-%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84-system.private.corelib-%E5%BC%95%E7%94%A8%E9%97%AE%E9%A2%98/</guid><description>&lt;h2 id="开发环境">开发环境
+&lt;/h2>&lt;ul>
+&lt;li>Unity 2022.3.46f1&lt;/li>
+&lt;li>Rider 2024.3.33&lt;/li>
+&lt;li>.NET 6.0.201&lt;/li>
+&lt;li>Obfuscar 2.2.40&lt;/li>
+&lt;/ul>
+&lt;h2 id="问题背景">问题背景
+&lt;/h2>&lt;p>为了防代码泄露，需要隔离开发工程和美术工程，将开发工程代码编译成 DLL，并且混淆后导入美术工程使用。&lt;/p>
+&lt;p>遇到了一个错误：混淆后的 DLL 在 Unity 中报错 &lt;code>Unable to resolve reference 'System.Private.CoreLib'&lt;/code>，而未混淆的 DLL 没有这个问题。&lt;/p>
+&lt;h2 id="问题现象">问题现象
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>正常情况&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>未混淆的 &lt;code>Dave.CodeGen.dll&lt;/code> 在 Unity 中正常运行&lt;/li>
+&lt;li>使用 &lt;code>ILSpy&lt;/code> 检查发现引用的是 &lt;code>mscorlib&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>异常情况&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 &lt;code>Obfuscar.Console&lt;/code> 混淆后，Unity 报错：&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-text" data-lang="text">&lt;span class="line">&lt;span class="cl">Unable to resolve reference &amp;#39;System.Private.CoreLib&amp;#39;. Is the assembly missing or incompatible with the current platform
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;ul>
+&lt;li>使用 &lt;code>ILSpy&lt;/code> 检查发现引用了 &lt;code>System.Private.CoreLib&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="问题分析">问题分析
+&lt;/h2>&lt;h3 id="1-初步猜测">1. 初步猜测
+&lt;/h3>&lt;ul>
+&lt;li>&lt;code>System.Private.CoreLib&lt;/code> 是 .NET Core / .NET 5+ 的核心库&lt;/li>
+&lt;li>Unity 使用的是 .NET Framework 4.8（基于 &lt;code>mscorlib&lt;/code>）&lt;/li>
+&lt;li>混淆过程可能引入了不兼容的引用&lt;/li>
+&lt;/ul>
+&lt;h3 id="2-排查过程">2. 排查过程
+&lt;/h3>&lt;h4 id="检查-net-版本">检查 .NET 版本
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>操作步骤&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 &lt;code>ILSpy&lt;/code> 打开混淆后的 &lt;code>Dave.CodeGen.dll&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>发现&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>目标框架是 &lt;code>.NET Framework 4.7.2&lt;/code>，与预期一致&lt;/li>
+&lt;li>引用中出现了 &lt;code>System.Private.CoreLib&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>结论&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>.NET 版本正确，问题不在目标框架&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="对比未混淆的-dll">对比未混淆的 DLL
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>操作步骤&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>用 &lt;code>ILSpy&lt;/code> 打开未混淆的 &lt;code>Dave.CodeGen.dll&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>发现&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>未混淆的 DLL 引用的是 &lt;code>mscorlib&lt;/code>&lt;/li>
+&lt;li>没有 &lt;code>System.Private.CoreLib&lt;/code> 引用&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>结论&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>混淆过程引入了 &lt;code>System.Private.CoreLib&lt;/code> 的引用&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h4 id="环境检查">环境检查
+&lt;/h4>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>.NET 环境&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检查 SDK 版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet --list-sdks
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet --version
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 检查运行时版本&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet --info
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Unity 编译&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Unity 自动编译&lt;/li>
+&lt;li>Unity 命令行编译&lt;/li>
+&lt;li>输出位置：&lt;code>Library/ScriptAssemblies/&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Obfuscar 工具&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet tool install --global Obfuscar.GlobalTool --version 2.2.40
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 卸载&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">dotnet tool uninstall --global Obfuscar.GlobalTool
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="解决方案">解决方案
+&lt;/h2>&lt;h3 id="1-调整混淆配置">1. 调整混淆配置
+&lt;/h3>&lt;p>在 Obfuscar 配置文件中添加 mscorlib.dll 的路径（&lt;code>./obfuscar_dependencies/mscorlib.dll&lt;/code>）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;AssemblySearchPath&lt;/span> &lt;span class="na">path=&lt;/span>&lt;span class="s">&amp;#34;./obfuscar_dependencies&amp;#34;&lt;/span> &lt;span class="nt">/&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="2-配置步骤">2. 配置步骤
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>创建依赖目录&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在项目目录下创建 &lt;code>obfuscar_dependencies&lt;/code> 文件夹&lt;/li>
+&lt;li>将 &lt;code>mscorlib.dll&lt;/code> 复制到该目录&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>验证配置&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>混淆后的 DLL 引用 mscorlib&lt;/li>
+&lt;li>无 System.Private.CoreLib 引用&lt;/li>
+&lt;li>在 Unity 中运行正常&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h2 id="问题根源">问题根源
+&lt;/h2>&lt;h3 id="原因分析">原因分析
+&lt;/h3>&lt;p>Obfuscar 在混淆时未找到 mscorlib.dll，可能从系统路径（.NET 6 SDK）加载了 System.Private.CoreLib。这是因为：&lt;/p>
+&lt;ol>
+&lt;li>Obfuscar 默认会搜索系统路径&lt;/li>
+&lt;li>系统中安装了 .NET 6 SDK&lt;/li>
+&lt;li>没有明确指定 mscorlib.dll 的路径&lt;/li>
+&lt;/ol></description></item><item><title>Unity 使用 MultiDex 库</title><link>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</link><pubDate>Tue, 05 Mar 2024 16:03:30 +0800</pubDate><guid>https://imhy.top/p/unity-%E4%BD%BF%E7%94%A8-multidex-%E5%BA%93/</guid><description>&lt;h2 id="问题背景">问题背景
+&lt;/h2>&lt;p>当 Unity 导出 Android APK 时，如果项目使用了大量的第三方 SDK 或库，很容易达到 Android 方法数 65536 的限制。这是因为：&lt;/p>
+&lt;ul>
+&lt;li>Android 的 DEX 文件格式限制每个 APK 最多包含 65536 个方法&lt;/li>
+&lt;li>现代游戏开发中经常使用多个第三方 SDK&lt;/li>
+&lt;li>Unity 项目本身也会引入大量方法&lt;/li>
+&lt;/ul>
 &lt;h2 id="开发环境">开发环境
 &lt;/h2>&lt;ul>
-&lt;li>Unity 2018.4.9，使用&lt;code>Gradle&lt;/code>构建 Android Project/Apk&lt;br>
-&lt;em>注：Unity 5.x 开始支持使用 aar 文件，Unity 5.4 开始支持 Gradle&lt;/em>&lt;/li>
-&lt;li>Android &lt;code>minSdkVersion&lt;/code> 16&lt;/li>
+&lt;li>Unity 2022.3.46f1&lt;/li>
+&lt;li>Android Gradle Plugin 7.3.1&lt;/li>
+&lt;li>Android SDK 33&lt;/li>
+&lt;li>minSdkVersion 21&lt;/li>
+&lt;li>targetSdkVersion 33&lt;/li>
 &lt;/ul>
-&lt;h2 id="multidex-使用">MultiDex 使用
-&lt;/h2>&lt;p>&lt;code>MultiDex&lt;/code>的使用需要修改 Gradle 配置文件，Unity 开启 Gradle build 后 Gradle 配置文件路径 &lt;code>*Assets/Plugins/Android/mainTemplate.gradle*&lt;/code>&lt;/p>
-&lt;ol>
+&lt;h2 id="multidex-解决方案">MultiDex 解决方案
+&lt;/h2>&lt;h3 id="1-基础配置">1. 基础配置
+&lt;/h3>&lt;ol>
 &lt;li>
-&lt;p>开启&lt;code>MultiDex&lt;/code>支持&lt;/p>
+&lt;p>&lt;strong>开启 Gradle 构建&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>在 Unity 中：Edit &amp;gt; Project Settings &amp;gt; Player &amp;gt; Android&lt;/li>
+&lt;li>勾选 &amp;ldquo;Custom Main Gradle Template&amp;rdquo;&lt;/li>
+&lt;li>勾选 &amp;ldquo;Custom Gradle Properties Template&amp;rdquo;&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>配置 Gradle 文件&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>路径：&lt;code>Assets/Plugins/Android/mainTemplate.gradle&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">defaultConfig&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">minSdkVersion&lt;/span> &lt;span class="mi">21&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">targetSdkVersion&lt;/span> &lt;span class="mi">33&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">multiDexEnabled&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用 R8 优化
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">minifyEnabled&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">proguardFiles&lt;/span> &lt;span class="nf">getDefaultProguardFile&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;proguard-android-optimize.txt&amp;#39;&lt;/span>&lt;span class="o">),&lt;/span> &lt;span class="s1">&amp;#39;proguard-unity.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-依赖配置">2. 依赖配置
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>AndroidX 支持&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">dependencies&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">implementation&lt;/span> &lt;span class="s1">&amp;#39;androidx.multidex:multidex:2.0.1&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 其他依赖...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>旧版支持库&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">dependencies&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">implementation&lt;/span> &lt;span class="s1">&amp;#39;com.android.support:multidex:1.0.3&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 其他依赖...
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h3 id="3-application-配置">3. Application 配置
+&lt;/h3>&lt;p>修改 &lt;code>Assets/Plugins/Android/AndroidManifest.xml&lt;/code>：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="na">xmlns:android=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">package=&lt;/span>&lt;span class="s">&amp;#34;com.yourcompany.gamename&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;application&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;androidx.multidex.MultiDexApplication&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:allowBackup=&lt;/span>&lt;span class="s">&amp;#34;true&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:icon=&lt;/span>&lt;span class="s">&amp;#34;@drawable/app_icon&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:label=&lt;/span>&lt;span class="s">&amp;#34;@string/app_name&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="na">android:theme=&lt;/span>&lt;span class="s">&amp;#34;@style/UnityThemeSelector&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c">&amp;lt;!-- 其他配置... --&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/application&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/manifest&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="性能优化">性能优化
+&lt;/h2>&lt;h3 id="1-启动优化">1. 启动优化
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>预加载配置&lt;/strong>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">defaultConfig&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="c1">// 启用预加载
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span> &lt;span class="n">multiDexKeepProguard&lt;/span> &lt;span class="nf">file&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;multidex-config.pro&amp;#39;&lt;/span>&lt;span class="o">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>主 DEX 配置&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>创建 &lt;code>multidex-config.pro&lt;/code> 文件&lt;/li>
+&lt;li>指定需要预加载的类&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;h3 id="2-构建优化">2. 构建优化
+&lt;/h3>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>R8 优化&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -23,59 +351,20 @@
 &lt;/span>&lt;span class="lnt">9
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">android {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> defaultConfig {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> minSdkVersion 21
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> targetSdkVersion 28
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> multiDexEnabled true
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> }
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">buildTypes&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">release&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">minifyEnabled&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">shrinkResources&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">proguardFiles&lt;/span> &lt;span class="nf">getDefaultProguardFile&lt;/span>&lt;span class="o">(&lt;/span>&lt;span class="s1">&amp;#39;proguard-android-optimize.txt&amp;#39;&lt;/span>&lt;span class="o">),&lt;/span> &lt;span class="s1">&amp;#39;proguard-unity.txt&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;/li>
 &lt;li>
-&lt;p>特殊处理&lt;/p>
-&lt;blockquote>
-&lt;p>Android 5.0(21) 之前平台版本使用&lt;code>Dalvik&lt;/code>运行时来执行应用代码，
-&lt;code>Dalvik&lt;/code>将应用限制每个Apk只能使用一个&lt;code>classes.dex&lt;/code>字节码文件。&lt;/p>
-&lt;p>Android 5.0(21) 以及更高的版本使用ART的运行时，它本身支持从Apk文件加载多个dex文件。&lt;/p>
-&lt;/blockquote>
-&lt;p>当 Android &lt;code>minSdkVersion&lt;/code>版本低于 Android 5（21），需要做如下处理：&lt;/p>
-&lt;ul>
-&lt;li>
-&lt;p>添加依赖&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dependencies {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implementation &amp;#39;androidx.multidex:multidex:2.0.1&amp;#39;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;p>如果项目未使用 &lt;code>AndroidX&lt;/code>, 需要改为添加&lt;/p>
-&lt;div class="highlight">&lt;div class="chroma">
-&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
-&lt;/span>&lt;span class="lnt">2
-&lt;/span>&lt;span class="lnt">3
-&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
-&lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">dependencies {
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> implementation &amp;#39;com.android.support:multidex:1.0.3&amp;#39;
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">}
-&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
-&lt;/div>
-&lt;/div>&lt;/li>
-&lt;li>
-&lt;p>修改&lt;code>Application&lt;/code>&lt;/p>
-&lt;p>需要修改 &lt;em>Assets/Plugins/Android/AndroidManifest.xml&lt;/em>，在&lt;code>&amp;lt;application&amp;gt;&lt;/code>标记中的
-&lt;code>android：name&lt;/code>改为如下所示：&lt;/p>
+&lt;p>&lt;strong>DEX 优化&lt;/strong>&lt;/p>
 &lt;div class="highlight">&lt;div class="chroma">
 &lt;table class="lntable">&lt;tr>&lt;td class="lntd">
 &lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
@@ -84,20 +373,52 @@
 &lt;/span>&lt;span class="lnt">4
 &lt;/span>&lt;span class="lnt">5
 &lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
 &lt;/span>&lt;/code>&lt;/pre>&lt;/td>
 &lt;td class="lntd">
-&lt;pre tabindex="0" class="chroma">&lt;code class="language-xml" data-lang="xml">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;?xml version=&amp;#34;1.0&amp;#34; encoding=&amp;#34;utf-8&amp;#34;?&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;manifest&lt;/span> &lt;span class="na">xmlns:android=&lt;/span>&lt;span class="s">&amp;#34;http://schemas.android.com/apk/res/android&amp;#34;&lt;/span> &lt;span class="na">package=&lt;/span>&lt;span class="s">&amp;#34;xxxx.xxxx.com&amp;#34;&lt;/span>&lt;span class="nt">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;application&lt;/span> &lt;span class="na">android:name=&lt;/span>&lt;span class="s">&amp;#34;android.support.multidex.MultiDexApplication&amp;#34;&lt;/span> &lt;span class="nt">&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> ...
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nt">&amp;lt;/application&amp;gt;&lt;/span>
-&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nt">&amp;lt;/manifest&amp;gt;&lt;/span>
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-groovy" data-lang="groovy">&lt;span class="line">&lt;span class="cl">&lt;span class="n">android&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">dexOptions&lt;/span> &lt;span class="o">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">preDexLibraries&lt;/span> &lt;span class="kc">true&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">maxProcessCount&lt;/span> &lt;span class="mi">8&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">javaMaxHeapSize&lt;/span> &lt;span class="s2">&amp;#34;4g&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="o">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">}&lt;/span>
 &lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
 &lt;/div>
 &lt;/div>&lt;/li>
+&lt;/ol>
+&lt;h2 id="注意事项">注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>版本兼容&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>Android 5.0 (API 21) 以上默认支持 MultiDex&lt;/li>
+&lt;li>低版本需要额外配置&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>性能影响&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>首次启动时间可能增加&lt;/li>
+&lt;li>内存占用可能增加&lt;/li>
+&lt;li>需要合理优化&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>调试建议&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>使用 Android Studio 的 APK Analyzer&lt;/li>
+&lt;li>监控启动时间&lt;/li>
+&lt;li>检查内存使用&lt;/li>
 &lt;/ul>
 &lt;/li>
 &lt;/ol>
-&lt;h2 id="参见">参见
-&lt;/h2>&lt;p>更多文档说明，请参见&lt;a class="link" href="https://developer.android.com/studio/build/multidex.html?hl=zh-cn" target="_blank" rel="noopener"
->Google MultiDex 使用说明&lt;/a>&lt;/p></description></item></channel></rss>
+&lt;h2 id="参考资源">参考资源
+&lt;/h2>&lt;ul>
+&lt;li>&lt;a class="link" href="https://developer.android.com/studio/build/multidex" target="_blank" rel="noopener"
+>Google MultiDex 官方文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://docs.unity3d.com/Manual/android-BuildProcess.html" target="_blank" rel="noopener"
+>Unity Android 构建文档&lt;/a>&lt;/li>
+&lt;li>&lt;a class="link" href="https://developer.android.com/studio/releases/gradle-plugin" target="_blank" rel="noopener"
+>Android Gradle Plugin 文档&lt;/a>&lt;/li>
+&lt;/ul></description></item></channel></rss>

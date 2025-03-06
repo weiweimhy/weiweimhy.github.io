@@ -1,0 +1,292 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="告别传统安装方式：探索 Windows 包管理器的魅力，让软件安装和管理变得简单高效"><title>Windows 系统软件安装指南</title>
+<link rel=canonical href=https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/><link rel=stylesheet href=/scss/style.min.9c7d8f47c42e5c9e849d9136eac0dba7d38eb242f4d63c101364d7fb84143805.css><meta property='og:title' content="Windows 系统软件安装指南"><meta property='og:description' content="告别传统安装方式：探索 Windows 包管理器的魅力，让软件安装和管理变得简单高效"><meta property='og:url' content='https://imhy.top/p/windows-%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/'><meta property='og:site_name' content='君不见'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='Windows'><meta property='article:tag' content='软件安装'><meta property='article:tag' content='包管理器'><meta property='article:tag' content='开发环境'><meta property='article:published_time' content='2024-03-06T14:11:27+08:00'><meta property='article:modified_time' content='2025-03-06T08:31:42+00:00'><meta name=twitter:title content="Windows 系统软件安装指南"><meta name=twitter:description content="告别传统安装方式：探索 Windows 包管理器的魅力，让软件安装和管理变得简单高效"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu9769813113213727679.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍦</span></figure><div class=site-meta><h1 class=site-name><a href=/>君不见</a></h1><h2 class=site-description>每天记录一点点🌱</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/%E6%90%9C%E7%B4%A2/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#软件安装方式>软件安装方式</a></li><li><a href=#包管理器介绍>包管理器介绍</a><ol><li><a href=#包管理器的优势>包管理器的优势</a></li><li><a href=#windows-主流包管理器>Windows 主流包管理器</a><ol><li><a href=#1-scoop推荐>1. Scoop（推荐）</a></li><li><a href=#scoop-目录说明>Scoop 目录说明</a></li><li><a href=#仓库管理>仓库管理</a></li><li><a href=#2-winget>2. WinGet</a></li><li><a href=#3-chocolatey>3. Chocolatey</a></li></ol></li></ol></li><li><a href=#软件安装最佳实践>软件安装最佳实践</a><ol><li><a href=#1-包管理器安装>1. 包管理器安装</a></li><li><a href=#2-安装包安装>2. 安装包安装</a></li></ol></li><li><a href=#推荐软件>推荐软件</a><ol><li><a href=#开发工具>开发工具</a></li><li><a href=#系统工具>系统工具</a></li><li><a href=#实用工具>实用工具</a></li><li><a href=#自动化工具>自动化工具</a></li></ol></li><li><a href=#配置文件>配置文件</a><ol><li><a href=#autohotkey-配置>AutoHotkey 配置</a></li></ol></li><li><a href=#配置下载>配置下载</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/windows%E7%8E%AF%E5%A2%83/>Windows环境</a></header><a href=/p/windows-%E7%B3%BB%E7%BB%9F%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E6%8C%87%E5%8D%97/><div class=article-title-wrapper><h2 class=article-title>Windows 系统软件安装指南</h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#597e8d" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4L18.5 9.5a2.828 2.828.0 10-4-4L4 16v4"/><path d="M13.5 6.5l4 4"/></svg>
+<time class=article-words>2034 字</time></div><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2024-03-06</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 5 分钟</time></div></footer></a></div></header><section class=article-content><h2 id=软件安装方式>软件安装方式</h2><p>Windows 系统安装应用的方式主要有以下几种：</p><ol><li><p><strong>包管理器安装</strong></p><ul><li>优点：自动化、便捷、可重复</li><li>缺点：部分软件可能不支持</li><li>适用场景：开发工具、常用软件</li></ul></li><li><p><strong>Microsoft Store 安装</strong></p><ul><li>优点：安全、自动更新</li><li>缺点：软件数量有限</li><li>适用场景：UWP 应用、系统工具</li></ul></li><li><p><strong>安装包安装</strong></p><ul><li>优点：最通用、功能完整</li><li>缺点：手动操作、可能捆绑</li><li>适用场景：大型软件、特殊软件</li></ul></li></ol><h2 id=包管理器介绍>包管理器介绍</h2><h3 id=包管理器的优势>包管理器的优势</h3><ol><li><p><strong>自动化管理</strong></p><ul><li>一键安装/卸载</li><li>批量更新</li><li>依赖处理</li><li>版本控制</li></ul></li><li><p><strong>安全性</strong></p><ul><li>官方源</li><li>签名验证</li><li>安全更新</li></ul></li><li><p><strong>便捷性</strong></p><ul><li>命令行操作</li><li>配置备份</li><li>环境迁移</li></ul></li><li><p><strong>一致性</strong></p><ul><li>统一安装流程</li><li>标准配置</li><li>可重复部署</li></ul></li></ol><h3 id=windows-主流包管理器>Windows 主流包管理器</h3><h4 id=1-scoop推荐>1. Scoop（推荐）</h4><p>特点：</p><ul><li>绿色软件，无需管理员权限</li><li>用户目录安装，不影响系统</li><li>配置简单，支持多版本共存</li><li>软件库相对较少，更新可能不够及时</li></ul><p>安装步骤：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 设置 PowerShell 执行策略</span>
+</span></span><span class=line><span class=cl><span class=nb>Set-ExecutionPolicy</span> <span class=n>-ExecutionPolicy</span> <span class=n>RemoteSigned</span> <span class=n>-Scope</span> <span class=n>CurrentUser</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 安装 Scoop</span>
+</span></span><span class=line><span class=cl><span class=nb>irm </span><span class=n>get</span><span class=p>.</span><span class=py>scoop</span><span class=p>.</span><span class=py>sh</span> <span class=n>-outfile</span> <span class=s1>&#39;install.ps1&#39;</span>
+</span></span><span class=line><span class=cl><span class=p>.\</span><span class=n>install</span><span class=p>.</span><span class=py>ps1</span> <span class=n>-ScoopDir</span> <span class=s1>&#39;D:\Applications\Scoop&#39;</span> <span class=n>-ScoopGlobalDir</span> <span class=s1>&#39;F:\GlobalScoopApps&#39;</span> <span class=n>-NoProxy</span>
+</span></span></code></pre></td></tr></table></div></div><p>常用命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 搜索软件</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>search</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 安装软件</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>install</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 更新软件</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>update</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 卸载软件</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>uninstall</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看已安装软件</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>list</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 高级命令</span>
+</span></span><span class=line><span class=cl><span class=c># 设置代理</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>config</span> <span class=n>proxy</span> <span class=mf>127.0</span><span class=p>.</span><span class=py>0</span><span class=p>.</span><span class=mf>1</span><span class=err>:</span><span class=mf>1080</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看帮助</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=p>-</span><span class=n>-help</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看版本</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=p>-</span><span class=n>-version</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看缓存</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>cache</span> <span class=n>list</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 清理缓存</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>cache</span> <span class=n>cleanup</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 导出安装列表</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>export</span> <span class=p>&gt;</span> <span class=p>&lt;</span><span class=n>file_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 导入安装列表</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>import</span> <span class=p>&lt;</span><span class=n>file_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 清理未使用的应用</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>cleanup</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 重置 Scoop</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>reset</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=scoop-目录说明>Scoop 目录说明</h4><p>Scoop 安装后会在指定目录创建以下文件夹：</p><ul><li><strong>apps</strong>：所有通过 scoop 安装的软件</li><li><strong>buckets</strong>：软件仓库配置，默认包含 main 仓库</li><li><strong>cache</strong>：下载的安装包临时存储</li><li><strong>persist</strong>：用户数据持久化存储</li><li><strong>shims</strong>：命令行工具软链接</li></ul><h4 id=仓库管理>仓库管理</h4><ol><li><p>添加仓库</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 添加官方仓库</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>bucket</span> <span class=n>add</span> <span class=n>extras</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>bucket</span> <span class=n>add</span> <span class=n>versions</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>bucket</span> <span class=n>add</span> <span class=n>java</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 添加自定义仓库</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>bucket</span> <span class=n>add</span> <span class=p>&lt;</span><span class=n>仓库名</span><span class=p>&gt;</span> <span class=p>&lt;</span><span class=n>仓库URL</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>查看仓库</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 列出所有仓库</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>bucket</span> <span class=n>list</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看仓库软件</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>search</span> <span class=p>&lt;</span><span class=n>软件名</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p>更新仓库</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 更新所有仓库</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>update</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 更新特定仓库</span>
+</span></span><span class=line><span class=cl><span class=n>scoop</span> <span class=n>update</span> <span class=p>&lt;</span><span class=n>仓库名</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><h4 id=2-winget>2. WinGet</h4><p>特点：</p><ul><li>微软官方维护，安全性高</li><li>系统原生集成，无需额外安装</li><li>支持 Microsoft Store 和 UWP 应用</li><li>软件库较少，功能相对简单</li></ul><p>安装方式：</p><ol><li><p><a class=link href="https://apps.microsoft.com/store/detail/%E5%BA%94%E7%94%A8%E5%AE%89%E8%A3%85%E7%A8%8B%E5%BA%8F/9NBLGGH4NNS1?hl=zh-cn&amp;gl=cn&amp;rtc=1" target=_blank rel=noopener>Microsoft Store 安装</a></p></li><li><p><a class=link href=https://github.com/microsoft/winget-cli/releases target=_blank rel=noopener>GitHub 下载安装</a></p></li><li><p>通过 Scoop 安装（推荐）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=n>scoop</span> <span class=n>install</span> <span class=n>winget</span>
+</span></span></code></pre></td></tr></table></div></div></li></ol><p>常用命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 搜索软件</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>search</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 安装软件</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>install</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 指定安装路径</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>install</span> <span class=n>-l</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 交互式安装</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>install</span> <span class=n>-i</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 高级命令</span>
+</span></span><span class=line><span class=cl><span class=c># 查看已安装软件</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>list</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 更新软件</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>upgrade</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 卸载软件</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>uninstall</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看软件信息</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>show</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 导出已安装软件列表</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>export</span> <span class=n>-o</span> <span class=p>&lt;</span><span class=n>file_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 从文件导入安装</span>
+</span></span><span class=line><span class=cl><span class=n>winget</span> <span class=n>import</span> <span class=p>&lt;</span><span class=n>file_name</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h4 id=3-chocolatey>3. Chocolatey</h4><p>特点：</p><ul><li>社区驱动，软件库最丰富</li><li>功能全面，支持多版本管理</li><li>需要管理员权限，配置较复杂</li><li>部分包更新不及时，安装较慢</li></ul><p>安装方法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 以管理员身份运行 PowerShell</span>
+</span></span><span class=line><span class=cl><span class=nb>Set-ExecutionPolicy</span> <span class=n>Bypass</span> <span class=n>-Scope</span> <span class=k>Process</span> <span class=n>-Force</span><span class=p>;</span> <span class=p>[</span><span class=no>System.Net.ServicePointManager</span><span class=p>]::</span><span class=n>SecurityProtocol</span> <span class=p>=</span> <span class=p>[</span><span class=no>System.Net.ServicePointManager</span><span class=p>]::</span><span class=n>SecurityProtocol</span> <span class=o>-bor</span> <span class=mf>3072</span><span class=p>;</span> <span class=nb>iex </span><span class=p>((</span><span class=nb>New-Object</span> <span class=n>System</span><span class=p>.</span><span class=py>Net</span><span class=p>.</span><span class=n>WebClient</span><span class=p>).</span><span class=py>DownloadString</span><span class=p>(</span><span class=s1>&#39;https://community.chocolatey.org/install.ps1&#39;</span><span class=p>))</span>
+</span></span></code></pre></td></tr></table></div></div><p>常用命令：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-powershell data-lang=powershell><span class=line><span class=cl><span class=c># 搜索软件</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>search</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 安装软件</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>install</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 更新软件</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>upgrade</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 卸载软件</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>uninstall</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看已安装软件</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>list</span> <span class=p>-</span><span class=n>-local-only</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 更新所有软件</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>upgrade</span> <span class=n>all</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c># 查看软件信息</span>
+</span></span><span class=line><span class=cl><span class=n>choco</span> <span class=n>info</span> <span class=p>&lt;</span><span class=n>app_name</span><span class=p>&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=软件安装最佳实践>软件安装最佳实践</h2><h3 id=1-包管理器安装>1. 包管理器安装</h3><p>优先使用包管理器安装软件，特别是开发工具和常用软件。</p><h3 id=2-安装包安装>2. 安装包安装</h3><p>对于无法通过包管理器安装的软件：</p><ol><li><p><strong>下载来源</strong></p><ul><li>官方网站</li><li>可信第三方</li><li>避免破解版</li></ul></li><li><p><strong>安装步骤</strong></p><ul><li>修改安装路径</li><li>取消捆绑软件</li><li>注意安装选项</li></ul></li><li><p><strong>安装后检查</strong></p><ul><li>验证功能</li><li>检查启动项</li><li>清理临时文件</li></ul></li></ol><h2 id=推荐软件>推荐软件</h2><h3 id=开发工具>开发工具</h3><ol><li><p><strong>编辑器</strong></p><ul><li>VSCode（<code>scoop install vscode</code>）：功能强大的代码编辑器，支持丰富的插件和扩展</li><li>Sublime Text（<code>scoop install sublime-text</code>）：轻量级高性能编辑器，适合快速编辑</li></ul></li><li><p><strong>终端工具</strong></p><ul><li>Windows Terminal（<code>scoop install windows-terminal</code>）：现代化的终端模拟器，支持多标签和分屏</li><li>Git（<code>scoop install git</code>）：版本控制工具，必备开发工具</li></ul></li><li><p><strong>开发工具</strong></p><ul><li>ADB（<code>scoop install adb</code>）：Android 调试工具，用于移动应用开发</li><li>APKTool（<code>scoop install apktool</code>）：Android 应用反编译工具</li></ul></li></ol><h3 id=系统工具>系统工具</h3><ol><li><p><strong>压缩工具</strong></p><ul><li>7-Zip（<code>scoop install 7zip</code>）：高效的文件压缩工具，支持多种格式</li></ul></li><li><p><strong>搜索工具</strong></p><ul><li>Everything（<code>scoop install everything</code>）：快速的文件搜索工具，支持实时索引</li></ul></li><li><p><strong>系统优化</strong></p><ul><li>CCleaner（<code>scoop install ccleaner</code>）：系统清理和优化工具</li></ul></li></ol><h3 id=实用工具>实用工具</h3><ol><li><p><strong>下载工具</strong></p><ul><li>Aria2（<code>scoop install aria2</code>）：多协议下载工具，支持断点续传</li></ul></li><li><p><strong>PDF阅读器</strong></p><ul><li>Foxit Reader（<code>scoop install foxit-pdf-reader</code>）：轻量级 PDF 阅读器，支持编辑功能</li></ul></li><li><p><strong>视频播放器</strong></p><ul><li>PotPlayer（<code>scoop install potplayer</code>）：功能强大的视频播放器，支持多种格式</li></ul></li><li><p><strong>截图工具</strong></p><ul><li>ShareX（<code>scoop install sharex</code>）：功能丰富的截图和录屏工具</li></ul></li></ol><h3 id=自动化工具>自动化工具</h3><ol><li><strong>快捷键工具</strong><ul><li>AutoHotkey（<code>scoop install autohotkey</code>）：强大的自动化脚本工具</li><li>PowerToys（<code>scoop install powertoys</code>）：微软官方工具集，提供多种系统增强功能</li></ul></li></ol><h2 id=配置文件>配置文件</h2><h3 id=autohotkey-配置>AutoHotkey 配置</h3><p>基本语法：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-autohotkey data-lang=autohotkey><span class=line><span class=cl><span class=n>#</span> <span class=err>代表</span> <span class=n>Win</span> <span class=err>键
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=o>!</span> <span class=err>代表</span> <span class=n>Alt</span> <span class=err>键
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=o>^</span> <span class=err>代表</span> <span class=n>Ctrl</span> <span class=err>键
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=o>+</span> <span class=err>代表</span> <span class=n>Shift</span> <span class=err>键
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=o>::</span> <span class=err>分隔符
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nb>run</span> <span class=err>运行命令</span><span class=c1>
+</span></span></span><span class=line><span class=cl><span class=c1>; 注释</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>示例配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-autohotkey data-lang=autohotkey><span class=line><span class=cl><span class=n>#</span> <span class=err>打开网站
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nl>#g::</span><span class=n>run</span> <span class=n>https</span><span class=o>://</span><span class=n>github</span><span class=o>.</span><span class=n>com</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=n>#</span> <span class=err>打开应用
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nl>#v::</span><span class=n>run</span> <span class=n>code</span><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err>
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=n>#</span> <span class=err>快捷键组合
+</span></span></span><span class=line><span class=cl><span class=err></span><span class=nl>#!v::</span><span class=n>run</span> <span class=n>notepad</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><h2 id=配置下载>配置下载</h2><ul><li>scoop <a href=/post/Windows%e7%8e%af%e5%a2%83/configs/scoop.json download class=link>列表下载</a></li><li>autohotkey <a href=/post/Windows%e7%8e%af%e5%a2%83/configs/my-hotkey.ahk download class=link>配置下载</a></li></ul></section><footer class=article-footer><section class=article-tags><a href=/tags/windows/>Windows</a>
+<a href=/tags/%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85/>软件安装</a>
+<a href=/tags/%E5%8C%85%E7%AE%A1%E7%90%86%E5%99%A8/>包管理器</a>
+<a href=/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/>开发环境</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-edit><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/Windows%e7%8e%af%e5%a2%83/windows%e7%b3%bb%e7%bb%9f%e5%ae%89%e8%a3%85%e8%bd%af%e4%bb%b6.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 2025-03-06</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/wsl-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>WSL 使用指南</h2></div></a></article><article><a href=/p/powertoys-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>PowerToys 使用指南</h2></div></a></article><article><a href=/p/windows-c%E7%9B%98%E7%A9%BA%E9%97%B4%E4%BC%98%E5%8C%96%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>Windows C盘空间优化指南</h2></div></a></article><article><a href=/p/windows-terminal-%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>Windows Terminal 使用指南</h2></div></a></article><article><a href=/p/windows-%E7%B3%BB%E7%BB%9F%E9%87%8D%E8%A3%85%E6%8C%87%E5%8D%97/><div class=article-details><h2 class=article-title>Windows 系统重装指南</h2></div></a></article></div></div></aside><script src=//unpkg.com/@waline/client@v2/dist/waline.js></script><link href=//unpkg.com/@waline/client@v2/dist/waline.css rel=stylesheet><div id=waline class=waline-container></div><style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding);--waline-font-size:var(--article-font-size)}.waline-container .wl-count{color:var(--card-text-color-main)}</style><script>Waline.init({dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://unpkg.com/@waline/emojis@1.0.1/weibo"],locale:{admin:"Admin",placeholder:null},requiredMeta:["name","email","url"]})</script><footer class=site-footer><section class=wordcount><p>26.50k 字<br>28篇文章</p></section><section class=copyright>&copy;
+2024 -
+2025 君不见</section><section class=powerby></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
