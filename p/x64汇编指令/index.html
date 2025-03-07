@@ -1,0 +1,309 @@
+<!doctype html><html lang=zh-cn dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="详解 x64 汇编指令集：数据传输、算术运算、控制流程、系统调用等常用指令"><title>x64汇编指令</title>
+<link rel=canonical href=https://imhy.top/p/x64%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/><link rel=stylesheet href=/scss/style.min.9c7d8f47c42e5c9e849d9136eac0dba7d38eb242f4d63c101364d7fb84143805.css><meta property='og:title' content="x64汇编指令"><meta property='og:description' content="详解 x64 汇编指令集：数据传输、算术运算、控制流程、系统调用等常用指令"><meta property='og:url' content='https://imhy.top/p/x64%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/'><meta property='og:site_name' content='君不见'><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='逆向技术'><meta property='article:tag' content='Windows'><meta property='article:tag' content='x64汇编'><meta property='article:published_time' content='2024-03-07T11:00:00+08:00'><meta property='article:modified_time' content='2025-03-07T16:35:24+00:00'><meta name=twitter:title content="x64汇编指令"><meta name=twitter:description content="详解 x64 汇编指令集：数据传输、算术运算、控制流程、系统调用等常用指令"></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu9769813113213727679.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>🍦</span></figure><div class=site-meta><h1 class=site-name><a href=/>君不见</a></h1><h2 class=site-description>每天记录一点点🌱</h2></div></header><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>主页</span></a></li><li><a href=/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>归档</span></a></li><li><a href=/%E6%90%9C%E7%B4%A2/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>搜索</span></a></li><li><a href=/%E5%85%B3%E4%BA%8E/><svg class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>
+<span>关于</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><ol><li><a href=#基本指令格式>基本指令格式</a></li><li><a href=#数据传输指令>数据传输指令</a><ol><li><a href=#基本传输>基本传输</a></li><li><a href=#特殊传输>特殊传输</a></li></ol></li><li><a href=#算术运算指令>算术运算指令</a><ol><li><a href=#基本运算>基本运算</a></li><li><a href=#位运算>位运算</a></li></ol></li><li><a href=#控制流指令>控制流指令</a><ol><li><a href=#比较和跳转>比较和跳转</a></li><li><a href=#函数调用>函数调用</a></li></ol></li><li><a href=#栈操作指令>栈操作指令</a></li><li><a href=#simd-指令>SIMD 指令</a><ol><li><a href=#sse-指令>SSE 指令</a></li><li><a href=#avx-指令>AVX 指令</a></li></ol></li><li><a href=#系统指令>系统指令</a></li><li><a href=#优化技巧>优化技巧</a><ol><li><a href=#1-性能优化>1. 性能优化</a></li><li><a href=#2-代码对齐>2. 代码对齐</a></li></ol></li><li><a href=#调试相关>调试相关</a><ol><li><a href=#1-断点指令>1. 断点指令</a></li><li><a href=#2-追踪指令>2. 追踪指令</a></li></ol></li><li><a href=#安全编程>安全编程</a><ol><li><a href=#1-栈保护>1. 栈保护</a></li><li><a href=#2-数据清理>2. 数据清理</a></li></ol></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class=main-article><header class=article-header><div class=article-details><header class=article-category><a href=/categories/%E6%8A%80%E6%9C%AF/ style=background-color:#2a9d8f;color:#fff>技术</a></header><a href=/p/x64%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4/><div class=article-title-wrapper><h2 class=article-title>x64汇编指令</h2></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-pencil" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="#597e8d" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 20h4L18.5 9.5a2.828 2.828.0 10-4-4L4 16v4"/><path d="M13.5 6.5l4 4"/></svg>
+<time class=article-words>1190 字</time></div><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>2024-03-07</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></a></div></header><section class=article-content><h2 id=基本指令格式>基本指令格式</h2><p>x64 汇编指令通常遵循以下格式：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=err>[标签:]</span> <span class=err>操作码</span> <span class=err>[操作数1],</span> <span class=err>[操作数2]</span>
+</span></span></code></pre></td></tr></table></div></div><p>操作数可以是：</p><ul><li>立即数（常量）</li><li>寄存器</li><li>内存引用</li><li>相对地址</li></ul><h2 id=数据传输指令>数据传输指令</h2><h3 id=基本传输>基本传输</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 寄存器到寄存器</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; 64位传输</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>eax</span><span class=p>,</span> <span class=nb>ebx</span>      <span class=c1>; 32位传输</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>ax</span><span class=p>,</span> <span class=nb>bx</span>        <span class=c1>; 16位传输</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>al</span><span class=p>,</span> <span class=nb>bl</span>        <span class=c1>; 8位传输</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 立即数到寄存器</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>rax</span><span class=p>,</span> <span class=mh>0x1234567890ABCDEF</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>eax</span><span class=p>,</span> <span class=mh>0x12345678</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 内存访问</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>rax</span><span class=p>,</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>]</span>    <span class=c1>; 从内存读取</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>],</span> <span class=nb>rax</span>    <span class=c1>; 写入内存</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>rax</span><span class=p>,</span> <span class=p>[</span><span class=nb>rbx</span><span class=o>+</span><span class=nb>rsi</span><span class=o>*</span><span class=mi>4</span><span class=o>+</span><span class=mh>0x10</span><span class=p>]</span>  <span class=c1>; 复杂寻址</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=特殊传输>特殊传输</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 零扩展</span>
+</span></span><span class=line><span class=cl><span class=nf>MOVZX</span> <span class=nb>rax</span><span class=p>,</span> <span class=kt>byte</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>]</span>   <span class=c1>; 8位到64位</span>
+</span></span><span class=line><span class=cl><span class=nf>MOVZX</span> <span class=nb>eax</span><span class=p>,</span> <span class=kt>word</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>]</span>   <span class=c1>; 16位到32位</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 符号扩展</span>
+</span></span><span class=line><span class=cl><span class=nf>MOVSX</span> <span class=nb>rax</span><span class=p>,</span> <span class=kt>byte</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>]</span>   <span class=c1>; 8位到64位</span>
+</span></span><span class=line><span class=cl><span class=nf>MOVSXD</span> <span class=nb>rax</span><span class=p>,</span> <span class=kt>dword</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>]</span> <span class=c1>; 32位到64位</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 条件传输</span>
+</span></span><span class=line><span class=cl><span class=nf>CMOVZ</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>          <span class=c1>; ZF=1时传输</span>
+</span></span><span class=line><span class=cl><span class=nf>CMOVNZ</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>         <span class=c1>; ZF=0时传输</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=算术运算指令>算术运算指令</h2><h3 id=基本运算>基本运算</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 加法</span>
+</span></span><span class=line><span class=cl><span class=nf>ADD</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; rax = rax + rbx</span>
+</span></span><span class=line><span class=cl><span class=nf>ADD</span> <span class=nb>rax</span><span class=p>,</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>]</span>    <span class=c1>; 从内存加载并相加</span>
+</span></span><span class=line><span class=cl><span class=nf>ADC</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; 带进位加法</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 减法</span>
+</span></span><span class=line><span class=cl><span class=nf>SUB</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; rax = rax - rbx</span>
+</span></span><span class=line><span class=cl><span class=nf>SBB</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; 带借位减法</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 乘法</span>
+</span></span><span class=line><span class=cl><span class=nf>MUL</span> <span class=nb>rbx</span>           <span class=c1>; 无符号乘法，结果在 RDX:RAX</span>
+</span></span><span class=line><span class=cl><span class=nf>IMUL</span> <span class=nb>rbx</span>          <span class=c1>; 有符号乘法</span>
+</span></span><span class=line><span class=cl><span class=nf>IMUL</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span><span class=p>,</span> <span class=mi>5</span>  <span class=c1>; 三操作数乘法</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 除法</span>
+</span></span><span class=line><span class=cl><span class=nf>DIV</span> <span class=nb>rbx</span>           <span class=c1>; 无符号除法</span>
+</span></span><span class=line><span class=cl><span class=nf>IDIV</span> <span class=nb>rbx</span>          <span class=c1>; 有符号除法</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=位运算>位运算</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 逻辑运算</span>
+</span></span><span class=line><span class=cl><span class=nf>AND</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; 按位与</span>
+</span></span><span class=line><span class=cl><span class=nf>OR</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>       <span class=c1>; 按位或</span>
+</span></span><span class=line><span class=cl><span class=nf>XOR</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; 按位异或</span>
+</span></span><span class=line><span class=cl><span class=nf>NOT</span> <span class=nb>rax</span>           <span class=c1>; 按位取反</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 移位运算</span>
+</span></span><span class=line><span class=cl><span class=nf>SHL</span> <span class=nb>rax</span><span class=p>,</span> <span class=mi>5</span>        <span class=c1>; 逻辑左移</span>
+</span></span><span class=line><span class=cl><span class=nf>SHR</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>cl</span>       <span class=c1>; 逻辑右移</span>
+</span></span><span class=line><span class=cl><span class=nf>SAR</span> <span class=nb>rax</span><span class=p>,</span> <span class=mi>1</span>        <span class=c1>; 算术右移</span>
+</span></span><span class=line><span class=cl><span class=nf>ROL</span> <span class=nb>rax</span><span class=p>,</span> <span class=mi>8</span>        <span class=c1>; 循环左移</span>
+</span></span><span class=line><span class=cl><span class=nf>ROR</span> <span class=nb>rax</span><span class=p>,</span> <span class=mi>8</span>        <span class=c1>; 循环右移</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=控制流指令>控制流指令</h2><h3 id=比较和跳转>比较和跳转</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 比较指令</span>
+</span></span><span class=line><span class=cl><span class=nf>CMP</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>      <span class=c1>; 比较两个操作数</span>
+</span></span><span class=line><span class=cl><span class=nf>TEST</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>     <span class=c1>; 按位测试</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 无条件跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JMP</span> <span class=nv>label</span>         <span class=c1>; 直接跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JMP</span> <span class=p>[</span><span class=nb>rax</span><span class=p>]</span>         <span class=c1>; 间接跳转</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 条件跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JE</span><span class=o>/</span><span class=nv>JZ</span> <span class=nv>label</span>       <span class=c1>; 相等/零时跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JNE</span><span class=o>/</span><span class=nv>JNZ</span> <span class=nv>label</span>     <span class=c1>; 不相等/非零时跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JG</span><span class=o>/</span><span class=nv>JNLE</span> <span class=nv>label</span>     <span class=c1>; 大于时跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JGE</span><span class=o>/</span><span class=nv>JNL</span> <span class=nv>label</span>     <span class=c1>; 大于等于时跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JL</span><span class=o>/</span><span class=nv>JNGE</span> <span class=nv>label</span>     <span class=c1>; 小于时跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>JLE</span><span class=o>/</span><span class=nv>JNG</span> <span class=nv>label</span>     <span class=c1>; 小于等于时跳转</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=函数调用>函数调用</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 函数调用</span>
+</span></span><span class=line><span class=cl><span class=nf>CALL</span> <span class=nv>procedure</span>    <span class=c1>; 调用过程</span>
+</span></span><span class=line><span class=cl><span class=nf>RET</span>              <span class=c1>; 返回</span>
+</span></span><span class=line><span class=cl><span class=nf>LEAVE</span>           <span class=c1>; 恢复栈帧</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 系统调用</span>
+</span></span><span class=line><span class=cl><span class=nf>SYSCALL</span>         <span class=c1>; 系统调用</span>
+</span></span><span class=line><span class=cl><span class=nf>SYSENTER</span>        <span class=c1>; 快速系统调用</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=栈操作指令>栈操作指令</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 基本栈操作</span>
+</span></span><span class=line><span class=cl><span class=nf>PUSH</span> <span class=nb>rax</span>         <span class=c1>; 压栈</span>
+</span></span><span class=line><span class=cl><span class=nf>POP</span> <span class=nb>rax</span>          <span class=c1>; 出栈</span>
+</span></span><span class=line><span class=cl><span class=nf>PUSHFQ</span>          <span class=c1>; 压入标志寄存器</span>
+</span></span><span class=line><span class=cl><span class=nf>POPFQ</span>           <span class=c1>; 弹出标志寄存器</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 多寄存器操作</span>
+</span></span><span class=line><span class=cl><span class=nf>PUSHA</span>           <span class=c1>; 压入所有通用寄存器</span>
+</span></span><span class=line><span class=cl><span class=nf>POPA</span>            <span class=c1>; 弹出所有通用寄存器</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=simd-指令>SIMD 指令</h2><h3 id=sse-指令>SSE 指令</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 数据传输</span>
+</span></span><span class=line><span class=cl><span class=nf>MOVUPS</span> <span class=nv>xmm0</span><span class=p>,</span> <span class=p>[</span><span class=nb>rax</span><span class=p>]</span>     <span class=c1>; 未对齐传输</span>
+</span></span><span class=line><span class=cl><span class=nf>MOVAPS</span> <span class=nv>xmm0</span><span class=p>,</span> <span class=p>[</span><span class=nb>rax</span><span class=p>]</span>     <span class=c1>; 对齐传输</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 算术运算</span>
+</span></span><span class=line><span class=cl><span class=nf>ADDPS</span> <span class=nv>xmm0</span><span class=p>,</span> <span class=nv>xmm1</span>      <span class=c1>; 并行单精度加法</span>
+</span></span><span class=line><span class=cl><span class=nf>MULPS</span> <span class=nv>xmm0</span><span class=p>,</span> <span class=nv>xmm1</span>      <span class=c1>; 并行单精度乘法</span>
+</span></span><span class=line><span class=cl><span class=nf>DIVPS</span> <span class=nv>xmm0</span><span class=p>,</span> <span class=nv>xmm1</span>      <span class=c1>; 并行单精度除法</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=avx-指令>AVX 指令</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 256位操作</span>
+</span></span><span class=line><span class=cl><span class=nf>VMOVUPS</span> <span class=nv>ymm0</span><span class=p>,</span> <span class=p>[</span><span class=nb>rax</span><span class=p>]</span>   <span class=c1>; 未对齐传输</span>
+</span></span><span class=line><span class=cl><span class=nf>VADDPS</span> <span class=nv>ymm0</span><span class=p>,</span> <span class=nv>ymm1</span><span class=p>,</span> <span class=nv>ymm2</span>  <span class=c1>; 三操作数加法</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=系统指令>系统指令</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 中断和异常</span>
+</span></span><span class=line><span class=cl><span class=nf>INT</span> <span class=mi>3</span>           <span class=c1>; 调试断点</span>
+</span></span><span class=line><span class=cl><span class=nf>INT</span> <span class=mh>0x80</span>        <span class=c1>; 系统调用（传统方式）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 特权级指令</span>
+</span></span><span class=line><span class=cl><span class=nf>CLI</span>             <span class=c1>; 清中断标志</span>
+</span></span><span class=line><span class=cl><span class=nf>STI</span>             <span class=c1>; 设置中断标志</span>
+</span></span><span class=line><span class=cl><span class=nf>HLT</span>             <span class=c1>; 处理器暂停</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=优化技巧>优化技巧</h2><h3 id=1-性能优化>1. 性能优化</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 使用 LEA 进行快速计算</span>
+</span></span><span class=line><span class=cl><span class=nf>LEA</span> <span class=nb>rax</span><span class=p>,</span> <span class=p>[</span><span class=nb>rbx</span><span class=o>+</span><span class=nb>rbx</span><span class=o>*</span><span class=mi>2</span><span class=p>]</span>   <span class=c1>; rax = rbx * 3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 使用 XOR 清零</span>
+</span></span><span class=line><span class=cl><span class=nf>XOR</span> <span class=nb>eax</span><span class=p>,</span> <span class=nb>eax</span>           <span class=c1>; 比 MOV eax, 0 更快</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 使用条件传送替代跳转</span>
+</span></span><span class=line><span class=cl><span class=nf>CMP</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>
+</span></span><span class=line><span class=cl><span class=nf>CMOVG</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rbx</span>         <span class=c1>; 比使用 JG 更高效</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-代码对齐>2. 代码对齐</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 16字节对齐</span>
+</span></span><span class=line><span class=cl><span class=k>ALIGN</span> <span class=mi>16</span>
+</span></span><span class=line><span class=cl><span class=nl>function_start:</span>
+</span></span><span class=line><span class=cl>    <span class=c1>; 函数代码</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=调试相关>调试相关</h2><h3 id=1-断点指令>1. 断点指令</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 软件断点</span>
+</span></span><span class=line><span class=cl><span class=nf>INT</span> <span class=mi>3</span>               <span class=c1>; CC 断点</span>
+</span></span><span class=line><span class=cl><span class=nf>UD2</span>                <span class=c1>; 未定义指令断点</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 条件断点</span>
+</span></span><span class=line><span class=cl><span class=nf>CMP</span> <span class=nb>rax</span><span class=p>,</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=nf>JE</span> <span class=nv>debug_point</span>     <span class=c1>; 条件成立时中断</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-追踪指令>2. 追踪指令</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 单步执行</span>
+</span></span><span class=line><span class=cl><span class=nf>PUSHF</span>
+</span></span><span class=line><span class=cl><span class=nf>OR</span> <span class=kt>word</span> <span class=p>[</span><span class=nb>rsp</span><span class=p>],</span> <span class=mh>0x100</span>  <span class=c1>; 设置 TF</span>
+</span></span><span class=line><span class=cl><span class=nf>POPF</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=安全编程>安全编程</h2><h3 id=1-栈保护>1. 栈保护</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 函数序言</span>
+</span></span><span class=line><span class=cl><span class=nf>PUSH</span> <span class=nb>rbp</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>rbp</span><span class=p>,</span> <span class=nb>rsp</span>
+</span></span><span class=line><span class=cl><span class=nf>SUB</span> <span class=nb>rsp</span><span class=p>,</span> <span class=mi>32</span>      <span class=c1>; 分配栈空间</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>; 函数尾声</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=nb>rsp</span><span class=p>,</span> <span class=nb>rbp</span>
+</span></span><span class=line><span class=cl><span class=nf>POP</span> <span class=nb>rbp</span>
+</span></span><span class=line><span class=cl><span class=nf>RET</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-数据清理>2. 数据清理</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-nasm data-lang=nasm><span class=line><span class=cl><span class=c1>; 安全清零</span>
+</span></span><span class=line><span class=cl><span class=nf>XOR</span> <span class=nb>rax</span><span class=p>,</span> <span class=nb>rax</span>
+</span></span><span class=line><span class=cl><span class=nf>MOV</span> <span class=p>[</span><span class=nb>rbx</span><span class=p>],</span> <span class=nb>rax</span>   <span class=c1>; 清零内存</span>
+</span></span></code></pre></td></tr></table></div></div></section><footer class=article-footer><section class=article-tags><a href=/tags/%E9%80%86%E5%90%91%E6%8A%80%E6%9C%AF/>逆向技术</a>
+<a href=/tags/windows/>Windows</a>
+<a href=/tags/x64%E6%B1%87%E7%BC%96/>X64汇编</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section><section class=article-edit><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
+<span><a style=color:inherit href=https://github.com/iwyang/iwyang.github.io/edit/develop/content/post/%e6%8a%80%e6%9c%af/%e9%80%86%e5%90%91%e6%8a%80%e6%9c%af/3.%20x64%e6%b1%87%e7%bc%96%e6%8c%87%e4%bb%a4.md target=_blank rel="noopener noreferrer">在 GitHub 上编辑此页</a></span></section><section class=article-lastmod><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<span>最后更新于 2025-03-07</span></section></footer><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css integrity=sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV crossorigin=anonymous><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js integrity=sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG+vnGctmUb0ZY0l8 crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js integrity=sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05 crossorigin=anonymous defer></script><script>window.addEventListener("DOMContentLoaded",()=>{renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1},{left:"\\(",right:"\\)",display:!1},{left:"\\[",right:"\\]",display:!0}],ignoredClasses:["gist"]})})</script></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article><a href=/p/64%E4%BD%8D%E5%AF%84%E5%AD%98%E5%99%A8/><div class=article-details><h2 class=article-title>64位寄存器</h2></div></a></article><article><a href=/p/%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/><div class=article-details><h2 class=article-title>内存模型</h2></div></a></article><article><a href=/p/pe%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/><div class=article-details><h2 class=article-title>PE文件结构</h2></div></a></article><article><a href=/p/5.-go-%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/><div class=article-details><h2 class=article-title>5. Go 基础数据类型</h2></div></a></article><article><a href=/p/6.-go-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/><div class=article-details><h2 class=article-title>6. Go 数据类型注意事项</h2></div></a></article></div></div></aside><script src=//unpkg.com/@waline/client@v2/dist/waline.js></script><link href=//unpkg.com/@waline/client@v2/dist/waline.css rel=stylesheet><div id=waline class=waline-container></div><style>.waline-container{background-color:var(--card-background);border-radius:var(--card-border-radius);box-shadow:var(--shadow-l1);padding:var(--card-padding);--waline-font-size:var(--article-font-size)}.waline-container .wl-count{color:var(--card-text-color-main)}</style><script>Waline.init({dark:'html[data-scheme="dark"]',el:"#waline",emoji:["https://unpkg.com/@waline/emojis@1.0.1/weibo"],locale:{admin:"Admin",placeholder:null},requiredMeta:["name","email","url"]})</script><footer class=site-footer><section class=wordcount><p>57.12k 字<br>43篇文章</p></section><section class=copyright>&copy;
+2024 -
+2025 君不见</section><section class=powerby></section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
